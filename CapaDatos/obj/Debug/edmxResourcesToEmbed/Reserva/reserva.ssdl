@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BDReservasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="estados">
+    <Key>
+      <PropertyRef Name="id_estado" />
+    </Key>
+    <Property Name="tipo" Type="nchar" MaxLength="25" Nullable="false" />
+    <Property Name="id_estado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="perfiles">
+    <Key>
+      <PropertyRef Name="id_perfil" />
+    </Key>
+    <Property Name="id_perfil" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="perfil" Type="nchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pistas">
+    <Key>
+      <PropertyRef Name="id_pista" />
+    </Key>
+    <Property Name="nombre" Type="nchar" MaxLength="25" Nullable="false" />
+    <Property Name="id_tipo_pista" Type="int" Nullable="false" />
+    <Property Name="id_instalacion" Type="int" Nullable="false" />
+    <Property Name="operativa" Type="bit" />
+    <Property Name="id_pista" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="reservas">
+    <Key>
+      <PropertyRef Name="id_reserva" />
+    </Key>
+    <Property Name="fecha" Type="date" Nullable="false" />
+    <Property Name="h_ini" Type="time" Precision="7" Nullable="false" />
+    <Property Name="h_fin" Type="time" Precision="7" Nullable="false" />
+    <Property Name="id_pista" Type="int" Nullable="false" />
+    <Property Name="id_usuario" Type="int" Nullable="false" />
+    <Property Name="created_at" Type="datetime" Nullable="false" />
+    <Property Name="updated_at" Type="datetime" Nullable="false" />
+    <Property Name="id_estado" Type="int" Nullable="false" />
+    <Property Name="id_reserva" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="usuarios">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="apellido1" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="apellido2" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="dni" Type="nchar" MaxLength="9" Nullable="false" />
+    <Property Name="email" Type="nchar" MaxLength="100" Nullable="false" />
+    <Property Name="password" Type="varbinary(max)" Nullable="false" />
+    <Property Name="id_perfil" Type="int" />
+    <Property Name="imagen" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_reservas_estados">
+    <End Role="estados" Type="Self.estados" Multiplicity="1" />
+    <End Role="reservas" Type="Self.reservas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="estados">
+        <PropertyRef Name="id_estado" />
+      </Principal>
+      <Dependent Role="reservas">
+        <PropertyRef Name="id_estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_reservas_pistas">
+    <End Role="pistas" Type="Self.pistas" Multiplicity="1" />
+    <End Role="reservas" Type="Self.reservas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="pistas">
+        <PropertyRef Name="id_pista" />
+      </Principal>
+      <Dependent Role="reservas">
+        <PropertyRef Name="id_pista" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_reservas_usuarios">
+    <End Role="usuarios" Type="Self.usuarios" Multiplicity="1" />
+    <End Role="reservas" Type="Self.reservas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuarios">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="reservas">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_usuarios_perfiles">
+    <End Role="perfiles" Type="Self.perfiles" Multiplicity="0..1" />
+    <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="perfiles">
+        <PropertyRef Name="id_perfil" />
+      </Principal>
+      <Dependent Role="usuarios">
+        <PropertyRef Name="id_perfil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="PA_INSERT_RESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="fecha" Type="date" Mode="In" />
+    <Parameter Name="h_ini" Type="time" Mode="In" />
+    <Parameter Name="h_fin" Type="time" Mode="In" />
+    <Parameter Name="id_pista" Type="int" Mode="In" />
+    <Parameter Name="id_usuario" Type="int" Mode="In" />
+    <Parameter Name="created_at" Type="datetime" Mode="In" />
+    <Parameter Name="updated_at" Type="datetime" Mode="In" />
+    <Parameter Name="id_estado" Type="int" Mode="In" />
+    <Parameter Name="ID_RESERVA" Type="int" Mode="InOut" />
+    <Parameter Name="RETCODE" Type="int" Mode="InOut" />
+    <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="PA_INSERT_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nombre" Type="nchar" Mode="In" />
+    <Parameter Name="apellido1" Type="nchar" Mode="In" />
+    <Parameter Name="apellido2" Type="nchar" Mode="In" />
+    <Parameter Name="dni" Type="nchar" Mode="In" />
+    <Parameter Name="email" Type="nchar" Mode="In" />
+    <Parameter Name="password" Type="nchar" Mode="In" />
+    <Parameter Name="id_perfil" Type="int" Mode="In" />
+    <Parameter Name="imagen" Type="varbinary(max)" Mode="In" />
+    <Parameter Name="RETCODE" Type="int" Mode="InOut" />
+    <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="PA_LOGIN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="email" Type="varchar" Mode="In" />
+    <Parameter Name="password" Type="nchar" Mode="In" />
+    <Parameter Name="ID" Type="int" Mode="InOut" />
+    <Parameter Name="RETCODE" Type="int" Mode="InOut" />
+    <Parameter Name="MENSAJE" Type="nchar" Mode="InOut" />
+  </Function>
+  <EntityContainer Name="BDReservasModelStoreContainer">
+    <EntitySet Name="estados" EntityType="Self.estados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="perfiles" EntityType="Self.perfiles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pistas" EntityType="Self.pistas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="reservas" EntityType="Self.reservas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_reservas_estados" Association="Self.FK_reservas_estados">
+      <End Role="estados" EntitySet="estados" />
+      <End Role="reservas" EntitySet="reservas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_reservas_pistas" Association="Self.FK_reservas_pistas">
+      <End Role="pistas" EntitySet="pistas" />
+      <End Role="reservas" EntitySet="reservas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_reservas_usuarios" Association="Self.FK_reservas_usuarios">
+      <End Role="usuarios" EntitySet="usuarios" />
+      <End Role="reservas" EntitySet="reservas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_usuarios_perfiles" Association="Self.FK_usuarios_perfiles">
+      <End Role="perfiles" EntitySet="perfiles" />
+      <End Role="usuarios" EntitySet="usuarios" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,12 @@
+C:\Users\eduar\source\repos\reservaPista\ReservaPista\CapaDatos\bin\Debug\CapaDatos.dll.config
+C:\Users\eduar\source\repos\reservaPista\ReservaPista\CapaDatos\bin\Debug\CapaDatos.dll
+C:\Users\eduar\source\repos\reservaPista\ReservaPista\CapaDatos\bin\Debug\CapaDatos.pdb
+C:\Users\eduar\source\repos\reservaPista\ReservaPista\CapaDatos\bin\Debug\EntityFramework.dll
+C:\Users\eduar\source\repos\reservaPista\ReservaPista\CapaDatos\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\eduar\source\repos\reservaPista\ReservaPista\CapaDatos\bin\Debug\EntityFramework.xml
+C:\Users\eduar\source\repos\reservaPista\ReservaPista\CapaDatos\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\eduar\source\repos\reservaPista\ReservaPista\CapaDatos\obj\Debug\CapaDatos.csprojAssemblyReference.cache
+C:\Users\eduar\source\repos\reservaPista\ReservaPista\CapaDatos\obj\Debug\CapaDatos.csproj.CoreCompileInputs.cache
+C:\Users\eduar\source\repos\reservaPista\ReservaPista\CapaDatos\obj\Debug\CapaDatos.csproj.CopyComplete
+C:\Users\eduar\source\repos\reservaPista\ReservaPista\CapaDatos\obj\Debug\CapaDatos.dll
+C:\Users\eduar\source\repos\reservaPista\ReservaPista\CapaDatos\obj\Debug\CapaDatos.pdb

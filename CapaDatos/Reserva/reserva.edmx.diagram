@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ff7d93e6084849649b0a2dadc9dfcfab" Name="Diagram1">
+        <EntityTypeShape EntityType="BDReservasModel.estados" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDReservasModel.perfiles" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDReservasModel.pistas" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDReservasModel.reservas" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDReservasModel.usuarios" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="BDReservasModel.FK_reservas_estados" ManuallyRouted="false" />
+        <AssociationConnector Association="BDReservasModel.FK_usuarios_perfiles" ManuallyRouted="false" />
+        <AssociationConnector Association="BDReservasModel.FK_reservas_pistas" ManuallyRouted="false" />
+        <AssociationConnector Association="BDReservasModel.FK_reservas_usuarios" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
