@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
 using CapaDatos.Reserva;
 using CapaNegocio.Helpers;
 using CapaNegocio.Usuario.DTO;
+
 
 
 namespace CapaNegocio.Usuario
@@ -79,12 +81,12 @@ namespace CapaNegocio.Usuario
                     ObjectParameter MENSAJE = new ObjectParameter("MENSAJE", typeof(string));
 
                     byte[] imagen = null;
-
+/*
                     if(newUser.Imagen != "")
                     {
                         imagen = new ImageConverter().base64ToByte(newUser.Imagen);
                     }
-
+*/
                     context.PA_INSERT_USUARIO(
                         newUser.Nombre,
                         newUser.Apellido1,
@@ -135,9 +137,9 @@ namespace CapaNegocio.Usuario
                 using (var context = new BDReservasEntities())
                 {
 
-
-                    byte[] imagen = (registro.Imagen != "") ? new ImageConverter().base64ToByte(registro.Imagen) : null;
-
+                    //la imagen del usuario se añadirá desde su perfil, no al registrarse
+                    //byte[] imagen = (registro.Imagen != "") ? new ImageConverter().base64ToByte(registro.Imagen) : null;
+                    byte[] imagen = null;
 
                     ObjectParameter RETCODE = new ObjectParameter("RETCODE", typeof(int));
                     ObjectParameter MENSAJE = new ObjectParameter("MENSAJE", typeof(string));
@@ -186,20 +188,20 @@ namespace CapaNegocio.Usuario
 
         }
 
-        /*
+        
         //MÉTODO DE BORRAR USUARIO
         public DeleteUserResponse DeleteUser(DeleteUserRequest delUser)
         {
             try
             {
-                using (var context = new UsuarioEntities())
+                using (var context = new BDReservasEntities())
                 {
                     ObjectParameter RETCODE = new ObjectParameter("RETCODE", typeof(int));
                     ObjectParameter MENSAJE = new ObjectParameter("MENSAJE", typeof(string));
 
-                    var consulta = context.USUARIOS.Where(user => user.ID_USUARIOS == delUser.ID_Usuario).FirstOrDefault();
+                    var consulta = context.usuarios.Where(user => user.id_usuario == delUser.Id_Usuario).FirstOrDefault();
 
-                    context.PA_BORRAR_USUARIO(delUser.ID_Usuario, RETCODE, MENSAJE);
+                    context.PA_DELETE_USUARIO(delUser.Id_Usuario, RETCODE, MENSAJE);
 
                     if ((int)RETCODE.Value < 0)
                     {
@@ -208,13 +210,13 @@ namespace CapaNegocio.Usuario
 
                     if ((int)RETCODE.Value > 0)
                     {
-                        throw new Exception(MENSAJE.Value.ToString());
+                        throw new Exception(MENSAJE.Value.ToString().Trim());
                     }
 
                     return new DeleteUserResponse()
                     {
-                        //   Usuario = consulta.USUARIO,
-                        Mensaje = MENSAJE.Value.ToString()
+                        Retcode = (int)RETCODE.Value,
+                        Mensaje = MENSAJE.Value.ToString().Trim()
                     };
                 }
             }
@@ -227,18 +229,18 @@ namespace CapaNegocio.Usuario
             }
 
         }
-
+        
         //MÉTODO DE ACTUALIZAR USUARIO
         public UpdateUserResponse UpdateUser(UpdateUserRequest upUser)
         {
             try
             {
-                using (var context = new UsuarioEntities())
+                using (var context = new BDReservasEntities())
                 {
                     ObjectParameter RETCODE = new ObjectParameter("RETCODE", typeof(int));
                     ObjectParameter MENSAJE = new ObjectParameter("MENSAJE", typeof(string));
 
-                    context.PA_MODIFICAR_USUARIO(upUser.ID_Usuario, upUser.Usuario, upUser.Password, upUser.Perfil, upUser.Email, RETCODE, MENSAJE);
+                    context.PA_MODIFICAR_USUARIO(upUser.Id_Usuario, upUser.Nombre, upUser.Apellido1, upUser.Apellido2, upUser.Id_Perfil, RETCODE, MENSAJE);
 
                     if ((int)RETCODE.Value < 0)
                     {
@@ -250,11 +252,12 @@ namespace CapaNegocio.Usuario
                         throw new Exception(MENSAJE.Value.ToString());
                     }
 
-                    var consulta = context.USUARIOS.Where(user => user.ID_USUARIOS == upUser.ID_Usuario).FirstOrDefault();
+                    var consulta = context.usuarios.Where(user => user.id_usuario == upUser.Id_Usuario).FirstOrDefault();
 
                     return new UpdateUserResponse()
                     {
-                        Usuario = consulta.USUARIO,
+                        Email = consulta.email,
+                        Retcode = (int)RETCODE.Value,
                         Mensaje = MENSAJE.Value.ToString()
                     };
                 }
@@ -268,21 +271,28 @@ namespace CapaNegocio.Usuario
             }
 
         }
+        
+        //METODO CAMBIO PASSWORD
+
 
         //MÉTODO DE LISTADO DE TODOS LOS USUARIOS
         public IEnumerable<User> GetUsers()
         {
             try
             {
-                using (var context = new UsuarioEntities())
+                using (var context = new BDReservasEntities())
                 {
                     List<User> listUsuarios = (from V_USUARIOS_PERFILES in context.V_USUARIOS_PERFILES
                                                select new User
                                                {
-                                                   ID_Usuario = V_USUARIOS_PERFILES.ID_USUARIOS,
-                                                   Usuario = V_USUARIOS_PERFILES.USUARIO,
-                                                   Perfil = V_USUARIOS_PERFILES.PERFIL,
-                                                   Email = V_USUARIOS_PERFILES.EMAIL
+                                                   Id_Usuario = V_USUARIOS_PERFILES.id_usuario,
+                                                   Nombre = V_USUARIOS_PERFILES.nombre,
+                                                   Apellido1 = V_USUARIOS_PERFILES.apellido1,
+                                                   Apellido2 = V_USUARIOS_PERFILES.apellido2,
+                                                   Perfil = V_USUARIOS_PERFILES.perfil,
+                                                   Email = V_USUARIOS_PERFILES.email,
+                                                   Dni = V_USUARIOS_PERFILES.dni
+                                                  
 
                                                }).ToList<User>();
                     return listUsuarios;
@@ -293,7 +303,7 @@ namespace CapaNegocio.Usuario
                 throw ex;
             }
 
-        }*/
+        }
 
     }
 }

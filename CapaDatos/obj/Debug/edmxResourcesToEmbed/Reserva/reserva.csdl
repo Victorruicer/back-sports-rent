@@ -8,6 +8,28 @@
     <Property Name="id_estado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <NavigationProperty Name="reservas" Relationship="Self.FK_reservas_estados" FromRole="estados" ToRole="reservas" />
   </EntityType>
+  <EntityType Name="horarios">
+    <Key>
+      <PropertyRef Name="id_horario" />
+    </Key>
+    <Property Name="id_horario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="horario" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="instalaciones" Relationship="Self.FK_instalaciones_horarios" FromRole="horarios" ToRole="instalaciones" />
+  </EntityType>
+  <EntityType Name="instalaciones">
+    <Key>
+      <PropertyRef Name="id_instalacion" />
+    </Key>
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="direccion" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="operativa" Type="Boolean" Nullable="false" />
+    <Property Name="id_horario" Type="Int32" Nullable="false" />
+    <Property Name="id_instalacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="horarios" Relationship="Self.FK_instalaciones_horarios" FromRole="instalaciones" ToRole="horarios" />
+    <NavigationProperty Name="pistas" Relationship="Self.FK_pistas_instalaciones" FromRole="instalaciones" ToRole="pistas" />
+  </EntityType>
   <EntityType Name="perfiles">
     <Key>
       <PropertyRef Name="id_perfil" />
@@ -21,28 +43,39 @@
       <PropertyRef Name="id_pista" />
     </Key>
     <Property Name="nombre" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="id_tipo_pista" Type="Int32" Nullable="false" />
     <Property Name="id_instalacion" Type="Int32" Nullable="false" />
     <Property Name="operativa" Type="Boolean" />
     <Property Name="id_pista" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_tarifa" Type="Int32" />
+    <NavigationProperty Name="instalaciones" Relationship="Self.FK_pistas_instalaciones" FromRole="pistas" ToRole="instalaciones" />
+    <NavigationProperty Name="tarifas" Relationship="Self.FK_pistas_tarifas" FromRole="pistas" ToRole="tarifas" />
     <NavigationProperty Name="reservas" Relationship="Self.FK_reservas_pistas" FromRole="pistas" ToRole="reservas" />
   </EntityType>
   <EntityType Name="reservas">
     <Key>
       <PropertyRef Name="id_reserva" />
     </Key>
-    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="h_ini" Type="Time" Nullable="false" Precision="7" />
-    <Property Name="h_fin" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="fecha" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="h_ini" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="h_fin" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="id_pista" Type="Int32" Nullable="false" />
     <Property Name="id_usuario" Type="Int32" Nullable="false" />
-    <Property Name="created_at" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="updated_at" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="created_at" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="updated_at" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
     <Property Name="id_estado" Type="Int32" Nullable="false" />
     <Property Name="id_reserva" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <NavigationProperty Name="estados" Relationship="Self.FK_reservas_estados" FromRole="reservas" ToRole="estados" />
     <NavigationProperty Name="pistas" Relationship="Self.FK_reservas_pistas" FromRole="reservas" ToRole="pistas" />
     <NavigationProperty Name="usuarios" Relationship="Self.FK_reservas_usuarios" FromRole="reservas" ToRole="usuarios" />
+  </EntityType>
+  <EntityType Name="tarifas">
+    <Key>
+      <PropertyRef Name="id_tarifa" />
+    </Key>
+    <Property Name="tarifa" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="valor" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="id_tarifa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="pistas" Relationship="Self.FK_pistas_tarifas" FromRole="tarifas" ToRole="pistas" />
   </EntityType>
   <EntityType Name="usuarios">
     <Key>
@@ -60,6 +93,24 @@
     <NavigationProperty Name="perfiles" Relationship="Self.FK_usuarios_perfiles" FromRole="usuarios" ToRole="perfiles" />
     <NavigationProperty Name="reservas" Relationship="Self.FK_reservas_usuarios" FromRole="usuarios" ToRole="reservas" />
   </EntityType>
+  <EntityType Name="V_USUARIOS_PERFILES">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+      <PropertyRef Name="nombre" />
+      <PropertyRef Name="apellido1" />
+      <PropertyRef Name="apellido2" />
+      <PropertyRef Name="email" />
+      <PropertyRef Name="dni" />
+    </Key>
+    <Property Name="id_usuario" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="apellido1" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="apellido2" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="id_perfil" Type="Int32" />
+    <Property Name="perfil" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="dni" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
+  </EntityType>
   <Association Name="FK_reservas_estados">
     <End Role="estados" Type="Self.estados" Multiplicity="1" />
     <End Role="reservas" Type="Self.reservas" Multiplicity="*" />
@@ -72,6 +123,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_instalaciones_horarios">
+    <End Role="horarios" Type="Self.horarios" Multiplicity="1" />
+    <End Role="instalaciones" Type="Self.instalaciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="horarios">
+        <PropertyRef Name="id_horario" />
+      </Principal>
+      <Dependent Role="instalaciones">
+        <PropertyRef Name="id_horario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pistas_instalaciones">
+    <End Role="instalaciones" Type="Self.instalaciones" Multiplicity="1" />
+    <End Role="pistas" Type="Self.pistas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="instalaciones">
+        <PropertyRef Name="id_instalacion" />
+      </Principal>
+      <Dependent Role="pistas">
+        <PropertyRef Name="id_instalacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_usuarios_perfiles">
     <End Role="perfiles" Type="Self.perfiles" Multiplicity="0..1" />
     <End Role="usuarios" Type="Self.usuarios" Multiplicity="*" />
@@ -81,6 +156,18 @@
       </Principal>
       <Dependent Role="usuarios">
         <PropertyRef Name="id_perfil" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pistas_tarifas">
+    <End Role="tarifas" Type="Self.tarifas" Multiplicity="0..1" />
+    <End Role="pistas" Type="Self.pistas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tarifas">
+        <PropertyRef Name="id_tarifa" />
+      </Principal>
+      <Dependent Role="pistas">
+        <PropertyRef Name="id_tarifa" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -110,17 +197,33 @@
   </Association>
   <EntityContainer Name="BDReservasEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="estados" EntityType="Self.estados" />
+    <EntitySet Name="horarios" EntityType="Self.horarios" />
+    <EntitySet Name="instalaciones" EntityType="Self.instalaciones" />
     <EntitySet Name="perfiles" EntityType="Self.perfiles" />
     <EntitySet Name="pistas" EntityType="Self.pistas" />
     <EntitySet Name="reservas" EntityType="Self.reservas" />
+    <EntitySet Name="tarifas" EntityType="Self.tarifas" />
     <EntitySet Name="usuarios" EntityType="Self.usuarios" />
+    <EntitySet Name="V_USUARIOS_PERFILES" EntityType="Self.V_USUARIOS_PERFILES" />
     <AssociationSet Name="FK_reservas_estados" Association="Self.FK_reservas_estados">
       <End Role="estados" EntitySet="estados" />
       <End Role="reservas" EntitySet="reservas" />
     </AssociationSet>
+    <AssociationSet Name="FK_instalaciones_horarios" Association="Self.FK_instalaciones_horarios">
+      <End Role="horarios" EntitySet="horarios" />
+      <End Role="instalaciones" EntitySet="instalaciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pistas_instalaciones" Association="Self.FK_pistas_instalaciones">
+      <End Role="instalaciones" EntitySet="instalaciones" />
+      <End Role="pistas" EntitySet="pistas" />
+    </AssociationSet>
     <AssociationSet Name="FK_usuarios_perfiles" Association="Self.FK_usuarios_perfiles">
       <End Role="perfiles" EntitySet="perfiles" />
       <End Role="usuarios" EntitySet="usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pistas_tarifas" Association="Self.FK_pistas_tarifas">
+      <End Role="tarifas" EntitySet="tarifas" />
+      <End Role="pistas" EntitySet="pistas" />
     </AssociationSet>
     <AssociationSet Name="FK_reservas_pistas" Association="Self.FK_reservas_pistas">
       <End Role="pistas" EntitySet="pistas" />
@@ -130,14 +233,34 @@
       <End Role="usuarios" EntitySet="usuarios" />
       <End Role="reservas" EntitySet="reservas" />
     </AssociationSet>
+    <FunctionImport Name="PA_DELETE_USUARIO">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PA_INSERT_INSTALACION">
+      <Parameter Name="nombre" Mode="In" Type="String" />
+      <Parameter Name="direccion" Mode="In" Type="String" />
+      <Parameter Name="operativa" Mode="In" Type="Boolean" />
+      <Parameter Name="id_horario" Mode="In" Type="Int32" />
+      <Parameter Name="imagen" Mode="In" Type="Binary" />
+      <Parameter Name="ID" Mode="InOut" Type="Int32" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PA_INSERT_PERFIL">
+      <Parameter Name="perfil" Mode="In" Type="String" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="PA_INSERT_RESERVA">
-      <Parameter Name="fecha" Mode="In" Type="DateTime" />
-      <Parameter Name="h_ini" Mode="In" Type="Time" />
-      <Parameter Name="h_fin" Mode="In" Type="Time" />
+      <Parameter Name="fecha" Mode="In" Type="String" />
+      <Parameter Name="h_ini" Mode="In" Type="String" />
+      <Parameter Name="h_fin" Mode="In" Type="String" />
       <Parameter Name="id_pista" Mode="In" Type="Int32" />
       <Parameter Name="id_usuario" Mode="In" Type="Int32" />
-      <Parameter Name="created_at" Mode="In" Type="DateTime" />
-      <Parameter Name="updated_at" Mode="In" Type="DateTime" />
+      <Parameter Name="created_at" Mode="In" Type="String" />
+      <Parameter Name="updated_at" Mode="In" Type="String" />
       <Parameter Name="id_estado" Mode="In" Type="Int32" />
       <Parameter Name="ID_RESERVA" Mode="InOut" Type="Int32" />
       <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
@@ -162,5 +285,28 @@
       <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
       <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="PA_MODIFICAR_USUARIO">
+      <Parameter Name="ID_USUARIO" Mode="In" Type="Int32" />
+      <Parameter Name="NOMBRE" Mode="In" Type="String" />
+      <Parameter Name="APELLIDO1" Mode="In" Type="String" />
+      <Parameter Name="APELLIDO2" Mode="In" Type="String" />
+      <Parameter Name="ID_PERFIL" Mode="In" Type="Int32" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="V_RESERVAS_PISTAS" EntityType="BDReservasModel.V_RESERVAS_PISTAS" />
   </EntityContainer>
+  <EntityType Name="V_RESERVAS_PISTAS">
+    <Key>
+      <PropertyRef Name="id_reserva" />
+      <PropertyRef Name="pista" />
+      <PropertyRef Name="email" />
+    </Key>
+    <Property Name="fecha" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="h_ini" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="h_fin" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="id_reserva" Type="Int32" Nullable="false" />
+    <Property Name="pista" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
+    <Property Name="email" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+  </EntityType>
 </Schema>

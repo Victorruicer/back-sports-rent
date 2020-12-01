@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 
 namespace CapaNegocio.Reserva.DTO
 {
-    public class CreateReservaRequest
+    public class ReservaModel
     {
         public string Fecha { get; set; }
         public string H_ini { get; set; }
         public string H_fin { get; set; }
-        public int Id_Pista { get; set; }
-        public int Id_Usuario { get; set; }
-        public string Created_at { get; set; }
-        public string Updated_at { get; set; }
-        public int Id_Estado { get; set; }
+        public int Id_Reserva { get; set; }
+        public string Pista  { get; set; }
+        public string Email  { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
 using System.Globalization;
 using System.Linq;
@@ -24,21 +25,22 @@ namespace CapaNegocio.Reserva
                     var cultureInfo = new CultureInfo("es-ES");
 
                     //CAMBIO DE STRING A FORMATO FECHA
+                    /*
                     var fecha = DateTime.Parse(nuevaReserva.Fecha, cultureInfo);
                     var h_ini = TimeSpan.ParseExact(nuevaReserva.H_ini, "HH:mm:ss", cultureInfo);
                     var h_fin = TimeSpan.ParseExact(nuevaReserva.H_fin, "HH:mm:ss", cultureInfo);
                     var createdAt = DateTime.ParseExact(nuevaReserva.Created_at, "MM/dd/yyyy HH:mm:ss", cultureInfo);
                     var updatedAt = DateTime.Parse(nuevaReserva.Updated_at, cultureInfo);
-
+                    */
 
                     context.PA_INSERT_RESERVA(
-                        fecha,
-                        h_ini,
-                        h_fin,
+                        nuevaReserva.Fecha,
+                        nuevaReserva.H_ini,
+                        nuevaReserva.H_fin,
                         nuevaReserva.Id_Pista,
                         nuevaReserva.Id_Usuario,
-                        createdAt,
-                        updatedAt,
+                        nuevaReserva.Created_at,
+                        nuevaReserva.Updated_at,
                         nuevaReserva.Id_Estado,
                         ID_RESERVA, RETCODE, MENSAJE);
 
@@ -67,5 +69,33 @@ namespace CapaNegocio.Reserva
                 };
             }
         }
+
+        public IEnumerable<ReservaModel> GetReservas()
+        {
+            try
+            {
+                using (var context = new BDReservasEntities())
+                {
+                    List<ReservaModel> listReservas = (from V_RESERVAS_PISTAS in context.V_RESERVAS_PISTAS
+                                                       select new ReservaModel
+                                               {
+                                                   Fecha = V_RESERVAS_PISTAS.fecha.Trim(),
+                                                   H_ini = V_RESERVAS_PISTAS.h_ini.Trim(),
+                                                   H_fin = V_RESERVAS_PISTAS.h_fin.Trim(),
+                                                   Id_Reserva = V_RESERVAS_PISTAS.id_reserva,
+                                                   Pista = V_RESERVAS_PISTAS.pista.Trim(),
+                                                   Email = V_RESERVAS_PISTAS.email.Trim()
+
+                                                       }).ToList<ReservaModel>();
+                    return listReservas;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
     }
 }

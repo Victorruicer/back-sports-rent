@@ -16,13 +16,24 @@ namespace WSReservas.Controllers
     {
         //CREATE
         [HttpPost]
-        [Authorize]
         [Route("createReserva")]
-        public HttpResponseMessage createUser(CreateReservaRequest nuevaReserva)
+        public HttpResponseMessage createReserva(CreateReservaRequest nuevaReserva)
         {
             var reservaDA = new ReservaDataAccess();
             var reserva = reservaDA.CreateReserva(nuevaReserva);
             return Request.CreateResponse(HttpStatusCode.OK, reserva);
         }
+
+        //LIST
+        [HttpGet]
+        [Route("listReserva")]
+        public HttpResponseMessage listReserva()
+        {
+            var reservasDA = new ReservaDataAccess();
+            var reservas = reservasDA.GetReservas();
+            return Request.CreateResponse(HttpStatusCode.OK, reservas);
+        }
+
+
     }
 }

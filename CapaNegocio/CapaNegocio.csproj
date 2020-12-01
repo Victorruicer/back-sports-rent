@@ -55,13 +55,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reserva\DTO\CreateReservaResponse.cs" />
     <Compile Include="Reserva\DTO\CreateReservaRequest.cs" />
+    <Compile Include="Reserva\DTO\ReservaModel.cs" />
     <Compile Include="Reserva\ReservaDataAccess.cs" />
+    <Compile Include="Usuario\DTO\User.cs" />
     <Compile Include="Usuario\DTO\CreateUserRequest.cs" />
     <Compile Include="Usuario\DTO\CreateUserResponse.cs" />
+    <Compile Include="Usuario\DTO\DeleteUserRequest.cs" />
+    <Compile Include="Usuario\DTO\DeleteUserResponse.cs" />
     <Compile Include="Usuario\DTO\LoginRequest.cs" />
     <Compile Include="Usuario\DTO\LoginResponse.cs" />
     <Compile Include="Usuario\DTO\RegistroRequest.cs" />
     <Compile Include="Usuario\DTO\RegistroResponse.cs" />
+    <Compile Include="Usuario\DTO\UpdateUserRequest.cs" />
+    <Compile Include="Usuario\DTO\UpdateUserResponse.cs" />
     <Compile Include="Usuario\UsuarioDataAccess.cs" />
   </ItemGroup>
   <ItemGroup>

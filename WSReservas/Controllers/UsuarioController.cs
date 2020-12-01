@@ -51,7 +51,7 @@ namespace WSReservas.Controllers
             var usuarioCreado = usuarioDA.CreateUser(newUser);
             return Request.CreateResponse(HttpStatusCode.OK, usuarioCreado);
         }
-        /*
+        
         //UPDATE
         [HttpPost]
         [Route("updateUser")]
@@ -61,7 +61,7 @@ namespace WSReservas.Controllers
             var usuarioUpdateado = usuarioDA.UpdateUser(upUser);
             return Request.CreateResponse(HttpStatusCode.OK, usuarioUpdateado);
         }
-
+        
         //DELETE
         [HttpPost]
         [Route("deleteUser")]
@@ -71,7 +71,7 @@ namespace WSReservas.Controllers
             var usuarioEliminado = usuarioDA.DeleteUser(delUser);
             return Request.CreateResponse(HttpStatusCode.OK, usuarioEliminado);
         }
-
+        
         //LIST
         [HttpGet]
         [Route("listUser")]
@@ -80,7 +80,7 @@ namespace WSReservas.Controllers
             var usuarioDA = new UsuarioDataAccess();
             var listUsers = usuarioDA.GetUsers();
             return Request.CreateResponse(HttpStatusCode.OK, listUsers);
-        }*/
+        }
 
     }
 }

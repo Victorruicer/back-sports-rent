@@ -12,20 +12,15 @@ namespace CapaDatos.Reserva
     using System;
     using System.Collections.Generic;
     
-    public partial class reservas
+    public partial class V_USUARIOS_PERFILES
     {
-        public string fecha { get; set; }
-        public string h_ini { get; set; }
-        public string h_fin { get; set; }
-        public int id_pista { get; set; }
         public int id_usuario { get; set; }
-        public string created_at { get; set; }
-        public string updated_at { get; set; }
-        public int id_estado { get; set; }
-        public int id_reserva { get; set; }
-    
-        public virtual estados estados { get; set; }
-        public virtual pistas pistas { get; set; }
-        public virtual usuarios usuarios { get; set; }
+        public string nombre { get; set; }
+        public string apellido1 { get; set; }
+        public string apellido2 { get; set; }
+        public Nullable<int> id_perfil { get; set; }
+        public string perfil { get; set; }
+        public string email { get; set; }
+        public string dni { get; set; }
     }
 }

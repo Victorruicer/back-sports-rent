@@ -7,6 +7,25 @@
     <Property Name="tipo" Type="nchar" MaxLength="25" Nullable="false" />
     <Property Name="id_estado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
+  <EntityType Name="horarios">
+    <Key>
+      <PropertyRef Name="id_horario" />
+    </Key>
+    <Property Name="id_horario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre" Type="nchar" MaxLength="25" Nullable="false" />
+    <Property Name="horario" Type="nchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="instalaciones">
+    <Key>
+      <PropertyRef Name="id_instalacion" />
+    </Key>
+    <Property Name="nombre" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="direccion" Type="nchar" MaxLength="100" Nullable="false" />
+    <Property Name="operativa" Type="bit" Nullable="false" />
+    <Property Name="id_horario" Type="int" Nullable="false" />
+    <Property Name="id_instalacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="imagen" Type="varbinary(max)" />
+  </EntityType>
   <EntityType Name="perfiles">
     <Key>
       <PropertyRef Name="id_perfil" />
@@ -19,24 +38,32 @@
       <PropertyRef Name="id_pista" />
     </Key>
     <Property Name="nombre" Type="nchar" MaxLength="25" Nullable="false" />
-    <Property Name="id_tipo_pista" Type="int" Nullable="false" />
     <Property Name="id_instalacion" Type="int" Nullable="false" />
     <Property Name="operativa" Type="bit" />
     <Property Name="id_pista" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_tarifa" Type="int" />
   </EntityType>
   <EntityType Name="reservas">
     <Key>
       <PropertyRef Name="id_reserva" />
     </Key>
-    <Property Name="fecha" Type="date" Nullable="false" />
-    <Property Name="h_ini" Type="time" Precision="7" Nullable="false" />
-    <Property Name="h_fin" Type="time" Precision="7" Nullable="false" />
+    <Property Name="fecha" Type="nchar" MaxLength="10" />
+    <Property Name="h_ini" Type="nchar" MaxLength="10" />
+    <Property Name="h_fin" Type="nchar" MaxLength="10" />
     <Property Name="id_pista" Type="int" Nullable="false" />
     <Property Name="id_usuario" Type="int" Nullable="false" />
-    <Property Name="created_at" Type="datetime" Nullable="false" />
-    <Property Name="updated_at" Type="datetime" Nullable="false" />
+    <Property Name="created_at" Type="nchar" MaxLength="50" />
+    <Property Name="updated_at" Type="nchar" MaxLength="50" />
     <Property Name="id_estado" Type="int" Nullable="false" />
     <Property Name="id_reserva" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tarifas">
+    <Key>
+      <PropertyRef Name="id_tarifa" />
+    </Key>
+    <Property Name="tarifa" Type="nchar" MaxLength="25" Nullable="false" />
+    <Property Name="valor" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="id_tarifa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="usuarios">
     <Key>
@@ -52,6 +79,77 @@
     <Property Name="id_perfil" Type="int" />
     <Property Name="imagen" Type="varbinary(max)" />
   </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BDReservas.dbo.V_RESERVAS_PISTAS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="V_RESERVAS_PISTAS">
+    <Key>
+      <PropertyRef Name="id_reserva" />
+      <PropertyRef Name="pista" />
+      <PropertyRef Name="email" />
+    </Key>
+    <Property Name="fecha" Type="nchar" MaxLength="10" />
+    <Property Name="h_ini" Type="nchar" MaxLength="10" />
+    <Property Name="h_fin" Type="nchar" MaxLength="10" />
+    <Property Name="id_reserva" Type="int" Nullable="false" />
+    <Property Name="pista" Type="nchar" MaxLength="25" Nullable="false" />
+    <Property Name="email" Type="nchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="V_USUARIOS_PERFILES">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+      <PropertyRef Name="nombre" />
+      <PropertyRef Name="apellido1" />
+      <PropertyRef Name="apellido2" />
+      <PropertyRef Name="email" />
+      <PropertyRef Name="dni" />
+    </Key>
+    <Property Name="id_usuario" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="apellido1" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="apellido2" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="id_perfil" Type="int" />
+    <Property Name="perfil" Type="nchar" MaxLength="25" />
+    <Property Name="email" Type="nchar" MaxLength="100" Nullable="false" />
+    <Property Name="dni" Type="nchar" MaxLength="9" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_instalaciones_horarios">
+    <End Role="horarios" Type="Self.horarios" Multiplicity="1" />
+    <End Role="instalaciones" Type="Self.instalaciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="horarios">
+        <PropertyRef Name="id_horario" />
+      </Principal>
+      <Dependent Role="instalaciones">
+        <PropertyRef Name="id_horario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pistas_instalaciones">
+    <End Role="instalaciones" Type="Self.instalaciones" Multiplicity="1" />
+    <End Role="pistas" Type="Self.pistas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="instalaciones">
+        <PropertyRef Name="id_instalacion" />
+      </Principal>
+      <Dependent Role="pistas">
+        <PropertyRef Name="id_instalacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pistas_tarifas">
+    <End Role="tarifas" Type="Self.tarifas" Multiplicity="0..1" />
+    <End Role="pistas" Type="Self.pistas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tarifas">
+        <PropertyRef Name="id_tarifa" />
+      </Principal>
+      <Dependent Role="pistas">
+        <PropertyRef Name="id_tarifa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_reservas_estados">
     <End Role="estados" Type="Self.estados" Multiplicity="1" />
     <End Role="reservas" Type="Self.reservas" Multiplicity="*" />
@@ -100,14 +198,34 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="PA_DELETE_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="RETCODE" Type="int" Mode="InOut" />
+    <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="PA_INSERT_INSTALACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nombre" Type="nchar" Mode="In" />
+    <Parameter Name="direccion" Type="nchar" Mode="In" />
+    <Parameter Name="operativa" Type="bit" Mode="In" />
+    <Parameter Name="id_horario" Type="int" Mode="In" />
+    <Parameter Name="imagen" Type="varbinary(max)" Mode="In" />
+    <Parameter Name="ID" Type="int" Mode="InOut" />
+    <Parameter Name="RETCODE" Type="int" Mode="InOut" />
+    <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="PA_INSERT_PERFIL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="perfil" Type="nchar" Mode="In" />
+    <Parameter Name="RETCODE" Type="int" Mode="InOut" />
+    <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+  </Function>
   <Function Name="PA_INSERT_RESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="fecha" Type="date" Mode="In" />
-    <Parameter Name="h_ini" Type="time" Mode="In" />
-    <Parameter Name="h_fin" Type="time" Mode="In" />
+    <Parameter Name="fecha" Type="nchar" Mode="In" />
+    <Parameter Name="h_ini" Type="nchar" Mode="In" />
+    <Parameter Name="h_fin" Type="nchar" Mode="In" />
     <Parameter Name="id_pista" Type="int" Mode="In" />
     <Parameter Name="id_usuario" Type="int" Mode="In" />
-    <Parameter Name="created_at" Type="datetime" Mode="In" />
-    <Parameter Name="updated_at" Type="datetime" Mode="In" />
+    <Parameter Name="created_at" Type="nchar" Mode="In" />
+    <Parameter Name="updated_at" Type="nchar" Mode="In" />
     <Parameter Name="id_estado" Type="int" Mode="In" />
     <Parameter Name="ID_RESERVA" Type="int" Mode="InOut" />
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />
@@ -132,12 +250,58 @@
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />
     <Parameter Name="MENSAJE" Type="nchar" Mode="InOut" />
   </Function>
+  <Function Name="PA_MODIFICAR_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID_USUARIO" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="APELLIDO1" Type="varchar" Mode="In" />
+    <Parameter Name="APELLIDO2" Type="varchar" Mode="In" />
+    <Parameter Name="ID_PERFIL" Type="int" Mode="In" />
+    <Parameter Name="RETCODE" Type="int" Mode="InOut" />
+    <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+  </Function>
   <EntityContainer Name="BDReservasModelStoreContainer">
     <EntitySet Name="estados" EntityType="Self.estados" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="horarios" EntityType="Self.horarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="instalaciones" EntityType="Self.instalaciones" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="perfiles" EntityType="Self.perfiles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="pistas" EntityType="Self.pistas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="reservas" EntityType="Self.reservas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tarifas" EntityType="Self.tarifas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="V_RESERVAS_PISTAS" EntityType="Self.V_RESERVAS_PISTAS" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [V_RESERVAS_PISTAS].[fecha] AS [fecha], 
+    [V_RESERVAS_PISTAS].[h_ini] AS [h_ini], 
+    [V_RESERVAS_PISTAS].[h_fin] AS [h_fin], 
+    [V_RESERVAS_PISTAS].[id_reserva] AS [id_reserva], 
+    [V_RESERVAS_PISTAS].[pista] AS [pista], 
+    [V_RESERVAS_PISTAS].[email] AS [email]
+    FROM [dbo].[V_RESERVAS_PISTAS] AS [V_RESERVAS_PISTAS]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="V_USUARIOS_PERFILES" EntityType="Self.V_USUARIOS_PERFILES" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [V_USUARIOS_PERFILES].[id_usuario] AS [id_usuario], 
+    [V_USUARIOS_PERFILES].[nombre] AS [nombre], 
+    [V_USUARIOS_PERFILES].[apellido1] AS [apellido1], 
+    [V_USUARIOS_PERFILES].[apellido2] AS [apellido2], 
+    [V_USUARIOS_PERFILES].[id_perfil] AS [id_perfil], 
+    [V_USUARIOS_PERFILES].[perfil] AS [perfil], 
+    [V_USUARIOS_PERFILES].[email] AS [email], 
+    [V_USUARIOS_PERFILES].[dni] AS [dni]
+    FROM [dbo].[V_USUARIOS_PERFILES] AS [V_USUARIOS_PERFILES]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_instalaciones_horarios" Association="Self.FK_instalaciones_horarios">
+      <End Role="horarios" EntitySet="horarios" />
+      <End Role="instalaciones" EntitySet="instalaciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pistas_instalaciones" Association="Self.FK_pistas_instalaciones">
+      <End Role="instalaciones" EntitySet="instalaciones" />
+      <End Role="pistas" EntitySet="pistas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pistas_tarifas" Association="Self.FK_pistas_tarifas">
+      <End Role="tarifas" EntitySet="tarifas" />
+      <End Role="pistas" EntitySet="pistas" />
+    </AssociationSet>
     <AssociationSet Name="FK_reservas_estados" Association="Self.FK_reservas_estados">
       <End Role="estados" EntitySet="estados" />
       <End Role="reservas" EntitySet="reservas" />

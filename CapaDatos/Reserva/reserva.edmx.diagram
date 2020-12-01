@@ -4,16 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ff7d93e6084849649b0a2dadc9dfcfab" Name="Diagram1">
-        <EntityTypeShape EntityType="BDReservasModel.estados" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDReservasModel.perfiles" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDReservasModel.pistas" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDReservasModel.reservas" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDReservasModel.usuarios" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+      <Diagram DiagramId="278e10b144b141209fe487bacac49cb4" Name="Diagram1">
+        <EntityTypeShape EntityType="BDReservasModel.estados" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDReservasModel.horarios" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDReservasModel.instalaciones" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDReservasModel.perfiles" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDReservasModel.pistas" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDReservasModel.reservas" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDReservasModel.tarifas" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDReservasModel.usuarios" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDReservasModel.V_USUARIOS_PERFILES" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
         <AssociationConnector Association="BDReservasModel.FK_reservas_estados" ManuallyRouted="false" />
+        <AssociationConnector Association="BDReservasModel.FK_instalaciones_horarios" ManuallyRouted="false" />
+        <AssociationConnector Association="BDReservasModel.FK_pistas_instalaciones" ManuallyRouted="false" />
         <AssociationConnector Association="BDReservasModel.FK_usuarios_perfiles" ManuallyRouted="false" />
+        <AssociationConnector Association="BDReservasModel.FK_pistas_tarifas" ManuallyRouted="false" />
         <AssociationConnector Association="BDReservasModel.FK_reservas_pistas" ManuallyRouted="false" />
         <AssociationConnector Association="BDReservasModel.FK_reservas_usuarios" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BDReservasModel.V_RESERVAS_PISTAS" Width="1.5" PointX="7.375" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

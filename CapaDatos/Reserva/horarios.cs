@@ -12,23 +12,19 @@ namespace CapaDatos.Reserva
     using System;
     using System.Collections.Generic;
     
-    public partial class pistas
+    public partial class horarios
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public pistas()
+        public horarios()
         {
-            this.reservas = new HashSet<reservas>();
+            this.instalaciones = new HashSet<instalaciones>();
         }
     
+        public int id_horario { get; set; }
         public string nombre { get; set; }
-        public int id_instalacion { get; set; }
-        public Nullable<bool> operativa { get; set; }
-        public int id_pista { get; set; }
-        public Nullable<int> id_tarifa { get; set; }
+        public string horario { get; set; }
     
-        public virtual instalaciones instalaciones { get; set; }
-        public virtual tarifas tarifas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<reservas> reservas { get; set; }
+        public virtual ICollection<instalaciones> instalaciones { get; set; }
     }
 }
