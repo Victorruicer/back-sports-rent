@@ -8,5 +8,8 @@ namespace CapaNegocio.Instalacion.DTO
 {
     public class CreateInstResponse
     {
+        public int Id_Instalacion { get; set; }
+        public int Retcode { get; set; }
+        public string Mensaje { get; set; }
     }
 }

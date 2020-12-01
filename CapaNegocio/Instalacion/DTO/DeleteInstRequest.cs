@@ -8,5 +8,6 @@ namespace CapaNegocio.Instalacion.DTO
 {
     public class DeleteInstRequest
     {
+        public int Id_Instalacion { get; set; }
     }
 }

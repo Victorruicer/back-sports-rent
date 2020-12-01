@@ -198,6 +198,11 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="PA_DELETE_RESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="RETCODE" Type="int" Mode="InOut" />
+    <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+  </Function>
   <Function Name="PA_DELETE_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="int" Mode="In" />
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />

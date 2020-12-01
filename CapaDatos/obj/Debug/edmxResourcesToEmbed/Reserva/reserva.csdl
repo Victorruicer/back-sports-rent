@@ -295,6 +295,11 @@
       <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
     </FunctionImport>
     <EntitySet Name="V_RESERVAS_PISTAS" EntityType="BDReservasModel.V_RESERVAS_PISTAS" />
+    <FunctionImport Name="PA_DELETE_RESERVA">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="V_RESERVAS_PISTAS">
     <Key>

@@ -8,5 +8,7 @@ namespace CapaNegocio.Instalacion.DTO
 {
     public class DeleteInstResponse
     {
+        public int Retcode { get; set; }
+        public string Mensaje { get; set; }
     }
 }

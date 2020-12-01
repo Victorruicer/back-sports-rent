@@ -121,5 +121,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="PA_DELETE_RESERVA" FunctionName="BDReservasModel.Store.PA_DELETE_RESERVA" />
   </EntityContainerMapping>
 </Mapping>
