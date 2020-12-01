@@ -192,5 +192,14 @@ namespace CapaDatos.Reserva
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_MODIFICAR_USUARIO", iD_USUARIOParameter, nOMBREParameter, aPELLIDO1Parameter, aPELLIDO2Parameter, iD_PERFILParameter, rETCODE, mENSAJE);
         }
+    
+        public virtual int PA_DELETE_RESERVA(Nullable<int> iD, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_DELETE_RESERVA", iDParameter, rETCODE, mENSAJE);
+        }
     }
 }

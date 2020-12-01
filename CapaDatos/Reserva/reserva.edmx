@@ -203,6 +203,11 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="PA_DELETE_RESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="RETCODE" Type="int" Mode="InOut" />
+          <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+        </Function>
         <Function Name="PA_DELETE_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID" Type="int" Mode="In" />
           <Parameter Name="RETCODE" Type="int" Mode="InOut" />
@@ -623,6 +628,11 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
             <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
           </FunctionImport>
           <EntitySet Name="V_RESERVAS_PISTAS" EntityType="BDReservasModel.V_RESERVAS_PISTAS" />
+          <FunctionImport Name="PA_DELETE_RESERVA">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="V_RESERVAS_PISTAS">
           <Key>
@@ -763,6 +773,7 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="PA_DELETE_RESERVA" FunctionName="BDReservasModel.Store.PA_DELETE_RESERVA" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -34,6 +34,16 @@ namespace WSReservas.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, reservas);
         }
 
+        //DELETE
+        [HttpPost]
+        [Route("deleteReserva")]
+        public HttpResponseMessage deleteReserva(DeleteReservaRequest delReserva)
+        {
+            var reservaDA = new ReservaDataAccess();
+            var reservaEliminada = reservaDA.DeleteReserva(delReserva);
+            return Request.CreateResponse(HttpStatusCode.OK, reservaEliminada);
+        }
+
 
     }
 }

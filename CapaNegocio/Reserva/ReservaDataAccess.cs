@@ -12,6 +12,7 @@ namespace CapaNegocio.Reserva
 {
     public class ReservaDataAccess
     {
+        //METODO CREAR RESERVA
         public CreateReservaResponse CreateReserva(CreateReservaRequest nuevaReserva)
         {
             try
@@ -70,6 +71,7 @@ namespace CapaNegocio.Reserva
             }
         }
 
+        //METODO LISTAR RESERVAS
         public IEnumerable<ReservaModel> GetReservas()
         {
             try
@@ -93,6 +95,45 @@ namespace CapaNegocio.Reserva
             catch (Exception ex)
             {
                 throw ex;
+            }
+
+        }
+
+        //METODO ELIMINAR RESERVA
+        public DeleteReservaResponse DeleteReserva(DeleteReservaRequest delReserva)
+        {
+            try
+            {
+                using (var context = new BDReservasEntities())
+                {
+                    ObjectParameter RETCODE = new ObjectParameter("RETCODE", typeof(int));
+                    ObjectParameter MENSAJE = new ObjectParameter("MENSAJE", typeof(string));
+
+                    context.PA_DELETE_RESERVA(delReserva.Id_Reserva, RETCODE, MENSAJE);
+
+                    if ((int)RETCODE.Value < 0)
+                    {
+                        throw new Exception("Error no controlado");
+                    }
+
+                    if ((int)RETCODE.Value > 0)
+                    {
+                        throw new Exception(MENSAJE.Value.ToString().Trim());
+                    }
+
+                    return new DeleteReservaResponse()
+                    {
+                        Retcode = (int)RETCODE.Value,
+                        Mensaje = MENSAJE.Value.ToString().Trim()
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new DeleteReservaResponse()
+                {
+                    Mensaje = ex.Message
+                };
             }
 
         }
