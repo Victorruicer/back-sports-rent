@@ -337,6 +337,7 @@
       <PropertyRef Name="actividad" />
       <PropertyRef Name="tipo_pista" />
       <PropertyRef Name="estado" />
+      <PropertyRef Name="instalacion" />
     </Key>
     <Property Name="fecha" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="h_ini" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
@@ -349,6 +350,7 @@
     <Property Name="actividad" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
     <Property Name="tipo_pista" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
     <Property Name="estado" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
+    <Property Name="instalacion" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
   </EntityType>
   <EntityType Name="actividades">
     <Key>

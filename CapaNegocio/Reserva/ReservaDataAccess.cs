@@ -140,37 +140,65 @@ namespace CapaNegocio.Reserva
 
         }
         
-        /*
+        
         //HISTORICO RESERVAS
         public IEnumerable<ReservaPistaModel> HistoricoReservas(HistoricoReservasRequest datos)
         {
             using(var context = new BDReservasEntities())
             {
+                var sql = "SELECT * FROM V_RESERVAS_PISTAS";
+                List<ReservaPistaModel> listaReservas = null;
+
                 try
                 {
-                    var sql = "SELECT * FROM V_RESERVAS_PISTAS";
-                    List<ReservaPistaModel> reservas = null;
 
                     //PETICION USUARIO
                     if (datos.Email != "todos")
                     {
-                        reservas = (from i in context.V_RESERVAS_PISTAS
+                        listaReservas = (from i in context.V_RESERVAS_PISTAS
                                     where i.email == datos.Email
-                                    and )
+                                    where i.estado == datos.Estado
+                                    select new ReservaPistaModel
+                                    {
+                                        Fecha = i.fecha,
+                                        H_ini = i.h_ini,
+                                        H_fin = i.h_fin,
+                                        Id_Reserva = i.id_reserva,
+                                        Pista = i.pista,
+                                        Instalacion = i.instalacion
+
+                                    }).ToList<ReservaPistaModel>();
+
+                        return listaReservas;
+
                     }
                     else//PETICION ADMIN
                     {
-                        
+                        listaReservas = (from i in context.V_RESERVAS_PISTAS
+                                         select new ReservaPistaModel
+                                         {
+                                             Fecha = i.fecha,
+                                             H_ini = i.h_ini,
+                                             H_fin = i.h_fin,
+                                             Id_Reserva = i.id_reserva,
+                                             Pista = i.pista,
+                                             Instalacion = i.instalacion
+
+                                         }).ToList<ReservaPistaModel>();
+                        return listaReservas;
                     }
-
-                    
-
                 }
                 catch(Exception)
                 {
+                    listaReservas.Add( new ReservaPistaModel()
+                    { 
+                        Mensaje = "No se pudo realizar la consulta." 
+                    });
+
+                    return listaReservas;
 
                 }
             }
-        }*/
+        }
     }
 }

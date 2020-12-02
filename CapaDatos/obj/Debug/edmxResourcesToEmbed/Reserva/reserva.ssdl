@@ -121,6 +121,7 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_RESERVAS_PISTAS' no tiene d
       <PropertyRef Name="actividad" />
       <PropertyRef Name="tipo_pista" />
       <PropertyRef Name="estado" />
+      <PropertyRef Name="instalacion" />
     </Key>
     <Property Name="fecha" Type="nchar" MaxLength="10" />
     <Property Name="h_ini" Type="nchar" MaxLength="10" />
@@ -133,6 +134,7 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_RESERVAS_PISTAS' no tiene d
     <Property Name="actividad" Type="nchar" MaxLength="50" Nullable="false" />
     <Property Name="tipo_pista" Type="nchar" MaxLength="50" Nullable="false" />
     <Property Name="estado" Type="nchar" MaxLength="25" Nullable="false" />
+    <Property Name="instalacion" Type="nchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -367,7 +369,8 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
     [V_RESERVAS_PISTAS].[precio hora] AS [precio hora], 
     [V_RESERVAS_PISTAS].[actividad] AS [actividad], 
     [V_RESERVAS_PISTAS].[tipo_pista] AS [tipo_pista], 
-    [V_RESERVAS_PISTAS].[estado] AS [estado]
+    [V_RESERVAS_PISTAS].[estado] AS [estado], 
+    [V_RESERVAS_PISTAS].[instalacion] AS [instalacion]
     FROM [dbo].[V_RESERVAS_PISTAS] AS [V_RESERVAS_PISTAS]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="V_USUARIOS_PERFILES" EntityType="Self.V_USUARIOS_PERFILES" store:Type="Views" store:Schema="dbo">

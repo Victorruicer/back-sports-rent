@@ -114,6 +114,7 @@
     <EntitySetMapping Name="V_RESERVAS_PISTAS">
       <EntityTypeMapping TypeName="BDReservasModel.V_RESERVAS_PISTAS">
         <MappingFragment StoreEntitySet="V_RESERVAS_PISTAS">
+          <ScalarProperty Name="instalacion" ColumnName="instalacion" />
           <ScalarProperty Name="estado" ColumnName="estado" />
           <ScalarProperty Name="tipo_pista" ColumnName="tipo_pista" />
           <ScalarProperty Name="actividad" ColumnName="actividad" />

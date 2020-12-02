@@ -19,5 +19,7 @@ namespace CapaNegocio.Reserva.DTO
         public string Actividad { get; set; }
         public string Tipo_pista { get; set; }
         public string Estado { get; set; }
+        public string Instalacion { get; set; }
+        public string Mensaje { get; set; }
     }
 }

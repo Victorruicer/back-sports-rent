@@ -25,5 +25,6 @@ namespace CapaDatos.Reserva
         public string actividad { get; set; }
         public string tipo_pista { get; set; }
         public string estado { get; set; }
+        public string instalacion { get; set; }
     }
 }
