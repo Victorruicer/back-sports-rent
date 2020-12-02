@@ -69,7 +69,6 @@ namespace CapaNegocio.Instalacion
         }
 
         //MÉTODO DE BORRAR INSTALACION
-        /*
         public DeleteInstResponse DeleteInst(DeleteInstRequest delInstalacion)
         {
             try
@@ -107,6 +106,99 @@ namespace CapaNegocio.Instalacion
             }
 
         }
-        */
+
+        //METODO LISTAR INSTALACIONES
+        public IEnumerable<InstModel> GetInstalaciones()
+        {
+            try
+            {
+                using (var context = new BDReservasEntities())
+                {
+
+                    List<InstModel> listaInstalaciones = (from i in context.V_INSTALACIONES_HORARIOS
+                                                          select new InstModel
+                                                          {
+                                                              Instalacion = i.instalacion.Trim(),
+                                                              Horario = i.horario,
+                                                              Direccion = i.direccion.Trim(),
+                                                              Imgtmp = i.imagen
+                                                          }).ToList<InstModel>();
+
+                    if (listaInstalaciones.Count < 1)
+                    {
+                        listaInstalaciones.Add(new InstModel
+                        {
+                            Mensaje = "No existen instalaciones"
+                        });
+
+                    }
+                    else
+                    {   //parche para convertir cada imagen del array de instalaciones
+                        foreach (InstModel instalacion in listaInstalaciones)
+                        {
+                            instalacion.Imagen = (instalacion.Imgtmp != null) ? new ImageConverter().byteTobase64(instalacion.Imgtmp) : null;
+                            instalacion.Imgtmp = null;
+                        }
+                    }
+
+                    return listaInstalaciones;
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        //    public InstModel GetInstalacion(int id)
+        //    {
+        //        try
+        //        {
+        //            using (var context = new BDReservasEntities())
+        //            {
+
+        //                InstModel instalacion = (from i in context.instalaciones
+        //                                                   where i.id_instalacion == id
+        //                                                   select new InstModel
+        //                                                   {
+        //                                                       Nombre = i.nombre.Trim(),
+        //                                                       Id_instalacion = (int)i.id_instalacion,
+        //                                                       Id_horario = (int)i.id_horario,
+        //                                                       Direccion = i.direccion.Trim(),
+        //                                                       Operativa = (bool)i.operativa,
+        //                                                       ImgTemp = i.imagen
+        //                                                   }).FirstOrDefault();
+
+        //                if (instalacion == null)
+        //                {
+        //                    return new InstalacionResponse
+        //                    {
+        //                        Mensaje = "No existe la instalacion solicitada"
+        //                    };
+
+        //                }
+        //                else
+        //                {
+        //                    instalacion.Imagen = (instalacion.ImgTemp != null) ? new ImageConverter().byteTobase64(instalacion.ImgTemp) : null;
+        //                    instalacion.ImgTemp = null;
+        //                }
+
+        //                return instalacion;
+
+        //            }
+
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            throw ex;
+        //        }
+        //    }
+
+        //}
     }
+
 }

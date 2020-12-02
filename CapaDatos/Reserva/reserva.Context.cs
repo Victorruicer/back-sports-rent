@@ -37,6 +37,8 @@ namespace CapaDatos.Reserva
         public virtual DbSet<usuarios> usuarios { get; set; }
         public virtual DbSet<V_USUARIOS_PERFILES> V_USUARIOS_PERFILES { get; set; }
         public virtual DbSet<V_RESERVAS_PISTAS> V_RESERVAS_PISTAS { get; set; }
+        public virtual DbSet<actividades> actividades { get; set; }
+        public virtual DbSet<V_INSTALACIONES_HORARIOS> V_INSTALACIONES_HORARIOS { get; set; }
     
         public virtual int PA_DELETE_USUARIO(Nullable<int> iD, ObjectParameter rETCODE, ObjectParameter mENSAJE)
         {
@@ -79,43 +81,6 @@ namespace CapaDatos.Reserva
                 new ObjectParameter("perfil", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_INSERT_PERFIL", perfilParameter, rETCODE, mENSAJE);
-        }
-    
-        public virtual int PA_INSERT_RESERVA(string fecha, string h_ini, string h_fin, Nullable<int> id_pista, Nullable<int> id_usuario, string created_at, string updated_at, Nullable<int> id_estado, ObjectParameter iD_RESERVA, ObjectParameter rETCODE, ObjectParameter mENSAJE)
-        {
-            var fechaParameter = fecha != null ?
-                new ObjectParameter("fecha", fecha) :
-                new ObjectParameter("fecha", typeof(string));
-    
-            var h_iniParameter = h_ini != null ?
-                new ObjectParameter("h_ini", h_ini) :
-                new ObjectParameter("h_ini", typeof(string));
-    
-            var h_finParameter = h_fin != null ?
-                new ObjectParameter("h_fin", h_fin) :
-                new ObjectParameter("h_fin", typeof(string));
-    
-            var id_pistaParameter = id_pista.HasValue ?
-                new ObjectParameter("id_pista", id_pista) :
-                new ObjectParameter("id_pista", typeof(int));
-    
-            var id_usuarioParameter = id_usuario.HasValue ?
-                new ObjectParameter("id_usuario", id_usuario) :
-                new ObjectParameter("id_usuario", typeof(int));
-    
-            var created_atParameter = created_at != null ?
-                new ObjectParameter("created_at", created_at) :
-                new ObjectParameter("created_at", typeof(string));
-    
-            var updated_atParameter = updated_at != null ?
-                new ObjectParameter("updated_at", updated_at) :
-                new ObjectParameter("updated_at", typeof(string));
-    
-            var id_estadoParameter = id_estado.HasValue ?
-                new ObjectParameter("id_estado", id_estado) :
-                new ObjectParameter("id_estado", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_INSERT_RESERVA", fechaParameter, h_iniParameter, h_finParameter, id_pistaParameter, id_usuarioParameter, created_atParameter, updated_atParameter, id_estadoParameter, iD_RESERVA, rETCODE, mENSAJE);
         }
     
         public virtual int PA_INSERT_USUARIO(string nombre, string apellido1, string apellido2, string dni, string email, string password, Nullable<int> id_perfil, byte[] imagen, ObjectParameter rETCODE, ObjectParameter mENSAJE)
@@ -200,6 +165,85 @@ namespace CapaDatos.Reserva
                 new ObjectParameter("ID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_DELETE_RESERVA", iDParameter, rETCODE, mENSAJE);
+        }
+    
+        public virtual int PA_DELETE_INSTALACION(Nullable<int> iD, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_DELETE_INSTALACION", iDParameter, rETCODE, mENSAJE);
+        }
+    
+        public virtual int PA_INSERT_PISTA(string nombre, Nullable<int> id_instalacion, Nullable<bool> operativa, Nullable<int> id_tarifa, Nullable<int> id_actividad, ObjectParameter iD, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var id_instalacionParameter = id_instalacion.HasValue ?
+                new ObjectParameter("id_instalacion", id_instalacion) :
+                new ObjectParameter("id_instalacion", typeof(int));
+    
+            var operativaParameter = operativa.HasValue ?
+                new ObjectParameter("operativa", operativa) :
+                new ObjectParameter("operativa", typeof(bool));
+    
+            var id_tarifaParameter = id_tarifa.HasValue ?
+                new ObjectParameter("id_tarifa", id_tarifa) :
+                new ObjectParameter("id_tarifa", typeof(int));
+    
+            var id_actividadParameter = id_actividad.HasValue ?
+                new ObjectParameter("id_actividad", id_actividad) :
+                new ObjectParameter("id_actividad", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_INSERT_PISTA", nombreParameter, id_instalacionParameter, operativaParameter, id_tarifaParameter, id_actividadParameter, iD, rETCODE, mENSAJE);
+        }
+    
+        public virtual int PA_INSERT_RESERVA(string fecha, string h_ini, string h_fin, Nullable<int> id_pista, Nullable<int> id_usuario, string created_at, string updated_at, Nullable<int> id_estado, Nullable<decimal> precio, Nullable<decimal> horas, ObjectParameter iD_RESERVA, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var fechaParameter = fecha != null ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(string));
+    
+            var h_iniParameter = h_ini != null ?
+                new ObjectParameter("h_ini", h_ini) :
+                new ObjectParameter("h_ini", typeof(string));
+    
+            var h_finParameter = h_fin != null ?
+                new ObjectParameter("h_fin", h_fin) :
+                new ObjectParameter("h_fin", typeof(string));
+    
+            var id_pistaParameter = id_pista.HasValue ?
+                new ObjectParameter("id_pista", id_pista) :
+                new ObjectParameter("id_pista", typeof(int));
+    
+            var id_usuarioParameter = id_usuario.HasValue ?
+                new ObjectParameter("id_usuario", id_usuario) :
+                new ObjectParameter("id_usuario", typeof(int));
+    
+            var created_atParameter = created_at != null ?
+                new ObjectParameter("created_at", created_at) :
+                new ObjectParameter("created_at", typeof(string));
+    
+            var updated_atParameter = updated_at != null ?
+                new ObjectParameter("updated_at", updated_at) :
+                new ObjectParameter("updated_at", typeof(string));
+    
+            var id_estadoParameter = id_estado.HasValue ?
+                new ObjectParameter("id_estado", id_estado) :
+                new ObjectParameter("id_estado", typeof(int));
+    
+            var precioParameter = precio.HasValue ?
+                new ObjectParameter("precio", precio) :
+                new ObjectParameter("precio", typeof(decimal));
+    
+            var horasParameter = horas.HasValue ?
+                new ObjectParameter("horas", horas) :
+                new ObjectParameter("horas", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_INSERT_RESERVA", fechaParameter, h_iniParameter, h_finParameter, id_pistaParameter, id_usuarioParameter, created_atParameter, updated_atParameter, id_estadoParameter, precioParameter, horasParameter, iD_RESERVA, rETCODE, mENSAJE);
         }
     }
 }

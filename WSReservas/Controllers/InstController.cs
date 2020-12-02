@@ -35,15 +35,15 @@ namespace WSReservas.Controllers
         //    return Request.CreateResponse(HttpStatusCode.OK, instUpdateada);
         //}
 
-        ////DELETE
-        //[HttpPost]
-        //[Route("deleteInst")]
-        //public HttpResponseMessage deleteInst(DeleteInstRequest delInst)
-        //{
-        //    var instDA = new InstDataAccess();
-        //    var instEliminada = instDA.DeleteInst(delInst);
-        //    return Request.CreateResponse(HttpStatusCode.OK, instEliminada);
-        //}
+        //DELETE
+        [HttpPost]
+        [Route("deleteInst")]
+        public HttpResponseMessage deleteInst(DeleteInstRequest delInst)
+        {
+           var instDA = new InstDataAccess();
+            var instEliminada = instDA.DeleteInst(delInst);
+           return Request.CreateResponse(HttpStatusCode.OK, instEliminada);
+        }
 
         ////LIST
         //[HttpGet]

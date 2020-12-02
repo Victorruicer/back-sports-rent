@@ -23,6 +23,8 @@ namespace CapaDatos.Reserva
         public string updated_at { get; set; }
         public int id_estado { get; set; }
         public int id_reserva { get; set; }
+        public Nullable<decimal> precio { get; set; }
+        public Nullable<decimal> horas { get; set; }
     
         public virtual estados estados { get; set; }
         public virtual pistas pistas { get; set; }

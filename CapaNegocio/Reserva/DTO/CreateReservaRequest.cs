@@ -16,5 +16,7 @@ namespace CapaNegocio.Reserva.DTO
         public string Created_at { get; set; }
         public string Updated_at { get; set; }
         public int Id_Estado { get; set; }
+        public decimal Precio { get; set; }
+        public decimal Horas { get; set; }
     }
 }

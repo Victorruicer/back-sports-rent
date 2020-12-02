@@ -8,9 +8,12 @@ namespace CapaNegocio.Instalacion.DTO
 {
     public class InstModel
     {
-        public string Nombre { get; set; }
         public string Direccion { get; set; }
         public string Horario { get; set; }
         public string Imagen { get; set; }
+        public byte[] Imgtmp { get; set; }
+        public int Id_instalacion { get; set; }
+        public string Mensaje { get; set; }
+        public string Instalacion { get; set; }
     }
 }

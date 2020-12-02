@@ -50,6 +50,8 @@
     <NavigationProperty Name="instalaciones" Relationship="Self.FK_pistas_instalaciones" FromRole="pistas" ToRole="instalaciones" />
     <NavigationProperty Name="tarifas" Relationship="Self.FK_pistas_tarifas" FromRole="pistas" ToRole="tarifas" />
     <NavigationProperty Name="reservas" Relationship="Self.FK_reservas_pistas" FromRole="pistas" ToRole="reservas" />
+    <Property Name="id_actividad" Type="Int32" />
+    <NavigationProperty Name="actividades" Relationship="BDReservasModel.FK_pistas_actividades" FromRole="pistas" ToRole="actividades" />
   </EntityType>
   <EntityType Name="reservas">
     <Key>
@@ -67,6 +69,8 @@
     <NavigationProperty Name="estados" Relationship="Self.FK_reservas_estados" FromRole="reservas" ToRole="estados" />
     <NavigationProperty Name="pistas" Relationship="Self.FK_reservas_pistas" FromRole="reservas" ToRole="pistas" />
     <NavigationProperty Name="usuarios" Relationship="Self.FK_reservas_usuarios" FromRole="reservas" ToRole="usuarios" />
+    <Property Name="precio" Type="Decimal" Precision="4" Scale="2" />
+    <Property Name="horas" Type="Decimal" Precision="3" Scale="1" />
   </EntityType>
   <EntityType Name="tarifas">
     <Key>
@@ -253,19 +257,6 @@
       <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
       <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="PA_INSERT_RESERVA">
-      <Parameter Name="fecha" Mode="In" Type="String" />
-      <Parameter Name="h_ini" Mode="In" Type="String" />
-      <Parameter Name="h_fin" Mode="In" Type="String" />
-      <Parameter Name="id_pista" Mode="In" Type="Int32" />
-      <Parameter Name="id_usuario" Mode="In" Type="Int32" />
-      <Parameter Name="created_at" Mode="In" Type="String" />
-      <Parameter Name="updated_at" Mode="In" Type="String" />
-      <Parameter Name="id_estado" Mode="In" Type="Int32" />
-      <Parameter Name="ID_RESERVA" Mode="InOut" Type="Int32" />
-      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
-      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
-    </FunctionImport>
     <FunctionImport Name="PA_INSERT_USUARIO">
       <Parameter Name="nombre" Mode="In" Type="String" />
       <Parameter Name="apellido1" Mode="In" Type="String" />
@@ -300,12 +291,52 @@
       <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
       <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
     </FunctionImport>
+    <EntitySet Name="actividades" EntityType="BDReservasModel.actividades" />
+    <AssociationSet Name="FK_pistas_actividades" Association="BDReservasModel.FK_pistas_actividades">
+      <End Role="actividades" EntitySet="actividades" />
+      <End Role="pistas" EntitySet="pistas" />
+    </AssociationSet>
+    <FunctionImport Name="PA_DELETE_INSTALACION">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="V_INSTALACIONES_HORARIOS" EntityType="BDReservasModel.V_INSTALACIONES_HORARIOS" />
+    <FunctionImport Name="PA_INSERT_PISTA">
+      <Parameter Name="nombre" Mode="In" Type="String" />
+      <Parameter Name="id_instalacion" Mode="In" Type="Int32" />
+      <Parameter Name="operativa" Mode="In" Type="Boolean" />
+      <Parameter Name="id_tarifa" Mode="In" Type="Int32" />
+      <Parameter Name="id_actividad" Mode="In" Type="Int32" />
+      <Parameter Name="ID" Mode="InOut" Type="Int32" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PA_INSERT_RESERVA">
+      <Parameter Name="fecha" Mode="In" Type="String" />
+      <Parameter Name="h_ini" Mode="In" Type="String" />
+      <Parameter Name="h_fin" Mode="In" Type="String" />
+      <Parameter Name="id_pista" Mode="In" Type="Int32" />
+      <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+      <Parameter Name="created_at" Mode="In" Type="String" />
+      <Parameter Name="updated_at" Mode="In" Type="String" />
+      <Parameter Name="id_estado" Mode="In" Type="Int32" />
+      <Parameter Name="precio" Mode="In" Type="Decimal" />
+      <Parameter Name="horas" Mode="In" Type="Decimal" />
+      <Parameter Name="ID_RESERVA" Mode="InOut" Type="Int32" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="V_RESERVAS_PISTAS">
     <Key>
       <PropertyRef Name="id_reserva" />
       <PropertyRef Name="pista" />
       <PropertyRef Name="email" />
+      <PropertyRef Name="precio_hora" />
+      <PropertyRef Name="actividad" />
+      <PropertyRef Name="tipo_pista" />
+      <PropertyRef Name="estado" />
     </Key>
     <Property Name="fecha" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="h_ini" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
@@ -313,5 +344,49 @@
     <Property Name="id_reserva" Type="Int32" Nullable="false" />
     <Property Name="pista" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
     <Property Name="email" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="precio" Type="Decimal" Precision="4" Scale="2" />
+    <Property Name="precio_hora" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="actividad" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="tipo_pista" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="estado" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="actividades">
+    <Key>
+      <PropertyRef Name="id_actividad" />
+    </Key>
+    <Property Name="id_actividad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="actividad" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="tipo_pista" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="pistas" Relationship="BDReservasModel.FK_pistas_actividades" FromRole="actividades" ToRole="pistas" />
+  </EntityType>
+  <Association Name="FK_pistas_actividades">
+    <End Type="BDReservasModel.actividades" Role="actividades" Multiplicity="0..1" />
+    <End Type="BDReservasModel.pistas" Role="pistas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="actividades">
+        <PropertyRef Name="id_actividad" />
+      </Principal>
+      <Dependent Role="pistas">
+        <PropertyRef Name="id_actividad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="V_INSTALACIONES_HORARIOS">
+    <Key>
+      <PropertyRef Name="instalacion" />
+      <PropertyRef Name="direccion" />
+      <PropertyRef Name="pista" />
+      <PropertyRef Name="actividad" />
+      <PropertyRef Name="tipo_pista" />
+      <PropertyRef Name="precio_hora" />
+    </Key>
+    <Property Name="instalacion" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="direccion" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="horario" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="pista" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
+    <Property Name="actividad" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="tipo_pista" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="precio_hora" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
   </EntityType>
 </Schema>

@@ -12,18 +12,15 @@ namespace CapaDatos.Reserva
     using System;
     using System.Collections.Generic;
     
-    public partial class V_RESERVAS_PISTAS
+    public partial class V_INSTALACIONES_HORARIOS
     {
-        public string fecha { get; set; }
-        public string h_ini { get; set; }
-        public string h_fin { get; set; }
-        public int id_reserva { get; set; }
+        public string instalacion { get; set; }
+        public string direccion { get; set; }
+        public byte[] imagen { get; set; }
+        public string horario { get; set; }
         public string pista { get; set; }
-        public string email { get; set; }
-        public Nullable<decimal> precio { get; set; }
-        public decimal precio_hora { get; set; }
         public string actividad { get; set; }
         public string tipo_pista { get; set; }
-        public string estado { get; set; }
+        public decimal precio_hora { get; set; }
     }
 }

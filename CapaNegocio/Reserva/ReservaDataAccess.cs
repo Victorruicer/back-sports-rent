@@ -23,7 +23,7 @@ namespace CapaNegocio.Reserva
                     ObjectParameter RETCODE = new ObjectParameter("RETCODE", typeof(int));
                     ObjectParameter MENSAJE = new ObjectParameter("MENSAJE", typeof(string));
 
-                    var cultureInfo = new CultureInfo("es-ES");
+                    //var cultureInfo = new CultureInfo("es-ES");
 
                     //CAMBIO DE STRING A FORMATO FECHA
                     /*
@@ -43,6 +43,8 @@ namespace CapaNegocio.Reserva
                         nuevaReserva.Created_at,
                         nuevaReserva.Updated_at,
                         nuevaReserva.Id_Estado,
+                        nuevaReserva.Precio,
+                        nuevaReserva.Horas,
                         ID_RESERVA, RETCODE, MENSAJE);
 
                     if ((int)RETCODE.Value < 0)
@@ -80,13 +82,13 @@ namespace CapaNegocio.Reserva
                 {
                     List<ReservaModel> listReservas = (from V_RESERVAS_PISTAS in context.V_RESERVAS_PISTAS
                                                        select new ReservaModel
-                                               {
-                                                   Fecha = V_RESERVAS_PISTAS.fecha.Trim(),
-                                                   H_ini = V_RESERVAS_PISTAS.h_ini.Trim(),
-                                                   H_fin = V_RESERVAS_PISTAS.h_fin.Trim(),
-                                                   Id_Reserva = V_RESERVAS_PISTAS.id_reserva,
-                                                   Pista = V_RESERVAS_PISTAS.pista.Trim(),
-                                                   Email = V_RESERVAS_PISTAS.email.Trim()
+                                                       {
+                                                           Fecha = V_RESERVAS_PISTAS.fecha.Trim(),
+                                                           H_ini = V_RESERVAS_PISTAS.h_ini.Trim(),
+                                                           H_fin = V_RESERVAS_PISTAS.h_fin.Trim(),
+                                                           Id_Reserva = V_RESERVAS_PISTAS.id_reserva,
+                                                           Pista = V_RESERVAS_PISTAS.pista.Trim(),
+                                                           Email = V_RESERVAS_PISTAS.email.Trim()
 
                                                        }).ToList<ReservaModel>();
                     return listReservas;
@@ -137,6 +139,38 @@ namespace CapaNegocio.Reserva
             }
 
         }
+        
+        /*
+        //HISTORICO RESERVAS
+        public IEnumerable<ReservaPistaModel> HistoricoReservas(HistoricoReservasRequest datos)
+        {
+            using(var context = new BDReservasEntities())
+            {
+                try
+                {
+                    var sql = "SELECT * FROM V_RESERVAS_PISTAS";
+                    List<ReservaPistaModel> reservas = null;
 
+                    //PETICION USUARIO
+                    if (datos.Email != "todos")
+                    {
+                        reservas = (from i in context.V_RESERVAS_PISTAS
+                                    where i.email == datos.Email
+                                    and )
+                    }
+                    else//PETICION ADMIN
+                    {
+                        
+                    }
+
+                    
+
+                }
+                catch(Exception)
+                {
+
+                }
+            }
+        }*/
     }
 }

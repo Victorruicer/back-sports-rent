@@ -138,8 +138,8 @@ namespace CapaNegocio.Usuario
                 {
 
                     //la imagen del usuario se añadirá desde su perfil, no al registrarse
-                    //byte[] imagen = (registro.Imagen != "") ? new ImageConverter().base64ToByte(registro.Imagen) : null;
-                    byte[] imagen = null;
+                    byte[] imagen = (registro.Imagen != "") ? new ImageConverter().base64ToByte(registro.Imagen) : null;
+                    //byte[] imagen = null;
 
                     ObjectParameter RETCODE = new ObjectParameter("RETCODE", typeof(int));
                     ObjectParameter MENSAJE = new ObjectParameter("MENSAJE", typeof(string));

@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="BDReservasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="actividades">
+    <Key>
+      <PropertyRef Name="id_actividad" />
+    </Key>
+    <Property Name="id_actividad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="actividad" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="tipo_pista" Type="nchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="estados">
     <Key>
       <PropertyRef Name="id_estado" />
@@ -42,6 +50,7 @@
     <Property Name="operativa" Type="bit" />
     <Property Name="id_pista" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="id_tarifa" Type="int" />
+    <Property Name="id_actividad" Type="int" />
   </EntityType>
   <EntityType Name="reservas">
     <Key>
@@ -56,6 +65,8 @@
     <Property Name="updated_at" Type="nchar" MaxLength="50" />
     <Property Name="id_estado" Type="int" Nullable="false" />
     <Property Name="id_reserva" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="precio" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="horas" Type="decimal" Precision="3" Scale="1" />
   </EntityType>
   <EntityType Name="tarifas">
     <Key>
@@ -80,12 +91,36 @@
     <Property Name="imagen" Type="varbinary(max)" />
   </EntityType>
   <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BDReservas.dbo.V_INSTALACIONES_HORARIOS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="V_INSTALACIONES_HORARIOS">
+    <Key>
+      <PropertyRef Name="instalacion" />
+      <PropertyRef Name="direccion" />
+      <PropertyRef Name="pista" />
+      <PropertyRef Name="actividad" />
+      <PropertyRef Name="tipo_pista" />
+      <PropertyRef Name="precio_hora" />
+    </Key>
+    <Property Name="instalacion" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="direccion" Type="nchar" MaxLength="100" Nullable="false" />
+    <Property Name="imagen" Type="varbinary(max)" />
+    <Property Name="horario" Type="nchar" MaxLength="50" />
+    <Property Name="pista" Type="nchar" MaxLength="25" Nullable="false" />
+    <Property Name="actividad" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="tipo_pista" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="precio_hora" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'BDReservas.dbo.V_RESERVAS_PISTAS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="V_RESERVAS_PISTAS">
     <Key>
       <PropertyRef Name="id_reserva" />
       <PropertyRef Name="pista" />
       <PropertyRef Name="email" />
+      <PropertyRef Name="precio hora" />
+      <PropertyRef Name="actividad" />
+      <PropertyRef Name="tipo_pista" />
+      <PropertyRef Name="estado" />
     </Key>
     <Property Name="fecha" Type="nchar" MaxLength="10" />
     <Property Name="h_ini" Type="nchar" MaxLength="10" />
@@ -93,6 +128,11 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_RESERVAS_PISTAS' no tiene d
     <Property Name="id_reserva" Type="int" Nullable="false" />
     <Property Name="pista" Type="nchar" MaxLength="25" Nullable="false" />
     <Property Name="email" Type="nchar" MaxLength="100" Nullable="false" />
+    <Property Name="precio" Type="decimal" Precision="4" Scale="2" />
+    <Property Name="precio hora" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="actividad" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="tipo_pista" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="estado" Type="nchar" MaxLength="25" Nullable="false" />
   </EntityType>
   <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -123,6 +163,18 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
       </Principal>
       <Dependent Role="instalaciones">
         <PropertyRef Name="id_horario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_pistas_actividades">
+    <End Role="actividades" Type="Self.actividades" Multiplicity="0..1" />
+    <End Role="pistas" Type="Self.pistas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="actividades">
+        <PropertyRef Name="id_actividad" />
+      </Principal>
+      <Dependent Role="pistas">
+        <PropertyRef Name="id_actividad" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -198,6 +250,11 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="PA_DELETE_INSTALACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="RETCODE" Type="int" Mode="InOut" />
+    <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+  </Function>
   <Function Name="PA_DELETE_RESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="int" Mode="In" />
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />
@@ -223,6 +280,16 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />
     <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
   </Function>
+  <Function Name="PA_INSERT_PISTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nombre" Type="nchar" Mode="In" />
+    <Parameter Name="id_instalacion" Type="int" Mode="In" />
+    <Parameter Name="operativa" Type="bit" Mode="In" />
+    <Parameter Name="id_tarifa" Type="int" Mode="In" />
+    <Parameter Name="id_actividad" Type="int" Mode="In" />
+    <Parameter Name="ID" Type="int" Mode="InOut" />
+    <Parameter Name="RETCODE" Type="int" Mode="InOut" />
+    <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+  </Function>
   <Function Name="PA_INSERT_RESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="fecha" Type="nchar" Mode="In" />
     <Parameter Name="h_ini" Type="nchar" Mode="In" />
@@ -232,6 +299,8 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
     <Parameter Name="created_at" Type="nchar" Mode="In" />
     <Parameter Name="updated_at" Type="nchar" Mode="In" />
     <Parameter Name="id_estado" Type="int" Mode="In" />
+    <Parameter Name="precio" Type="decimal" Mode="In" />
+    <Parameter Name="horas" Type="decimal" Mode="In" />
     <Parameter Name="ID_RESERVA" Type="int" Mode="InOut" />
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />
     <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
@@ -265,6 +334,7 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
     <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
   </Function>
   <EntityContainer Name="BDReservasModelStoreContainer">
+    <EntitySet Name="actividades" EntityType="Self.actividades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="estados" EntityType="Self.estados" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="horarios" EntityType="Self.horarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="instalaciones" EntityType="Self.instalaciones" Schema="dbo" store:Type="Tables" />
@@ -273,6 +343,18 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
     <EntitySet Name="reservas" EntityType="Self.reservas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tarifas" EntityType="Self.tarifas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="usuarios" EntityType="Self.usuarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="V_INSTALACIONES_HORARIOS" EntityType="Self.V_INSTALACIONES_HORARIOS" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [V_INSTALACIONES_HORARIOS].[instalacion] AS [instalacion], 
+    [V_INSTALACIONES_HORARIOS].[direccion] AS [direccion], 
+    [V_INSTALACIONES_HORARIOS].[imagen] AS [imagen], 
+    [V_INSTALACIONES_HORARIOS].[horario] AS [horario], 
+    [V_INSTALACIONES_HORARIOS].[pista] AS [pista], 
+    [V_INSTALACIONES_HORARIOS].[actividad] AS [actividad], 
+    [V_INSTALACIONES_HORARIOS].[tipo_pista] AS [tipo_pista], 
+    [V_INSTALACIONES_HORARIOS].[precio_hora] AS [precio_hora]
+    FROM [dbo].[V_INSTALACIONES_HORARIOS] AS [V_INSTALACIONES_HORARIOS]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="V_RESERVAS_PISTAS" EntityType="Self.V_RESERVAS_PISTAS" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [V_RESERVAS_PISTAS].[fecha] AS [fecha], 
@@ -280,7 +362,12 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
     [V_RESERVAS_PISTAS].[h_fin] AS [h_fin], 
     [V_RESERVAS_PISTAS].[id_reserva] AS [id_reserva], 
     [V_RESERVAS_PISTAS].[pista] AS [pista], 
-    [V_RESERVAS_PISTAS].[email] AS [email]
+    [V_RESERVAS_PISTAS].[email] AS [email], 
+    [V_RESERVAS_PISTAS].[precio] AS [precio], 
+    [V_RESERVAS_PISTAS].[precio hora] AS [precio hora], 
+    [V_RESERVAS_PISTAS].[actividad] AS [actividad], 
+    [V_RESERVAS_PISTAS].[tipo_pista] AS [tipo_pista], 
+    [V_RESERVAS_PISTAS].[estado] AS [estado]
     FROM [dbo].[V_RESERVAS_PISTAS] AS [V_RESERVAS_PISTAS]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="V_USUARIOS_PERFILES" EntityType="Self.V_USUARIOS_PERFILES" store:Type="Views" store:Schema="dbo">
@@ -298,6 +385,10 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
     <AssociationSet Name="FK_instalaciones_horarios" Association="Self.FK_instalaciones_horarios">
       <End Role="horarios" EntitySet="horarios" />
       <End Role="instalaciones" EntitySet="instalaciones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_pistas_actividades" Association="Self.FK_pistas_actividades">
+      <End Role="actividades" EntitySet="actividades" />
+      <End Role="pistas" EntitySet="pistas" />
     </AssociationSet>
     <AssociationSet Name="FK_pistas_instalaciones" Association="Self.FK_pistas_instalaciones">
       <End Role="instalaciones" EntitySet="instalaciones" />
