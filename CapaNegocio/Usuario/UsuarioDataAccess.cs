@@ -240,7 +240,18 @@ namespace CapaNegocio.Usuario
                     ObjectParameter RETCODE = new ObjectParameter("RETCODE", typeof(int));
                     ObjectParameter MENSAJE = new ObjectParameter("MENSAJE", typeof(string));
 
-                    context.PA_MODIFICAR_USUARIO(upUser.Id_Usuario, upUser.Nombre, upUser.Apellido1, upUser.Apellido2, upUser.Id_Perfil, RETCODE, MENSAJE);
+                    byte[] imagen = null;
+
+                    if (upUser.Imagen != null)
+                    {
+                        imagen = new ImageConverter().base64ToByte(upUser.Imagen);
+                    }
+                    else
+                    {
+                        upUser.Imagen = null;
+                    }
+
+                    context.PA_MODIFICAR_USUARIO(upUser.Id_Usuario, upUser.Nombre, upUser.Apellido1, upUser.Apellido2, upUser.Id_Perfil, imagen, RETCODE, MENSAJE);
 
                     if ((int)RETCODE.Value < 0)
                     {
@@ -256,8 +267,7 @@ namespace CapaNegocio.Usuario
 
                     return new UpdateUserResponse()
                     {
-                        Email = consulta.email,
-                        Retcode = (int)RETCODE.Value,
+                        Email = consulta.email.Trim(),
                         Mensaje = MENSAJE.Value.ToString()
                     };
                 }

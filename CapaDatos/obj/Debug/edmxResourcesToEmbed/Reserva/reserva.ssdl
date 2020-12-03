@@ -355,6 +355,7 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
     <Parameter Name="APELLIDO1" Type="varchar" Mode="In" />
     <Parameter Name="APELLIDO2" Type="varchar" Mode="In" />
     <Parameter Name="ID_PERFIL" Type="int" Mode="In" />
+    <Parameter Name="IMAGEN" Type="varbinary(max)" Mode="In" />
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />
     <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
   </Function>

@@ -13,5 +13,6 @@ namespace CapaNegocio.Usuario.DTO
         public string Apellido1 { get; set; }
         public string Apellido2 { get; set; }
         public int Id_Perfil { get; set; }
+        public string Imagen { get; set; }
     }
 }

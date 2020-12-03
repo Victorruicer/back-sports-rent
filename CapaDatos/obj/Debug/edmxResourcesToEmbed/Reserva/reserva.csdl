@@ -282,6 +282,7 @@
       <Parameter Name="APELLIDO1" Mode="In" Type="String" />
       <Parameter Name="APELLIDO2" Mode="In" Type="String" />
       <Parameter Name="ID_PERFIL" Mode="In" Type="Int32" />
+      <Parameter Name="IMAGEN" Mode="In" Type="Binary" />
       <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
       <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
     </FunctionImport>

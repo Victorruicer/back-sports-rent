@@ -133,7 +133,7 @@ namespace CapaDatos.Reserva
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_LOGIN", emailParameter, passwordParameter, iD, rETCODE, mENSAJE);
         }
     
-        public virtual int PA_MODIFICAR_USUARIO(Nullable<int> iD_USUARIO, string nOMBRE, string aPELLIDO1, string aPELLIDO2, Nullable<int> iD_PERFIL, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        public virtual int PA_MODIFICAR_USUARIO(Nullable<int> iD_USUARIO, string nOMBRE, string aPELLIDO1, string aPELLIDO2, Nullable<int> iD_PERFIL, byte[] iMAGEN, ObjectParameter rETCODE, ObjectParameter mENSAJE)
         {
             var iD_USUARIOParameter = iD_USUARIO.HasValue ?
                 new ObjectParameter("ID_USUARIO", iD_USUARIO) :
@@ -155,7 +155,11 @@ namespace CapaDatos.Reserva
                 new ObjectParameter("ID_PERFIL", iD_PERFIL) :
                 new ObjectParameter("ID_PERFIL", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_MODIFICAR_USUARIO", iD_USUARIOParameter, nOMBREParameter, aPELLIDO1Parameter, aPELLIDO2Parameter, iD_PERFILParameter, rETCODE, mENSAJE);
+            var iMAGENParameter = iMAGEN != null ?
+                new ObjectParameter("IMAGEN", iMAGEN) :
+                new ObjectParameter("IMAGEN", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_MODIFICAR_USUARIO", iD_USUARIOParameter, nOMBREParameter, aPELLIDO1Parameter, aPELLIDO2Parameter, iD_PERFILParameter, iMAGENParameter, rETCODE, mENSAJE);
         }
     
         public virtual int PA_DELETE_RESERVA(Nullable<int> iD, ObjectParameter rETCODE, ObjectParameter mENSAJE)
