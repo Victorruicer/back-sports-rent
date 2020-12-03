@@ -60,9 +60,15 @@
     <Compile Include="Instalacion\DTO\UpdateInstRequest.cs" />
     <Compile Include="Instalacion\DTO\UpdateInstResponse.cs" />
     <Compile Include="Instalacion\InstDataAccess.cs" />
+    <Compile Include="Pista\DTO\CreatePistaRequest.cs" />
+    <Compile Include="Pista\DTO\CreatePistaResponse.cs" />
+    <Compile Include="Pista\DTO\DeletePistaRequest.cs" />
+    <Compile Include="Pista\DTO\DeletePistaResponse.cs" />
     <Compile Include="Pista\DTO\PistaModel.cs" />
     <Compile Include="Pista\DTO\PistasReservaRequest.cs" />
     <Compile Include="Pista\DTO\PistasReservaResponse.cs" />
+    <Compile Include="Pista\DTO\UpdatePistaRequest.cs" />
+    <Compile Include="Pista\DTO\UpdatePistaResponse.cs" />
     <Compile Include="Pista\PistaDataAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reserva\DTO\CreateReservaResponse.cs" />

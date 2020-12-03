@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CapaNegocio.Instalacion.DTO
+namespace CapaNegocio.Pista.DTO
 {
-    public class UpdateInstResponse
+    public class UpdatePistaResponse
     {
         public string Nombre { get; set; }
         public int Retcode { get; set; }

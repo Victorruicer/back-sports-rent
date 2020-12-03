@@ -10,7 +10,8 @@ namespace CapaNegocio.Instalacion.DTO
     {
         public string Nombre { get; set; }
         public string Direccion { get; set; }
-        public int Operativa { get; set; }
+        public Boolean Operativa { get; set; }
         public int Id_horario { get; set; }
+        public string Imagen { get; set; }
     }
 }

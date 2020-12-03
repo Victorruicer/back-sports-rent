@@ -156,5 +156,8 @@
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="PA_INSERT_PISTA" FunctionName="BDReservasModel.Store.PA_INSERT_PISTA" />
     <FunctionImportMapping FunctionImportName="PA_INSERT_RESERVA" FunctionName="BDReservasModel.Store.PA_INSERT_RESERVA" />
+    <FunctionImportMapping FunctionImportName="PA_DELETE_PISTA" FunctionName="BDReservasModel.Store.PA_DELETE_PISTA" />
+    <FunctionImportMapping FunctionImportName="PA_MODIFICAR_INSTALACION" FunctionName="BDReservasModel.Store.PA_MODIFICAR_INSTALACION" />
+    <FunctionImportMapping FunctionImportName="PA_MODIFICAR_PISTA" FunctionName="BDReservasModel.Store.PA_MODIFICAR_PISTA" />
   </EntityContainerMapping>
 </Mapping>

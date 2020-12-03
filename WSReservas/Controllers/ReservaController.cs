@@ -44,6 +44,15 @@ namespace WSReservas.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, reservaEliminada);
         }
 
+        //HISTORICO RESERVAS
+        [HttpPost]
+        [Route("historico")]
+        public HttpResponseMessage historicoReservas(HistoricoReservasRequest datos)
+        {
+            var reservaDA = new ReservaDataAccess();
+            var listaReservas = reservaDA.HistoricoReservas(datos);
+            return Request.CreateResponse(HttpStatusCode.OK, listaReservas);
+        }
 
     }
 }

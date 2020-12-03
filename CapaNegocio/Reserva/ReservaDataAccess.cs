@@ -142,11 +142,13 @@ namespace CapaNegocio.Reserva
         
         
         //HISTORICO RESERVAS
+        //dependiendo del valor de datos.Email se muestran todos las reservas(admin) o 
+        //solo las del usuario( con el valor que tenga el campo datos.estado)
         public IEnumerable<ReservaPistaModel> HistoricoReservas(HistoricoReservasRequest datos)
         {
             using(var context = new BDReservasEntities())
             {
-                var sql = "SELECT * FROM V_RESERVAS_PISTAS";
+
                 List<ReservaPistaModel> listaReservas = null;
 
                 try

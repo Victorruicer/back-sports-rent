@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CapaNegocio.Instalacion.DTO
+namespace CapaNegocio.Pista.DTO
 {
-    public class UpdateInstResponse
+    public class DeletePistaResponse
     {
-        public string Nombre { get; set; }
         public int Retcode { get; set; }
         public string Mensaje { get; set; }
     }

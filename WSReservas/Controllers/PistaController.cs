@@ -24,7 +24,7 @@ namespace WSReservas.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, Pistas);
         }
 
-        /*
+        
         //CREATE
         [HttpPost]
         [Route("createPista")]
@@ -34,7 +34,7 @@ namespace WSReservas.Controllers
             var PistaCreada = PistaDA.CreatePista(newPista);
             return Request.CreateResponse(HttpStatusCode.OK, PistaCreada);
         }
-
+        /*
         //UPDATE
         [HttpPost]
         [Route("updatePista")]
@@ -44,7 +44,7 @@ namespace WSReservas.Controllers
             var PistaUpdateada = PistaDA.UpdatePista(upPista);
             return Request.CreateResponse(HttpStatusCode.OK, PistaUpdateada);
         }
-
+        */
         //DELETE
         [HttpPost]
         [Route("deletePista")]
@@ -57,13 +57,13 @@ namespace WSReservas.Controllers
 
         //LIST
         [HttpGet]
-        [Route("listPista")]
+        [Route("listPistas")]
         public HttpResponseMessage listPistas()
         {
             var PistaDA = new PistaDataAccess();
             var listPistas = PistaDA.GetPistas();
             return Request.CreateResponse(HttpStatusCode.OK, listPistas);
         }
-        */
+        
     }
 }

@@ -108,7 +108,7 @@ namespace CapaNegocio.Instalacion
         }
 
         //METODO LISTAR INSTALACIONES
-        public IEnumerable<InstModel> GetInstalaciones()
+        public IEnumerable<InstModel> GetInsts()
         {
             try
             {
@@ -151,6 +151,60 @@ namespace CapaNegocio.Instalacion
             {
                 throw ex;
             }
+        }
+
+        //METODO ACTUALIZAR INSTALACION
+        public UpdateInstResponse UpdateInst(UpdateInstRequest upInst)
+        {
+            try
+            {
+                using (var context = new BDReservasEntities())
+                {
+                    ObjectParameter RETCODE = new ObjectParameter("RETCODE", typeof(int));
+                    ObjectParameter MENSAJE = new ObjectParameter("MENSAJE", typeof(string));
+
+                    byte[] imagen = null;
+
+                    if (upInst.Imagen != null)
+                    {
+                        imagen = new ImageConverter().base64ToByte(upInst.Imagen);
+                    }
+                    else
+                    {
+                        upInst.Imagen = null;
+                    }
+
+
+                    context.PA_MODIFICAR_INSTALACION(upInst.Nombre, upInst.Direccion, upInst.Operativa, upInst.Id_horario, imagen, RETCODE, MENSAJE);
+
+                    if ((int)RETCODE.Value < 0)
+                    {
+                        throw new Exception("Error no controlado");
+                    }
+
+                    if ((int)RETCODE.Value > 0)
+                    {
+                        throw new Exception(MENSAJE.Value.ToString());
+                    }
+
+                    var consulta = context.instalaciones.Where(user => user.nombre == upInst.Nombre).FirstOrDefault();
+
+                    return new UpdateInstResponse()
+                    {
+                        Nombre = consulta.nombre,
+                        Retcode = (int)RETCODE.Value,
+                        Mensaje = MENSAJE.Value.ToString()
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new UpdateInstResponse()
+                {
+                    Mensaje = ex.Message
+                };
+            }
+
         }
 
         //    public InstModel GetInstalacion(int id)

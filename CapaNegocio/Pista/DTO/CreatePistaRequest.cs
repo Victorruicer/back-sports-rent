@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CapaNegocio.Instalacion.DTO
+namespace CapaNegocio.Pista.DTO
 {
-    public class CreateInstRequest
+    public class CreatePistaRequest
     {
         public string Nombre { get; set; }
-        public string Direccion { get; set; }
+        public int Id_instalacion { get; set; }
         public Boolean Operativa { get; set; }
-        public int Id_Horario { get; set; }
-        public string Imagen { get; set; }
+        public int Id_tarifa { get; set; }
+        public int Id_actividad { get; set; }
     }
 }

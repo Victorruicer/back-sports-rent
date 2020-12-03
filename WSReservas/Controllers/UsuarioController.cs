@@ -74,7 +74,7 @@ namespace WSReservas.Controllers
         
         //LIST
         [HttpGet]
-        [Route("listUser")]
+        [Route("listUsers")]
         public HttpResponseMessage listUsers()
         {
             var usuarioDA = new UsuarioDataAccess();

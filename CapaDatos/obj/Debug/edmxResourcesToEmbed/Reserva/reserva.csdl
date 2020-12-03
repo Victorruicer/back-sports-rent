@@ -327,6 +327,29 @@
       <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
       <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="PA_DELETE_PISTA">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PA_MODIFICAR_INSTALACION">
+      <Parameter Name="NOMBRE" Mode="In" Type="String" />
+      <Parameter Name="DIRECCION" Mode="In" Type="String" />
+      <Parameter Name="OPERATIVA" Mode="In" Type="Boolean" />
+      <Parameter Name="ID_HORARIO" Mode="In" Type="Int32" />
+      <Parameter Name="IMAGEN" Mode="In" Type="Binary" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PA_MODIFICAR_PISTA">
+      <Parameter Name="NOMBRE" Mode="In" Type="String" />
+      <Parameter Name="ID_INSTALACION" Mode="In" Type="Int32" />
+      <Parameter Name="OPERATIVA" Mode="In" Type="Boolean" />
+      <Parameter Name="ID_TARIFA" Mode="In" Type="Int32" />
+      <Parameter Name="ID_ACTIVIDAD" Mode="In" Type="Int32" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="V_RESERVAS_PISTAS">
     <Key>
