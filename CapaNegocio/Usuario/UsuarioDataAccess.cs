@@ -108,13 +108,20 @@ namespace CapaNegocio.Usuario
                         throw new Exception(MENSAJE.Value.ToString());
                     }
 
-                    var consulta = context.usuarios.Where(dni => dni.dni == newUser.Dni).FirstOrDefault();
+                    var consulta = context.V_USUARIOS_PERFILES.Where(dni => dni.dni == newUser.Dni).FirstOrDefault();
 
                     return new CreateUserResponse()
                     {
-                        Nombre = consulta.nombre,
-                        Apellido1 = consulta.apellido1,
-                        Mensaje = MENSAJE.Value.ToString()
+                        Id_Usuario = consulta.id_usuario,
+                        Nombre = consulta.nombre.Trim(),
+                        Apellido1 = consulta.apellido1.Trim(),
+                        Apellido2 = consulta.apellido2.Trim(),
+                        Dni = consulta.dni.Trim(),
+                        Email = consulta.email.Trim(),
+                        Perfil = consulta.perfil.Trim(),
+                        Id_Perfil = consulta.id_perfil,
+                        Mensaje = MENSAJE.Value.ToString(),
+                        Retcode = (int)RETCODE.Value
                     };
                 }
             }
@@ -122,7 +129,8 @@ namespace CapaNegocio.Usuario
             {
                 return new CreateUserResponse()
                 {
-                    Mensaje = ex.Message
+                    Mensaje = ex.Message,
+                    Retcode = -1
                 };
             }
 
@@ -171,6 +179,8 @@ namespace CapaNegocio.Usuario
                     {
                         Nombre = consulta.nombre.Trim(),
                         Apellido1 = consulta.apellido1.Trim(),
+                        Email = consulta.email.Trim(),
+                        Retcode = (int)RETCODE.Value,
                         Mensaje = MENSAJE.Value.ToString().Trim()
                     };
 
@@ -182,7 +192,8 @@ namespace CapaNegocio.Usuario
             {
                 return new RegistroResponse()
                 {
-                    Mensaje = ex.Message.Trim()
+                    Mensaje = ex.Message.Trim(),
+                    Retcode = -1
                 };
             }
 
@@ -224,6 +235,7 @@ namespace CapaNegocio.Usuario
             {
                 return new DeleteUserResponse()
                 {
+                    Retcode = -1,
                     Mensaje = ex.Message
                 };
             }
@@ -268,7 +280,8 @@ namespace CapaNegocio.Usuario
                     return new UpdateUserResponse()
                     {
                         Email = consulta.email.Trim(),
-                        Mensaje = MENSAJE.Value.ToString()
+                        Mensaje = MENSAJE.Value.ToString(),
+                        Retcode = (int)RETCODE.Value
                     };
                 }
             }
@@ -276,7 +289,8 @@ namespace CapaNegocio.Usuario
             {
                 return new UpdateUserResponse()
                 {
-                    Mensaje = ex.Message
+                    Mensaje = ex.Message,
+                    Retcode = -1
                 };
             }
 
@@ -295,14 +309,15 @@ namespace CapaNegocio.Usuario
                     List<User> listUsuarios = (from V_USUARIOS_PERFILES in context.V_USUARIOS_PERFILES
                                                select new User
                                                {
+                                                   Nombre = V_USUARIOS_PERFILES.nombre.Trim(),
+                                                   Apellido1 = V_USUARIOS_PERFILES.apellido1.Trim(),
+                                                   Apellido2 = V_USUARIOS_PERFILES.apellido2.Trim(),
+                                                   Perfil = V_USUARIOS_PERFILES.perfil.Trim(),
                                                    Id_Usuario = V_USUARIOS_PERFILES.id_usuario,
-                                                   Nombre = V_USUARIOS_PERFILES.nombre,
-                                                   Apellido1 = V_USUARIOS_PERFILES.apellido1,
-                                                   Apellido2 = V_USUARIOS_PERFILES.apellido2,
-                                                   Perfil = V_USUARIOS_PERFILES.perfil,
-                                                   Email = V_USUARIOS_PERFILES.email,
-                                                   Dni = V_USUARIOS_PERFILES.dni
-                                                  
+                                                   Id_Perfil = (int)V_USUARIOS_PERFILES.id_perfil,
+                                                   Email = V_USUARIOS_PERFILES.email.Trim(),
+                                                   Dni = V_USUARIOS_PERFILES.dni.Trim()
+
 
                                                }).ToList<User>();
                     return listUsuarios;

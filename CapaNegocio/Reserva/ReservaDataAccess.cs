@@ -60,7 +60,8 @@ namespace CapaNegocio.Reserva
                      return new CreateReservaResponse()
                     {
                         Id_Reserva = (int)ID_RESERVA.Value,
-                        Mensaje = MENSAJE.Value.ToString()
+                        Mensaje = MENSAJE.Value.ToString(),
+                        Retcode = (int)RETCODE.Value
                     };
                 }
             }
@@ -68,7 +69,8 @@ namespace CapaNegocio.Reserva
             {
                 return new CreateReservaResponse()
                 {
-                    Mensaje = ex.Message.Trim()
+                    Mensaje = ex.Message.Trim(),
+                    Retcode = -1
                 };
             }
         }

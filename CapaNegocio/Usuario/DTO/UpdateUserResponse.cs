@@ -10,5 +10,6 @@ namespace CapaNegocio.Usuario.DTO
     {
         public string Email { get; set; }
         public string Mensaje { get; set; }
+        public int Retcode { get; set; }
     }
 }

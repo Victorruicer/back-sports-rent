@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CapaNegocio.Usuario.DTO
+namespace CapaNegocio.Tarifa.DTO
 {
-    public class RegistroResponse
+    public class DeleteTarifaResponse
     {
-        public string Nombre { get; set; }
-        public string Apellido1 { get; set; }
-        public string Email { get; set; }
         public string Mensaje { get; set; }
         public int Retcode { get; set; }
     }

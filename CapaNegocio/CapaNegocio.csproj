@@ -51,7 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actividad\ActividadDataAccess.cs" />
     <Compile Include="Helpers\ImageConverter.cs" />
+    <Compile Include="Horario\HorarioDataAccess.cs" />
     <Compile Include="Instalacion\DTO\CreateInstRequest.cs" />
     <Compile Include="Instalacion\DTO\CreateInstResponse.cs" />
     <Compile Include="Instalacion\DTO\DeleteInstRequest.cs" />
@@ -79,6 +81,14 @@
     <Compile Include="Reserva\DTO\ReservaModel.cs" />
     <Compile Include="Reserva\DTO\ReservaPistaModel.cs" />
     <Compile Include="Reserva\ReservaDataAccess.cs" />
+    <Compile Include="Tarifa\DTO\CreateTarifaRequest.cs" />
+    <Compile Include="Tarifa\DTO\CreateTarifaResponse.cs" />
+    <Compile Include="Tarifa\DTO\DeleteTarifaRequest.cs" />
+    <Compile Include="Tarifa\DTO\DeleteTarifaResponse.cs" />
+    <Compile Include="Tarifa\DTO\TarifaModel.cs" />
+    <Compile Include="Tarifa\DTO\UpdateTarifaRequest.cs" />
+    <Compile Include="Tarifa\DTO\UpdateTarifaResponse.cs" />
+    <Compile Include="Tarifa\TarifaDataAccess.cs" />
     <Compile Include="Usuario\DTO\User.cs" />
     <Compile Include="Usuario\DTO\CreateUserRequest.cs" />
     <Compile Include="Usuario\DTO\CreateUserResponse.cs" />
@@ -96,7 +106,10 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Actividad\DTO\" />
+    <Folder Include="Horario\DTO\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CapaDatos\CapaDatos.csproj">
       <Project>{a5923361-92c8-48e8-9203-e089a472f1e1}</Project>

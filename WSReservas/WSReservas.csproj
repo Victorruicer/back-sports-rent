@@ -156,6 +156,7 @@
     <Compile Include="Controllers\InstController.cs" />
     <Compile Include="Controllers\PistaController.cs" />
     <Compile Include="Controllers\ReservaController.cs" />
+    <Compile Include="Controllers\TarifaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
