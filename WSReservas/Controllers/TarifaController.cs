@@ -14,7 +14,7 @@ namespace WSReservas.Controllers
     [RoutePrefix("api/tarifa")]
     public class TarifaController : ApiController
     {
-        /*
+        
         //CREATE
         [HttpPost]
         [Route("createTarifa")]
@@ -54,6 +54,6 @@ namespace WSReservas.Controllers
             var listTarifas = TarifaDA.GetTarifas();
             return Request.CreateResponse(HttpStatusCode.OK, listTarifas);
         }
-        */
+        
     }
 }

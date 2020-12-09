@@ -24,6 +24,16 @@ namespace WSReservas.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, reserva);
         }
 
+        //UPDATE
+        [HttpPost]
+        [Route("updateReserva")]
+        public HttpResponseMessage UpdateReserva(UpdateReservaRequest upReserva)
+        {
+            var ReservaDA = new ReservaDataAccess();
+            var ReservaUpdateada = ReservaDA.UpdateReserva(upReserva);
+            return Request.CreateResponse(HttpStatusCode.OK, ReservaUpdateada);
+        }
+
         //LIST
         [HttpGet]
         [Route("listReserva")]

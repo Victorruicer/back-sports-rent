@@ -303,37 +303,13 @@
       <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
     </FunctionImport>
     <EntitySet Name="V_INSTALACIONES_HORARIOS" EntityType="BDReservasModel.V_INSTALACIONES_HORARIOS" />
-    <FunctionImport Name="PA_INSERT_PISTA">
-      <Parameter Name="nombre" Mode="In" Type="String" />
-      <Parameter Name="id_instalacion" Mode="In" Type="Int32" />
-      <Parameter Name="operativa" Mode="In" Type="Boolean" />
-      <Parameter Name="id_tarifa" Mode="In" Type="Int32" />
-      <Parameter Name="id_actividad" Mode="In" Type="Int32" />
-      <Parameter Name="ID" Mode="InOut" Type="Int32" />
-      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
-      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="PA_INSERT_RESERVA">
-      <Parameter Name="fecha" Mode="In" Type="String" />
-      <Parameter Name="h_ini" Mode="In" Type="String" />
-      <Parameter Name="h_fin" Mode="In" Type="String" />
-      <Parameter Name="id_pista" Mode="In" Type="Int32" />
-      <Parameter Name="id_usuario" Mode="In" Type="Int32" />
-      <Parameter Name="created_at" Mode="In" Type="String" />
-      <Parameter Name="updated_at" Mode="In" Type="String" />
-      <Parameter Name="id_estado" Mode="In" Type="Int32" />
-      <Parameter Name="precio" Mode="In" Type="Decimal" />
-      <Parameter Name="horas" Mode="In" Type="Decimal" />
-      <Parameter Name="ID_RESERVA" Mode="InOut" Type="Int32" />
-      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
-      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
-    </FunctionImport>
     <FunctionImport Name="PA_DELETE_PISTA">
       <Parameter Name="ID" Mode="In" Type="Int32" />
       <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
       <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
     </FunctionImport>
     <FunctionImport Name="PA_MODIFICAR_INSTALACION">
+      <Parameter Name="ID_INSTALACION" Mode="In" Type="Int32" />
       <Parameter Name="NOMBRE" Mode="In" Type="String" />
       <Parameter Name="DIRECCION" Mode="In" Type="String" />
       <Parameter Name="OPERATIVA" Mode="In" Type="Boolean" />
@@ -343,11 +319,100 @@
       <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
     </FunctionImport>
     <FunctionImport Name="PA_MODIFICAR_PISTA">
+      <Parameter Name="ID_PISTA" Mode="In" Type="Int32" />
       <Parameter Name="NOMBRE" Mode="In" Type="String" />
       <Parameter Name="ID_INSTALACION" Mode="In" Type="Int32" />
       <Parameter Name="OPERATIVA" Mode="In" Type="Boolean" />
       <Parameter Name="ID_TARIFA" Mode="In" Type="Int32" />
       <Parameter Name="ID_ACTIVIDAD" Mode="In" Type="Int32" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PA_DELETE_ACTIVIDAD">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PA_DELETE_HORARIO">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PA_DELETE_TARIFA">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PA_INSERT_ACTIVIDAD">
+      <Parameter Name="actividad" Mode="In" Type="String" />
+      <Parameter Name="tipo_pista" Mode="In" Type="String" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PA_INSERT_HORARIO">
+      <Parameter Name="nombre" Mode="In" Type="String" />
+      <Parameter Name="horario" Mode="In" Type="String" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PA_INSERT_TARIFA">
+      <Parameter Name="tarifa" Mode="In" Type="String" />
+      <Parameter Name="valor" Mode="In" Type="Decimal" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PA_MODIFICAR_TARIFA">
+      <Parameter Name="ID_TARIFA" Mode="In" Type="Int32" />
+      <Parameter Name="TARIFA" Mode="In" Type="String" />
+      <Parameter Name="VALOR" Mode="In" Type="Decimal" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PA_INSERT_PISTA">
+      <Parameter Name="nombre" Mode="In" Type="String" />
+      <Parameter Name="id_instalacion" Mode="In" Type="Int32" />
+      <Parameter Name="operativa" Mode="In" Type="Boolean" />
+      <Parameter Name="id_tarifa" Mode="In" Type="Int32" />
+      <Parameter Name="id_actividad" Mode="In" Type="Int32" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PA_MODIFICAR_RESERVA">
+      <Parameter Name="ID_RESERVA" Mode="In" Type="Int32" />
+      <Parameter Name="FECHA" Mode="In" Type="String" />
+      <Parameter Name="H_INI" Mode="In" Type="String" />
+      <Parameter Name="H_FIN" Mode="In" Type="String" />
+      <Parameter Name="ID_PISTA" Mode="In" Type="Int32" />
+      <Parameter Name="ID_ESTADO" Mode="In" Type="Int32" />
+      <Parameter Name="PRECIO" Mode="In" Type="Decimal" />
+      <Parameter Name="HORAS" Mode="In" Type="Decimal" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PA_INSERT_RESERVA">
+      <Parameter Name="fecha" Mode="In" Type="String" />
+      <Parameter Name="h_ini" Mode="In" Type="String" />
+      <Parameter Name="h_fin" Mode="In" Type="String" />
+      <Parameter Name="id_pista" Mode="In" Type="Int32" />
+      <Parameter Name="id_usuario" Mode="In" Type="Int32" />
+      <Parameter Name="id_estado" Mode="In" Type="Int32" />
+      <Parameter Name="precio" Mode="In" Type="Decimal" />
+      <Parameter Name="horas" Mode="In" Type="Decimal" />
+      <Parameter Name="ID_RESERVA" Mode="InOut" Type="Int32" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PA_MODIFICAR_ACTIVIDAD">
+      <Parameter Name="ID_ACTIVIDAD" Mode="In" Type="Int32" />
+      <Parameter Name="ACTIVIDAD" Mode="In" Type="String" />
+      <Parameter Name="TIPO_PISTA" Mode="In" Type="String" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PA_MODIFICAR_HORARIO">
+      <Parameter Name="ID_HORARIO" Mode="In" Type="Int32" />
+      <Parameter Name="NOMBRE" Mode="In" Type="String" />
+      <Parameter Name="HORARIO" Mode="In" Type="String" />
       <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
       <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
     </FunctionImport>

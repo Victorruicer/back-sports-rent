@@ -154,10 +154,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="PA_INSERT_PISTA" FunctionName="BDReservasModel.Store.PA_INSERT_PISTA" />
-    <FunctionImportMapping FunctionImportName="PA_INSERT_RESERVA" FunctionName="BDReservasModel.Store.PA_INSERT_RESERVA" />
     <FunctionImportMapping FunctionImportName="PA_DELETE_PISTA" FunctionName="BDReservasModel.Store.PA_DELETE_PISTA" />
     <FunctionImportMapping FunctionImportName="PA_MODIFICAR_INSTALACION" FunctionName="BDReservasModel.Store.PA_MODIFICAR_INSTALACION" />
     <FunctionImportMapping FunctionImportName="PA_MODIFICAR_PISTA" FunctionName="BDReservasModel.Store.PA_MODIFICAR_PISTA" />
+    <FunctionImportMapping FunctionImportName="PA_DELETE_ACTIVIDAD" FunctionName="BDReservasModel.Store.PA_DELETE_ACTIVIDAD" />
+    <FunctionImportMapping FunctionImportName="PA_DELETE_HORARIO" FunctionName="BDReservasModel.Store.PA_DELETE_HORARIO" />
+    <FunctionImportMapping FunctionImportName="PA_DELETE_TARIFA" FunctionName="BDReservasModel.Store.PA_DELETE_TARIFA" />
+    <FunctionImportMapping FunctionImportName="PA_INSERT_ACTIVIDAD" FunctionName="BDReservasModel.Store.PA_INSERT_ACTIVIDAD" />
+    <FunctionImportMapping FunctionImportName="PA_INSERT_HORARIO" FunctionName="BDReservasModel.Store.PA_INSERT_HORARIO" />
+    <FunctionImportMapping FunctionImportName="PA_INSERT_TARIFA" FunctionName="BDReservasModel.Store.PA_INSERT_TARIFA" />
+    <FunctionImportMapping FunctionImportName="PA_MODIFICAR_TARIFA" FunctionName="BDReservasModel.Store.PA_MODIFICAR_TARIFA" />
+    <FunctionImportMapping FunctionImportName="PA_INSERT_PISTA" FunctionName="BDReservasModel.Store.PA_INSERT_PISTA" />
+    <FunctionImportMapping FunctionImportName="PA_MODIFICAR_RESERVA" FunctionName="BDReservasModel.Store.PA_MODIFICAR_RESERVA" />
+    <FunctionImportMapping FunctionImportName="PA_INSERT_RESERVA" FunctionName="BDReservasModel.Store.PA_INSERT_RESERVA" />
+    <FunctionImportMapping FunctionImportName="PA_MODIFICAR_ACTIVIDAD" FunctionName="BDReservasModel.Store.PA_MODIFICAR_ACTIVIDAD" />
+    <FunctionImportMapping FunctionImportName="PA_MODIFICAR_HORARIO" FunctionName="BDReservasModel.Store.PA_MODIFICAR_HORARIO" />
   </EntityContainerMapping>
 </Mapping>

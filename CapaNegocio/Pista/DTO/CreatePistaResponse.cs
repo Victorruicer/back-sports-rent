@@ -8,7 +8,6 @@ namespace CapaNegocio.Pista.DTO
 {
     public class CreatePistaResponse
     {
-        public int Id { get; set; }
         public int Retcode { get; set; }
         public string Mensaje { get; set; }
     }

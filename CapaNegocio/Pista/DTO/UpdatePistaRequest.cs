@@ -9,6 +9,7 @@ namespace CapaNegocio.Pista.DTO
     public class UpdatePistaRequest
     {
         public string Nombre { get; set; }
+        public int Id_pista { get; set; }
         public int Id_instalacion { get; set; }
         public Boolean Operativa { get; set; }
         public int Id_tarifa { get; set; }

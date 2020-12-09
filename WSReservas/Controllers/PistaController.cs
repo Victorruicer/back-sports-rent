@@ -34,7 +34,7 @@ namespace WSReservas.Controllers
             var PistaCreada = PistaDA.CreatePista(newPista);
             return Request.CreateResponse(HttpStatusCode.OK, PistaCreada);
         }
-        /*
+        
         //UPDATE
         [HttpPost]
         [Route("updatePista")]
@@ -44,7 +44,7 @@ namespace WSReservas.Controllers
             var PistaUpdateada = PistaDA.UpdatePista(upPista);
             return Request.CreateResponse(HttpStatusCode.OK, PistaUpdateada);
         }
-        */
+        
         //DELETE
         [HttpPost]
         [Route("deletePista")]

@@ -11,7 +11,7 @@ namespace CapaNegocio.Tarifa
 {
     public class TarifaDataAccess
     {
-        /*
+        
         //METODO CREAR TARIFA
         public CreateTarifaResponse CreateTarifa(CreateTarifaRequest nuevaTarifa)
         {
@@ -54,7 +54,7 @@ namespace CapaNegocio.Tarifa
                 };
             }
         }
-
+        
         //MÉTODO DE BORRAR TARIFA
         public DeleteTarifaResponse DeleteTarifa(DeleteTarifaRequest delTarifa)
         {
@@ -174,6 +174,5 @@ namespace CapaNegocio.Tarifa
 
         }
 
-*/
     }
 }

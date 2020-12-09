@@ -55,7 +55,8 @@ namespace CapaNegocio.Instalacion
                     return new CreateInstResponse()
                     {
                         Id_Instalacion = (int)ID.Value,
-                        Mensaje = MENSAJE.Value.ToString()
+                        Mensaje = MENSAJE.Value.ToString(),
+                        Retcode = (int)RETCODE.Value
                     };
                 }
             }
@@ -63,7 +64,8 @@ namespace CapaNegocio.Instalacion
             {
                 return new CreateInstResponse()
                 {
-                    Mensaje = ex.Message.Trim()
+                    Mensaje = ex.Message.Trim(),
+                    Retcode = -1
                 };
             }
         }
@@ -175,7 +177,7 @@ namespace CapaNegocio.Instalacion
                     }
 
 
-                    context.PA_MODIFICAR_INSTALACION(upInst.Nombre, upInst.Direccion, upInst.Operativa, upInst.Id_horario, imagen, RETCODE, MENSAJE);
+                    context.PA_MODIFICAR_INSTALACION(upInst.Id_instalacion, upInst.Nombre, upInst.Direccion, upInst.Operativa, upInst.Id_horario, imagen, RETCODE, MENSAJE);
 
                     if ((int)RETCODE.Value < 0)
                     {

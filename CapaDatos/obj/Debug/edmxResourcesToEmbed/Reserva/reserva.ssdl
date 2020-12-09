@@ -252,6 +252,16 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="PA_DELETE_ACTIVIDAD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="RETCODE" Type="int" Mode="InOut" />
+    <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="PA_DELETE_HORARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="RETCODE" Type="int" Mode="InOut" />
+    <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+  </Function>
   <Function Name="PA_DELETE_INSTALACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="int" Mode="In" />
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />
@@ -267,8 +277,25 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />
     <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
   </Function>
+  <Function Name="PA_DELETE_TARIFA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="RETCODE" Type="int" Mode="InOut" />
+    <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+  </Function>
   <Function Name="PA_DELETE_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="RETCODE" Type="int" Mode="InOut" />
+    <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="PA_INSERT_ACTIVIDAD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="actividad" Type="nchar" Mode="In" />
+    <Parameter Name="tipo_pista" Type="nchar" Mode="In" />
+    <Parameter Name="RETCODE" Type="int" Mode="InOut" />
+    <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="PA_INSERT_HORARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="nombre" Type="nchar" Mode="In" />
+    <Parameter Name="horario" Type="nchar" Mode="In" />
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />
     <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
   </Function>
@@ -293,7 +320,6 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
     <Parameter Name="operativa" Type="bit" Mode="In" />
     <Parameter Name="id_tarifa" Type="int" Mode="In" />
     <Parameter Name="id_actividad" Type="int" Mode="In" />
-    <Parameter Name="ID" Type="int" Mode="InOut" />
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />
     <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
   </Function>
@@ -303,12 +329,16 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
     <Parameter Name="h_fin" Type="nchar" Mode="In" />
     <Parameter Name="id_pista" Type="int" Mode="In" />
     <Parameter Name="id_usuario" Type="int" Mode="In" />
-    <Parameter Name="created_at" Type="nchar" Mode="In" />
-    <Parameter Name="updated_at" Type="nchar" Mode="In" />
     <Parameter Name="id_estado" Type="int" Mode="In" />
     <Parameter Name="precio" Type="decimal" Mode="In" />
     <Parameter Name="horas" Type="decimal" Mode="In" />
     <Parameter Name="ID_RESERVA" Type="int" Mode="InOut" />
+    <Parameter Name="RETCODE" Type="int" Mode="InOut" />
+    <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="PA_INSERT_TARIFA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="tarifa" Type="nchar" Mode="In" />
+    <Parameter Name="valor" Type="decimal" Mode="In" />
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />
     <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
   </Function>
@@ -331,7 +361,22 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />
     <Parameter Name="MENSAJE" Type="nchar" Mode="InOut" />
   </Function>
+  <Function Name="PA_MODIFICAR_ACTIVIDAD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID_ACTIVIDAD" Type="int" Mode="In" />
+    <Parameter Name="ACTIVIDAD" Type="varchar" Mode="In" />
+    <Parameter Name="TIPO_PISTA" Type="varchar" Mode="In" />
+    <Parameter Name="RETCODE" Type="int" Mode="InOut" />
+    <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="PA_MODIFICAR_HORARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID_HORARIO" Type="int" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="HORARIO" Type="varchar" Mode="In" />
+    <Parameter Name="RETCODE" Type="int" Mode="InOut" />
+    <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+  </Function>
   <Function Name="PA_MODIFICAR_INSTALACION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID_INSTALACION" Type="int" Mode="In" />
     <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
     <Parameter Name="DIRECCION" Type="varchar" Mode="In" />
     <Parameter Name="OPERATIVA" Type="bit" Mode="In" />
@@ -341,11 +386,31 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
     <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
   </Function>
   <Function Name="PA_MODIFICAR_PISTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID_PISTA" Type="int" Mode="In" />
     <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
     <Parameter Name="ID_INSTALACION" Type="int" Mode="In" />
     <Parameter Name="OPERATIVA" Type="bit" Mode="In" />
     <Parameter Name="ID_TARIFA" Type="int" Mode="In" />
     <Parameter Name="ID_ACTIVIDAD" Type="int" Mode="In" />
+    <Parameter Name="RETCODE" Type="int" Mode="InOut" />
+    <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="PA_MODIFICAR_RESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID_RESERVA" Type="int" Mode="In" />
+    <Parameter Name="FECHA" Type="varchar" Mode="In" />
+    <Parameter Name="H_INI" Type="varchar" Mode="In" />
+    <Parameter Name="H_FIN" Type="varchar" Mode="In" />
+    <Parameter Name="ID_PISTA" Type="int" Mode="In" />
+    <Parameter Name="ID_ESTADO" Type="int" Mode="In" />
+    <Parameter Name="PRECIO" Type="decimal" Mode="In" />
+    <Parameter Name="HORAS" Type="decimal" Mode="In" />
+    <Parameter Name="RETCODE" Type="int" Mode="InOut" />
+    <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
+  </Function>
+  <Function Name="PA_MODIFICAR_TARIFA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID_TARIFA" Type="int" Mode="In" />
+    <Parameter Name="TARIFA" Type="varchar" Mode="In" />
+    <Parameter Name="VALOR" Type="decimal" Mode="In" />
     <Parameter Name="RETCODE" Type="int" Mode="InOut" />
     <Parameter Name="MENSAJE" Type="varchar" Mode="InOut" />
   </Function>

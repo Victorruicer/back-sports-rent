@@ -180,7 +180,157 @@ namespace CapaDatos.Reserva
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_DELETE_INSTALACION", iDParameter, rETCODE, mENSAJE);
         }
     
-        public virtual int PA_INSERT_PISTA(string nombre, Nullable<int> id_instalacion, Nullable<bool> operativa, Nullable<int> id_tarifa, Nullable<int> id_actividad, ObjectParameter iD, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        public virtual int PA_DELETE_PISTA(Nullable<int> iD, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_DELETE_PISTA", iDParameter, rETCODE, mENSAJE);
+        }
+    
+        public virtual int PA_MODIFICAR_INSTALACION(Nullable<int> iD_INSTALACION, string nOMBRE, string dIRECCION, Nullable<bool> oPERATIVA, Nullable<int> iD_HORARIO, byte[] iMAGEN, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var iD_INSTALACIONParameter = iD_INSTALACION.HasValue ?
+                new ObjectParameter("ID_INSTALACION", iD_INSTALACION) :
+                new ObjectParameter("ID_INSTALACION", typeof(int));
+    
+            var nOMBREParameter = nOMBRE != null ?
+                new ObjectParameter("NOMBRE", nOMBRE) :
+                new ObjectParameter("NOMBRE", typeof(string));
+    
+            var dIRECCIONParameter = dIRECCION != null ?
+                new ObjectParameter("DIRECCION", dIRECCION) :
+                new ObjectParameter("DIRECCION", typeof(string));
+    
+            var oPERATIVAParameter = oPERATIVA.HasValue ?
+                new ObjectParameter("OPERATIVA", oPERATIVA) :
+                new ObjectParameter("OPERATIVA", typeof(bool));
+    
+            var iD_HORARIOParameter = iD_HORARIO.HasValue ?
+                new ObjectParameter("ID_HORARIO", iD_HORARIO) :
+                new ObjectParameter("ID_HORARIO", typeof(int));
+    
+            var iMAGENParameter = iMAGEN != null ?
+                new ObjectParameter("IMAGEN", iMAGEN) :
+                new ObjectParameter("IMAGEN", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_MODIFICAR_INSTALACION", iD_INSTALACIONParameter, nOMBREParameter, dIRECCIONParameter, oPERATIVAParameter, iD_HORARIOParameter, iMAGENParameter, rETCODE, mENSAJE);
+        }
+    
+        public virtual int PA_MODIFICAR_PISTA(Nullable<int> iD_PISTA, string nOMBRE, Nullable<int> iD_INSTALACION, Nullable<bool> oPERATIVA, Nullable<int> iD_TARIFA, Nullable<int> iD_ACTIVIDAD, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var iD_PISTAParameter = iD_PISTA.HasValue ?
+                new ObjectParameter("ID_PISTA", iD_PISTA) :
+                new ObjectParameter("ID_PISTA", typeof(int));
+    
+            var nOMBREParameter = nOMBRE != null ?
+                new ObjectParameter("NOMBRE", nOMBRE) :
+                new ObjectParameter("NOMBRE", typeof(string));
+    
+            var iD_INSTALACIONParameter = iD_INSTALACION.HasValue ?
+                new ObjectParameter("ID_INSTALACION", iD_INSTALACION) :
+                new ObjectParameter("ID_INSTALACION", typeof(int));
+    
+            var oPERATIVAParameter = oPERATIVA.HasValue ?
+                new ObjectParameter("OPERATIVA", oPERATIVA) :
+                new ObjectParameter("OPERATIVA", typeof(bool));
+    
+            var iD_TARIFAParameter = iD_TARIFA.HasValue ?
+                new ObjectParameter("ID_TARIFA", iD_TARIFA) :
+                new ObjectParameter("ID_TARIFA", typeof(int));
+    
+            var iD_ACTIVIDADParameter = iD_ACTIVIDAD.HasValue ?
+                new ObjectParameter("ID_ACTIVIDAD", iD_ACTIVIDAD) :
+                new ObjectParameter("ID_ACTIVIDAD", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_MODIFICAR_PISTA", iD_PISTAParameter, nOMBREParameter, iD_INSTALACIONParameter, oPERATIVAParameter, iD_TARIFAParameter, iD_ACTIVIDADParameter, rETCODE, mENSAJE);
+        }
+    
+        public virtual int PA_DELETE_ACTIVIDAD(Nullable<int> iD, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_DELETE_ACTIVIDAD", iDParameter, rETCODE, mENSAJE);
+        }
+    
+        public virtual int PA_DELETE_HORARIO(Nullable<int> iD, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_DELETE_HORARIO", iDParameter, rETCODE, mENSAJE);
+        }
+    
+        public virtual int PA_DELETE_TARIFA(Nullable<int> iD, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_DELETE_TARIFA", iDParameter, rETCODE, mENSAJE);
+        }
+    
+        public virtual int PA_INSERT_ACTIVIDAD(string actividad, string tipo_pista, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var actividadParameter = actividad != null ?
+                new ObjectParameter("actividad", actividad) :
+                new ObjectParameter("actividad", typeof(string));
+    
+            var tipo_pistaParameter = tipo_pista != null ?
+                new ObjectParameter("tipo_pista", tipo_pista) :
+                new ObjectParameter("tipo_pista", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_INSERT_ACTIVIDAD", actividadParameter, tipo_pistaParameter, rETCODE, mENSAJE);
+        }
+    
+        public virtual int PA_INSERT_HORARIO(string nombre, string horario, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("nombre", nombre) :
+                new ObjectParameter("nombre", typeof(string));
+    
+            var horarioParameter = horario != null ?
+                new ObjectParameter("horario", horario) :
+                new ObjectParameter("horario", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_INSERT_HORARIO", nombreParameter, horarioParameter, rETCODE, mENSAJE);
+        }
+    
+        public virtual int PA_INSERT_TARIFA(string tarifa, Nullable<decimal> valor, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var tarifaParameter = tarifa != null ?
+                new ObjectParameter("tarifa", tarifa) :
+                new ObjectParameter("tarifa", typeof(string));
+    
+            var valorParameter = valor.HasValue ?
+                new ObjectParameter("valor", valor) :
+                new ObjectParameter("valor", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_INSERT_TARIFA", tarifaParameter, valorParameter, rETCODE, mENSAJE);
+        }
+    
+        public virtual int PA_MODIFICAR_TARIFA(Nullable<int> iD_TARIFA, string tARIFA, Nullable<decimal> vALOR, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var iD_TARIFAParameter = iD_TARIFA.HasValue ?
+                new ObjectParameter("ID_TARIFA", iD_TARIFA) :
+                new ObjectParameter("ID_TARIFA", typeof(int));
+    
+            var tARIFAParameter = tARIFA != null ?
+                new ObjectParameter("TARIFA", tARIFA) :
+                new ObjectParameter("TARIFA", typeof(string));
+    
+            var vALORParameter = vALOR.HasValue ?
+                new ObjectParameter("VALOR", vALOR) :
+                new ObjectParameter("VALOR", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_MODIFICAR_TARIFA", iD_TARIFAParameter, tARIFAParameter, vALORParameter, rETCODE, mENSAJE);
+        }
+    
+        public virtual int PA_INSERT_PISTA(string nombre, Nullable<int> id_instalacion, Nullable<bool> operativa, Nullable<int> id_tarifa, Nullable<int> id_actividad, ObjectParameter rETCODE, ObjectParameter mENSAJE)
         {
             var nombreParameter = nombre != null ?
                 new ObjectParameter("nombre", nombre) :
@@ -202,10 +352,47 @@ namespace CapaDatos.Reserva
                 new ObjectParameter("id_actividad", id_actividad) :
                 new ObjectParameter("id_actividad", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_INSERT_PISTA", nombreParameter, id_instalacionParameter, operativaParameter, id_tarifaParameter, id_actividadParameter, iD, rETCODE, mENSAJE);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_INSERT_PISTA", nombreParameter, id_instalacionParameter, operativaParameter, id_tarifaParameter, id_actividadParameter, rETCODE, mENSAJE);
         }
     
-        public virtual int PA_INSERT_RESERVA(string fecha, string h_ini, string h_fin, Nullable<int> id_pista, Nullable<int> id_usuario, string created_at, string updated_at, Nullable<int> id_estado, Nullable<decimal> precio, Nullable<decimal> horas, ObjectParameter iD_RESERVA, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        public virtual int PA_MODIFICAR_RESERVA(Nullable<int> iD_RESERVA, string fECHA, string h_INI, string h_FIN, Nullable<int> iD_PISTA, Nullable<int> iD_ESTADO, Nullable<decimal> pRECIO, Nullable<decimal> hORAS, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var iD_RESERVAParameter = iD_RESERVA.HasValue ?
+                new ObjectParameter("ID_RESERVA", iD_RESERVA) :
+                new ObjectParameter("ID_RESERVA", typeof(int));
+    
+            var fECHAParameter = fECHA != null ?
+                new ObjectParameter("FECHA", fECHA) :
+                new ObjectParameter("FECHA", typeof(string));
+    
+            var h_INIParameter = h_INI != null ?
+                new ObjectParameter("H_INI", h_INI) :
+                new ObjectParameter("H_INI", typeof(string));
+    
+            var h_FINParameter = h_FIN != null ?
+                new ObjectParameter("H_FIN", h_FIN) :
+                new ObjectParameter("H_FIN", typeof(string));
+    
+            var iD_PISTAParameter = iD_PISTA.HasValue ?
+                new ObjectParameter("ID_PISTA", iD_PISTA) :
+                new ObjectParameter("ID_PISTA", typeof(int));
+    
+            var iD_ESTADOParameter = iD_ESTADO.HasValue ?
+                new ObjectParameter("ID_ESTADO", iD_ESTADO) :
+                new ObjectParameter("ID_ESTADO", typeof(int));
+    
+            var pRECIOParameter = pRECIO.HasValue ?
+                new ObjectParameter("PRECIO", pRECIO) :
+                new ObjectParameter("PRECIO", typeof(decimal));
+    
+            var hORASParameter = hORAS.HasValue ?
+                new ObjectParameter("HORAS", hORAS) :
+                new ObjectParameter("HORAS", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_MODIFICAR_RESERVA", iD_RESERVAParameter, fECHAParameter, h_INIParameter, h_FINParameter, iD_PISTAParameter, iD_ESTADOParameter, pRECIOParameter, hORASParameter, rETCODE, mENSAJE);
+        }
+    
+        public virtual int PA_INSERT_RESERVA(string fecha, string h_ini, string h_fin, Nullable<int> id_pista, Nullable<int> id_usuario, Nullable<int> id_estado, Nullable<decimal> precio, Nullable<decimal> horas, ObjectParameter iD_RESERVA, ObjectParameter rETCODE, ObjectParameter mENSAJE)
         {
             var fechaParameter = fecha != null ?
                 new ObjectParameter("fecha", fecha) :
@@ -227,14 +414,6 @@ namespace CapaDatos.Reserva
                 new ObjectParameter("id_usuario", id_usuario) :
                 new ObjectParameter("id_usuario", typeof(int));
     
-            var created_atParameter = created_at != null ?
-                new ObjectParameter("created_at", created_at) :
-                new ObjectParameter("created_at", typeof(string));
-    
-            var updated_atParameter = updated_at != null ?
-                new ObjectParameter("updated_at", updated_at) :
-                new ObjectParameter("updated_at", typeof(string));
-    
             var id_estadoParameter = id_estado.HasValue ?
                 new ObjectParameter("id_estado", id_estado) :
                 new ObjectParameter("id_estado", typeof(int));
@@ -247,66 +426,41 @@ namespace CapaDatos.Reserva
                 new ObjectParameter("horas", horas) :
                 new ObjectParameter("horas", typeof(decimal));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_INSERT_RESERVA", fechaParameter, h_iniParameter, h_finParameter, id_pistaParameter, id_usuarioParameter, created_atParameter, updated_atParameter, id_estadoParameter, precioParameter, horasParameter, iD_RESERVA, rETCODE, mENSAJE);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_INSERT_RESERVA", fechaParameter, h_iniParameter, h_finParameter, id_pistaParameter, id_usuarioParameter, id_estadoParameter, precioParameter, horasParameter, iD_RESERVA, rETCODE, mENSAJE);
         }
     
-        public virtual int PA_DELETE_PISTA(Nullable<int> iD, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        public virtual int PA_MODIFICAR_ACTIVIDAD(Nullable<int> iD_ACTIVIDAD, string aCTIVIDAD, string tIPO_PISTA, ObjectParameter rETCODE, ObjectParameter mENSAJE)
         {
-            var iDParameter = iD.HasValue ?
-                new ObjectParameter("ID", iD) :
-                new ObjectParameter("ID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_DELETE_PISTA", iDParameter, rETCODE, mENSAJE);
-        }
-    
-        public virtual int PA_MODIFICAR_INSTALACION(string nOMBRE, string dIRECCION, Nullable<bool> oPERATIVA, Nullable<int> iD_HORARIO, byte[] iMAGEN, ObjectParameter rETCODE, ObjectParameter mENSAJE)
-        {
-            var nOMBREParameter = nOMBRE != null ?
-                new ObjectParameter("NOMBRE", nOMBRE) :
-                new ObjectParameter("NOMBRE", typeof(string));
-    
-            var dIRECCIONParameter = dIRECCION != null ?
-                new ObjectParameter("DIRECCION", dIRECCION) :
-                new ObjectParameter("DIRECCION", typeof(string));
-    
-            var oPERATIVAParameter = oPERATIVA.HasValue ?
-                new ObjectParameter("OPERATIVA", oPERATIVA) :
-                new ObjectParameter("OPERATIVA", typeof(bool));
-    
-            var iD_HORARIOParameter = iD_HORARIO.HasValue ?
-                new ObjectParameter("ID_HORARIO", iD_HORARIO) :
-                new ObjectParameter("ID_HORARIO", typeof(int));
-    
-            var iMAGENParameter = iMAGEN != null ?
-                new ObjectParameter("IMAGEN", iMAGEN) :
-                new ObjectParameter("IMAGEN", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_MODIFICAR_INSTALACION", nOMBREParameter, dIRECCIONParameter, oPERATIVAParameter, iD_HORARIOParameter, iMAGENParameter, rETCODE, mENSAJE);
-        }
-    
-        public virtual int PA_MODIFICAR_PISTA(string nOMBRE, Nullable<int> iD_INSTALACION, Nullable<bool> oPERATIVA, Nullable<int> iD_TARIFA, Nullable<int> iD_ACTIVIDAD, ObjectParameter rETCODE, ObjectParameter mENSAJE)
-        {
-            var nOMBREParameter = nOMBRE != null ?
-                new ObjectParameter("NOMBRE", nOMBRE) :
-                new ObjectParameter("NOMBRE", typeof(string));
-    
-            var iD_INSTALACIONParameter = iD_INSTALACION.HasValue ?
-                new ObjectParameter("ID_INSTALACION", iD_INSTALACION) :
-                new ObjectParameter("ID_INSTALACION", typeof(int));
-    
-            var oPERATIVAParameter = oPERATIVA.HasValue ?
-                new ObjectParameter("OPERATIVA", oPERATIVA) :
-                new ObjectParameter("OPERATIVA", typeof(bool));
-    
-            var iD_TARIFAParameter = iD_TARIFA.HasValue ?
-                new ObjectParameter("ID_TARIFA", iD_TARIFA) :
-                new ObjectParameter("ID_TARIFA", typeof(int));
-    
             var iD_ACTIVIDADParameter = iD_ACTIVIDAD.HasValue ?
                 new ObjectParameter("ID_ACTIVIDAD", iD_ACTIVIDAD) :
                 new ObjectParameter("ID_ACTIVIDAD", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_MODIFICAR_PISTA", nOMBREParameter, iD_INSTALACIONParameter, oPERATIVAParameter, iD_TARIFAParameter, iD_ACTIVIDADParameter, rETCODE, mENSAJE);
+            var aCTIVIDADParameter = aCTIVIDAD != null ?
+                new ObjectParameter("ACTIVIDAD", aCTIVIDAD) :
+                new ObjectParameter("ACTIVIDAD", typeof(string));
+    
+            var tIPO_PISTAParameter = tIPO_PISTA != null ?
+                new ObjectParameter("TIPO_PISTA", tIPO_PISTA) :
+                new ObjectParameter("TIPO_PISTA", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_MODIFICAR_ACTIVIDAD", iD_ACTIVIDADParameter, aCTIVIDADParameter, tIPO_PISTAParameter, rETCODE, mENSAJE);
+        }
+    
+        public virtual int PA_MODIFICAR_HORARIO(Nullable<int> iD_HORARIO, string nOMBRE, string hORARIO, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var iD_HORARIOParameter = iD_HORARIO.HasValue ?
+                new ObjectParameter("ID_HORARIO", iD_HORARIO) :
+                new ObjectParameter("ID_HORARIO", typeof(int));
+    
+            var nOMBREParameter = nOMBRE != null ?
+                new ObjectParameter("NOMBRE", nOMBRE) :
+                new ObjectParameter("NOMBRE", typeof(string));
+    
+            var hORARIOParameter = hORARIO != null ?
+                new ObjectParameter("HORARIO", hORARIO) :
+                new ObjectParameter("HORARIO", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_MODIFICAR_HORARIO", iD_HORARIOParameter, nOMBREParameter, hORARIOParameter, rETCODE, mENSAJE);
         }
     }
 }

@@ -13,7 +13,7 @@
         <EntityTypeShape EntityType="BDReservasModel.reservas" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="BDReservasModel.tarifas" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BDReservasModel.usuarios" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="BDReservasModel.V_USUARIOS_PERFILES" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BDReservasModel.V_USUARIOS_PERFILES" Width="1.875" PointX="9.5" PointY="5.875" IsExpanded="true" />
         <AssociationConnector Association="BDReservasModel.FK_reservas_estados" ManuallyRouted="false" />
         <AssociationConnector Association="BDReservasModel.FK_instalaciones_horarios" ManuallyRouted="false" />
         <AssociationConnector Association="BDReservasModel.FK_pistas_instalaciones" ManuallyRouted="false" />
@@ -24,7 +24,7 @@
         <EntityTypeShape EntityType="BDReservasModel.V_RESERVAS_PISTAS" Width="1.5" PointX="7.375" PointY="9.75" />
         <EntityTypeShape EntityType="BDReservasModel.actividades" Width="1.5" PointX="9.375" PointY="9.875" />
         <AssociationConnector Association="BDReservasModel.FK_pistas_actividades" />
-        <EntityTypeShape EntityType="BDReservasModel.V_INSTALACIONES_HORARIOS" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="BDReservasModel.V_INSTALACIONES_HORARIOS" Width="2.125" PointX="9.75" PointY="2.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

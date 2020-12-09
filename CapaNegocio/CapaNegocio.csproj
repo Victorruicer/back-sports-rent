@@ -52,7 +52,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actividad\ActividadDataAccess.cs" />
+    <Compile Include="Actividad\DTO\ActividadModel.cs" />
+    <Compile Include="Actividad\DTO\CreateActividadRequest.cs" />
+    <Compile Include="Actividad\DTO\CreateActividadResponse.cs" />
+    <Compile Include="Actividad\DTO\DeleteActividadRequest.cs" />
+    <Compile Include="Actividad\DTO\DeleteActividadResponse.cs" />
+    <Compile Include="Actividad\DTO\UpdateActividadRequest.cs" />
+    <Compile Include="Actividad\DTO\UpdateActividadResponse.cs" />
     <Compile Include="Helpers\ImageConverter.cs" />
+    <Compile Include="Horario\DTO\CreateHorarioRequest.cs" />
+    <Compile Include="Horario\DTO\CreateHorarioResponse.cs" />
+    <Compile Include="Horario\DTO\DeleteHorarioRequest.cs" />
+    <Compile Include="Horario\DTO\DeleteHorarioResponse.cs" />
+    <Compile Include="Horario\DTO\HorarioModel.cs" />
+    <Compile Include="Horario\DTO\UpdateHorarioRequest.cs" />
+    <Compile Include="Horario\DTO\UpdateHorarioResponse.cs" />
     <Compile Include="Horario\HorarioDataAccess.cs" />
     <Compile Include="Instalacion\DTO\CreateInstRequest.cs" />
     <Compile Include="Instalacion\DTO\CreateInstResponse.cs" />
@@ -80,6 +94,8 @@
     <Compile Include="Reserva\DTO\HistoricoReservasRequest.cs" />
     <Compile Include="Reserva\DTO\ReservaModel.cs" />
     <Compile Include="Reserva\DTO\ReservaPistaModel.cs" />
+    <Compile Include="Reserva\DTO\UpdateReservaRequest.cs" />
+    <Compile Include="Reserva\DTO\UpdateReservaResponse.cs" />
     <Compile Include="Reserva\ReservaDataAccess.cs" />
     <Compile Include="Tarifa\DTO\CreateTarifaRequest.cs" />
     <Compile Include="Tarifa\DTO\CreateTarifaResponse.cs" />
@@ -106,10 +122,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Actividad\DTO\" />
-    <Folder Include="Horario\DTO\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CapaDatos\CapaDatos.csproj">
       <Project>{a5923361-92c8-48e8-9203-e089a472f1e1}</Project>

@@ -60,7 +60,6 @@ namespace CapaNegocio.Pista
             {
                 using (var context = new BDReservasEntities())
                 {
-                    ObjectParameter ID = new ObjectParameter("ID", typeof(int));
                     ObjectParameter RETCODE = new ObjectParameter("RETCODE", typeof(int));
                     ObjectParameter MENSAJE = new ObjectParameter("MENSAJE", typeof(string));
 
@@ -72,7 +71,7 @@ namespace CapaNegocio.Pista
                         nuevaPista.Operativa,
                         nuevaPista.Id_tarifa,
                         nuevaPista.Id_actividad,
-                        ID, RETCODE, MENSAJE);
+                        RETCODE, MENSAJE);
 
                     if ((int)RETCODE.Value < 0)
                     {
@@ -86,7 +85,6 @@ namespace CapaNegocio.Pista
 
                     return new CreatePistaResponse()
                     {
-                        Id = (int)ID.Value,
                         Retcode = (int)RETCODE.Value,
                         Mensaje = MENSAJE.Value.ToString()
                     };
@@ -143,14 +141,14 @@ namespace CapaNegocio.Pista
         //METODO LISTAR PISTAS
         public IEnumerable<PistaModel> GetPistas()
         {
-            List<PistaModel> listaInstalaciones = null;
+            List<PistaModel> listaPistas = null;
 
             try
             {
                 using (var context = new BDReservasEntities())
                 {
 
-                    listaInstalaciones = (from i in context.V_INSTALACIONES_HORARIOS
+                    listaPistas = (from i in context.V_INSTALACIONES_HORARIOS
                                             select new PistaModel
                                             {
                                                 Instalacion = i.instalacion.Trim(),
@@ -161,16 +159,16 @@ namespace CapaNegocio.Pista
                                                 Precio_hora = i.precio_hora,
                                             }).ToList();
 
-                    if (listaInstalaciones.Count < 1)
+                    if (listaPistas.Count < 1)
                     {
-                        listaInstalaciones.Add(new PistaModel
+                        listaPistas.Add(new PistaModel
                         {
                             Mensaje = "No existen instalaciones"
                         });
 
                     }
 
-                    return listaInstalaciones;
+                    return listaPistas;
 
                 }
 
@@ -178,12 +176,12 @@ namespace CapaNegocio.Pista
             }
             catch (Exception ex)
             {
-                listaInstalaciones.Add(new PistaModel
+                listaPistas.Add(new PistaModel
                 {
                     Mensaje = "No se pudo realizar la consulta -- " + ex.Message
                 });
 
-                return listaInstalaciones;
+                return listaPistas;
 
             }
         }
@@ -199,7 +197,7 @@ namespace CapaNegocio.Pista
                     ObjectParameter MENSAJE = new ObjectParameter("MENSAJE", typeof(string));
 
 
-                    context.PA_MODIFICAR_PISTA(upPista.Nombre, upPista.Id_instalacion, upPista.Operativa, upPista.Id_tarifa, upPista.Id_actividad, RETCODE, MENSAJE);
+                    context.PA_MODIFICAR_PISTA(upPista.Id_pista, upPista.Nombre, upPista.Id_instalacion, upPista.Operativa, upPista.Id_tarifa, upPista.Id_actividad, RETCODE, MENSAJE);
 
                     if ((int)RETCODE.Value < 0)
                     {
@@ -215,7 +213,7 @@ namespace CapaNegocio.Pista
 
                     return new UpdatePistaResponse()
                     {
-                        Nombre = consulta.nombre,
+                        Nombre = consulta.nombre.Trim(),
                         Retcode = (int)RETCODE.Value,
                         Mensaje = MENSAJE.Value.ToString()
                     };

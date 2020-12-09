@@ -152,7 +152,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ActividadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HorarioController.cs" />
     <Compile Include="Controllers\InstController.cs" />
     <Compile Include="Controllers\PistaController.cs" />
     <Compile Include="Controllers\ReservaController.cs" />

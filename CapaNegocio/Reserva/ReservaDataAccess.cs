@@ -40,8 +40,6 @@ namespace CapaNegocio.Reserva
                         nuevaReserva.H_fin,
                         nuevaReserva.Id_Pista,
                         nuevaReserva.Id_Usuario,
-                        nuevaReserva.Created_at,
-                        nuevaReserva.Updated_at,
                         nuevaReserva.Id_Estado,
                         nuevaReserva.Precio,
                         nuevaReserva.Horas,
@@ -141,8 +139,59 @@ namespace CapaNegocio.Reserva
             }
 
         }
-        
-        
+
+        //METODO UPDATE RESERVA
+        public UpdateReservaResponse UpdateReserva(UpdateReservaRequest upReserva)
+        {
+            try
+            {
+                using (var context = new BDReservasEntities())
+                {
+                    ObjectParameter RETCODE = new ObjectParameter("RETCODE", typeof(int));
+                    ObjectParameter MENSAJE = new ObjectParameter("MENSAJE", typeof(string));
+
+
+                    context.PA_MODIFICAR_RESERVA(
+                        upReserva.Id_reserva,
+                        upReserva.Fecha,
+                        upReserva.H_ini,
+                        upReserva.H_fin,
+                        upReserva.Id_pista,
+                        upReserva.Id_estado,
+                        upReserva.Precio,
+                        upReserva.Horas,
+                        RETCODE, MENSAJE);
+
+                    if ((int)RETCODE.Value < 0)
+                    {
+                        throw new Exception("Error no controlado");
+                    }
+
+                    if ((int)RETCODE.Value > 0)
+                    {
+                        throw new Exception(MENSAJE.Value.ToString());
+                    }
+
+
+                    return new UpdateReservaResponse()
+                    {
+                        Retcode = (int)RETCODE.Value,
+                        Mensaje = MENSAJE.Value.ToString()
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                return new UpdateReservaResponse()
+                {
+                    Mensaje = ex.Message,
+                    Retcode = -1
+                };
+            }
+
+        }
+
+
         //HISTORICO RESERVAS
         //dependiendo del valor de datos.Email se muestran todos las reservas(admin) o 
         //solo las del usuario( con el valor que tenga el campo datos.estado)

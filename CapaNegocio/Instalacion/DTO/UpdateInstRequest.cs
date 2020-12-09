@@ -8,6 +8,7 @@ namespace CapaNegocio.Instalacion.DTO
 {
     public class UpdateInstRequest
     {
+        public int Id_instalacion { get; set; }
         public string Nombre { get; set; }
         public string Direccion { get; set; }
         public Boolean Operativa { get; set; }
