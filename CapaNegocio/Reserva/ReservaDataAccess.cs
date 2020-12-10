@@ -209,18 +209,18 @@ namespace CapaNegocio.Reserva
                     if (datos.Email != "todos")
                     {
                         listaReservas = (from i in context.V_RESERVAS_PISTAS
-                                    where i.email == datos.Email
-                                    where i.estado == datos.Estado
-                                    select new ReservaPistaModel
-                                    {
-                                        Fecha = i.fecha,
-                                        H_ini = i.h_ini,
-                                        H_fin = i.h_fin,
-                                        Id_Reserva = i.id_reserva,
-                                        Pista = i.pista,
-                                        Instalacion = i.instalacion
+                                        where i.email == datos.Email
+                                        where i.estado == datos.Estado
+                                        select new ReservaPistaModel
+                                        {
+                                            Id_Reserva = i.id_reserva,
+                                            Instalacion = i.instalacion.Trim(),
+                                            Pista = i.pista.Trim(),
+                                            Fecha = i.fecha.Trim(),
+                                            H_ini = i.h_ini.Trim(),
+                                            H_fin = i.h_fin.Trim()
 
-                                    }).ToList<ReservaPistaModel>();
+                                        }).ToList<ReservaPistaModel>();
 
                         return listaReservas;
 

@@ -416,6 +416,13 @@
       <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
       <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="PA_CAMBIO_PASSWORD">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+      <Parameter Name="OLD_PASSWORD" Mode="In" Type="String" />
+      <Parameter Name="NEW_PASSWORD" Mode="In" Type="String" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="V_RESERVAS_PISTAS">
     <Key>

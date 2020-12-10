@@ -257,6 +257,13 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="PA_CAMBIO_PASSWORD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="OLD_PASSWORD" Type="nchar" Mode="In" />
+          <Parameter Name="NEW_PASSWORD" Type="nchar" Mode="In" />
+          <Parameter Name="RETCODE" Type="int" Mode="InOut" />
+          <Parameter Name="MENSAJE" Type="nchar" Mode="InOut" />
+        </Function>
         <Function Name="PA_DELETE_ACTIVIDAD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID" Type="int" Mode="In" />
           <Parameter Name="RETCODE" Type="int" Mode="InOut" />
@@ -932,6 +939,13 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
             <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
             <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="PA_CAMBIO_PASSWORD">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="OLD_PASSWORD" Mode="In" Type="String" />
+            <Parameter Name="NEW_PASSWORD" Mode="In" Type="String" />
+            <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="V_RESERVAS_PISTAS">
           <Key>
@@ -1170,6 +1184,7 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
           <FunctionImportMapping FunctionImportName="PA_INSERT_RESERVA" FunctionName="BDReservasModel.Store.PA_INSERT_RESERVA" />
           <FunctionImportMapping FunctionImportName="PA_MODIFICAR_ACTIVIDAD" FunctionName="BDReservasModel.Store.PA_MODIFICAR_ACTIVIDAD" />
           <FunctionImportMapping FunctionImportName="PA_MODIFICAR_HORARIO" FunctionName="BDReservasModel.Store.PA_MODIFICAR_HORARIO" />
+          <FunctionImportMapping FunctionImportName="PA_CAMBIO_PASSWORD" FunctionName="BDReservasModel.Store.PA_CAMBIO_PASSWORD" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

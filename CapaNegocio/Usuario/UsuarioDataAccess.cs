@@ -199,7 +199,53 @@ namespace CapaNegocio.Usuario
 
         }
 
-        
+        //METODO CAMBIO CONTRASEÑA
+        public ChangePassResponse ChangePass(ChangePassRequest datos)
+        {
+            try
+            {
+                using (var context = new BDReservasEntities())
+                {
+                    ObjectParameter RETCODE = new ObjectParameter("RETCODE", typeof(int));
+                    ObjectParameter MENSAJE = new ObjectParameter("MENSAJE", typeof(string));
+
+                    context.PA_CAMBIO_PASSWORD(
+                        datos.Id_usuario,
+                        datos.Oldpass,
+                        datos.Newpass,
+                        RETCODE, MENSAJE
+                        );
+
+                    if ((int)RETCODE.Value < 0)
+                    {
+                        throw new Exception("Error no controlado");
+                    }
+
+                    if ((int)RETCODE.Value > 0)
+                    {
+                        throw new Exception(MENSAJE.Value.ToString());
+                    }
+
+                    return new ChangePassResponse()
+                    {
+                        Retcode = (int)RETCODE.Value,
+                        Mensaje = MENSAJE.Value.ToString().Trim()
+                    };
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ChangePassResponse()
+                {
+                    Mensaje = ex.Message.Trim(),
+                    Retcode = -1
+                };
+            }
+
+        }
+    
+
         //MÉTODO DE BORRAR USUARIO
         public DeleteUserResponse DeleteUser(DeleteUserRequest delUser)
         {

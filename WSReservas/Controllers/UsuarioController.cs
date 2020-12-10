@@ -36,11 +36,19 @@ namespace WSReservas.Controllers
         {
             var usuarioDA = new UsuarioDataAccess();
             var usuarioRegistrado = usuarioDA.Registro(User);
-
-
             return Request.CreateResponse(HttpStatusCode.OK, usuarioRegistrado);
         }
-        
+
+        //CAMBIO PASSWORD
+        [HttpPost]
+        [Route("changePass")]
+        public HttpResponseMessage ChangePass(ChangePassRequest datos)
+        {
+            var cambioPassDA = new UsuarioDataAccess();
+            var newPassResult = cambioPassDA.ChangePass(datos);
+            return Request.CreateResponse(HttpStatusCode.OK, newPassResult);
+        }
+
         //CREATE
         [HttpPost]
         [Authorize]

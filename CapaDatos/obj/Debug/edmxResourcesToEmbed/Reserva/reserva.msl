@@ -169,5 +169,6 @@
     <FunctionImportMapping FunctionImportName="PA_INSERT_RESERVA" FunctionName="BDReservasModel.Store.PA_INSERT_RESERVA" />
     <FunctionImportMapping FunctionImportName="PA_MODIFICAR_ACTIVIDAD" FunctionName="BDReservasModel.Store.PA_MODIFICAR_ACTIVIDAD" />
     <FunctionImportMapping FunctionImportName="PA_MODIFICAR_HORARIO" FunctionName="BDReservasModel.Store.PA_MODIFICAR_HORARIO" />
+    <FunctionImportMapping FunctionImportName="PA_CAMBIO_PASSWORD" FunctionName="BDReservasModel.Store.PA_CAMBIO_PASSWORD" />
   </EntityContainerMapping>
 </Mapping>

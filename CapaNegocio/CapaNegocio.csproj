@@ -105,6 +105,8 @@
     <Compile Include="Tarifa\DTO\UpdateTarifaRequest.cs" />
     <Compile Include="Tarifa\DTO\UpdateTarifaResponse.cs" />
     <Compile Include="Tarifa\TarifaDataAccess.cs" />
+    <Compile Include="Usuario\DTO\ChangePassRequest.cs" />
+    <Compile Include="Usuario\DTO\ChangePassResponse.cs" />
     <Compile Include="Usuario\DTO\User.cs" />
     <Compile Include="Usuario\DTO\CreateUserRequest.cs" />
     <Compile Include="Usuario\DTO\CreateUserResponse.cs" />

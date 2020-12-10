@@ -462,5 +462,22 @@ namespace CapaDatos.Reserva
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_MODIFICAR_HORARIO", iD_HORARIOParameter, nOMBREParameter, hORARIOParameter, rETCODE, mENSAJE);
         }
+    
+        public virtual int PA_CAMBIO_PASSWORD(Nullable<int> iD, string oLD_PASSWORD, string nEW_PASSWORD, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            var oLD_PASSWORDParameter = oLD_PASSWORD != null ?
+                new ObjectParameter("OLD_PASSWORD", oLD_PASSWORD) :
+                new ObjectParameter("OLD_PASSWORD", typeof(string));
+    
+            var nEW_PASSWORDParameter = nEW_PASSWORD != null ?
+                new ObjectParameter("NEW_PASSWORD", nEW_PASSWORD) :
+                new ObjectParameter("NEW_PASSWORD", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_CAMBIO_PASSWORD", iDParameter, oLD_PASSWORDParameter, nEW_PASSWORDParameter, rETCODE, mENSAJE);
+        }
     }
 }
