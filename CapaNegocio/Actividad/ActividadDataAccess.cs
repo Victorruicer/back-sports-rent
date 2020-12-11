@@ -107,13 +107,13 @@ namespace CapaNegocio.Actividad
                 {
 
                     listaActividades = (from i in context.actividades
-                                          select new ActividadModel
-                                          {
-                                              Id_actividad = i.id_actividad,
-                                              Actividad = i.actividad,
-                                              Tipo_pista = i.tipo_pista.Trim(),
+                                        select new ActividadModel
+                                        {
+                                            Id_actividad = i.id_actividad,
+                                            Actividad = i.actividad,
+                                            Tipo_pista = i.tipo_pista.Trim(),
 
-                                          }).ToList();
+                                        }).ToList<ActividadModel>();
 
                     if (listaActividades.Count < 1)
                     {
