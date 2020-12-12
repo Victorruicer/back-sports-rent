@@ -123,7 +123,8 @@ namespace CapaNegocio.Instalacion
                                                               Instalacion = i.instalacion.Trim(),
                                                               Horario = i.horario,
                                                               Direccion = i.direccion.Trim(),
-                                                              Imgtmp = i.imagen
+                                                              Imgtmp = i.imagen,
+                                                              Operativa = i.instalación_operativa
                                                           }).ToList<InstModel>();
 
                     if (listaInstalaciones.Count < 1)

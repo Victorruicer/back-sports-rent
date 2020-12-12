@@ -11,7 +11,7 @@
           </Key>
           <Property Name="id_actividad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="actividad" Type="nchar" MaxLength="50" Nullable="false" />
-          <Property Name="tipo_pista" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="tipo_pista" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="estados">
           <Key>
@@ -103,8 +103,9 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_INSTALACIONES_HORARIOS' no 
             <PropertyRef Name="direccion" />
             <PropertyRef Name="pista" />
             <PropertyRef Name="actividad" />
-            <PropertyRef Name="tipo_pista" />
             <PropertyRef Name="precio_hora" />
+            <PropertyRef Name="instalación_operativa" />
+            <PropertyRef Name="tipo_pista" />
           </Key>
           <Property Name="instalacion" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="direccion" Type="nchar" MaxLength="100" Nullable="false" />
@@ -112,8 +113,10 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_INSTALACIONES_HORARIOS' no 
           <Property Name="horario" Type="nchar" MaxLength="50" />
           <Property Name="pista" Type="nchar" MaxLength="25" Nullable="false" />
           <Property Name="actividad" Type="nchar" MaxLength="50" Nullable="false" />
-          <Property Name="tipo_pista" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="tipo_pista" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="precio_hora" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="pista_operativa" Type="bit" />
+          <Property Name="instalación_operativa" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'BDReservas.dbo.V_RESERVAS_PISTAS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -124,9 +127,9 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_RESERVAS_PISTAS' no tiene d
             <PropertyRef Name="email" />
             <PropertyRef Name="precio hora" />
             <PropertyRef Name="actividad" />
-            <PropertyRef Name="tipo_pista" />
             <PropertyRef Name="estado" />
             <PropertyRef Name="instalacion" />
+            <PropertyRef Name="tipo_pista" />
           </Key>
           <Property Name="fecha" Type="nchar" MaxLength="10" />
           <Property Name="h_ini" Type="nchar" MaxLength="10" />
@@ -137,9 +140,10 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_RESERVAS_PISTAS' no tiene d
           <Property Name="precio" Type="decimal" Precision="4" Scale="2" />
           <Property Name="precio hora" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="actividad" Type="nchar" MaxLength="50" Nullable="false" />
-          <Property Name="tipo_pista" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="tipo_pista" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="estado" Type="nchar" MaxLength="25" Nullable="false" />
           <Property Name="instalacion" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="horas" Type="decimal" Precision="3" Scale="1" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -455,7 +459,9 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
     [V_INSTALACIONES_HORARIOS].[pista] AS [pista], 
     [V_INSTALACIONES_HORARIOS].[actividad] AS [actividad], 
     [V_INSTALACIONES_HORARIOS].[tipo_pista] AS [tipo_pista], 
-    [V_INSTALACIONES_HORARIOS].[precio_hora] AS [precio_hora]
+    [V_INSTALACIONES_HORARIOS].[precio_hora] AS [precio_hora], 
+    [V_INSTALACIONES_HORARIOS].[pista_operativa] AS [pista_operativa], 
+    [V_INSTALACIONES_HORARIOS].[instalación_operativa] AS [instalación_operativa]
     FROM [dbo].[V_INSTALACIONES_HORARIOS] AS [V_INSTALACIONES_HORARIOS]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_RESERVAS_PISTAS" EntityType="Self.V_RESERVAS_PISTAS" store:Type="Views" store:Schema="dbo">
@@ -471,7 +477,8 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
     [V_RESERVAS_PISTAS].[actividad] AS [actividad], 
     [V_RESERVAS_PISTAS].[tipo_pista] AS [tipo_pista], 
     [V_RESERVAS_PISTAS].[estado] AS [estado], 
-    [V_RESERVAS_PISTAS].[instalacion] AS [instalacion]
+    [V_RESERVAS_PISTAS].[instalacion] AS [instalacion], 
+    [V_RESERVAS_PISTAS].[horas] AS [horas]
     FROM [dbo].[V_RESERVAS_PISTAS] AS [V_RESERVAS_PISTAS]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_USUARIOS_PERFILES" EntityType="Self.V_USUARIOS_PERFILES" store:Type="Views" store:Schema="dbo">
@@ -967,9 +974,10 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
           <Property Name="precio" Type="Decimal" Precision="4" Scale="2" />
           <Property Name="precio_hora" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
           <Property Name="actividad" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="tipo_pista" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="tipo_pista" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="estado" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
           <Property Name="instalacion" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="horas" Type="Decimal" Precision="3" Scale="1" />
         </EntityType>
         <EntityType Name="actividades">
           <Key>
@@ -977,7 +985,7 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
           </Key>
           <Property Name="id_actividad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="actividad" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="tipo_pista" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="tipo_pista" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="pistas" Relationship="BDReservasModel.FK_pistas_actividades" FromRole="actividades" ToRole="pistas" />
         </EntityType>
         <Association Name="FK_pistas_actividades">
@@ -1000,6 +1008,7 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
             <PropertyRef Name="actividad" />
             <PropertyRef Name="tipo_pista" />
             <PropertyRef Name="precio_hora" />
+            <PropertyRef Name="instalación_operativa" />
           </Key>
           <Property Name="instalacion" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="direccion" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
@@ -1007,8 +1016,10 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
           <Property Name="horario" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="pista" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
           <Property Name="actividad" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="tipo_pista" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="tipo_pista" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="precio_hora" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="pista_operativa" Type="Boolean" />
+          <Property Name="instalación_operativa" Type="Boolean" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1129,6 +1140,7 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
           <EntitySetMapping Name="V_RESERVAS_PISTAS">
             <EntityTypeMapping TypeName="BDReservasModel.V_RESERVAS_PISTAS">
               <MappingFragment StoreEntitySet="V_RESERVAS_PISTAS">
+                <ScalarProperty Name="horas" ColumnName="horas" />
                 <ScalarProperty Name="instalacion" ColumnName="instalacion" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="tipo_pista" ColumnName="tipo_pista" />
@@ -1158,6 +1170,8 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
           <EntitySetMapping Name="V_INSTALACIONES_HORARIOS">
             <EntityTypeMapping TypeName="BDReservasModel.V_INSTALACIONES_HORARIOS">
               <MappingFragment StoreEntitySet="V_INSTALACIONES_HORARIOS">
+                <ScalarProperty Name="instalación_operativa" ColumnName="instalación_operativa" />
+                <ScalarProperty Name="pista_operativa" ColumnName="pista_operativa" />
                 <ScalarProperty Name="precio_hora" ColumnName="precio_hora" />
                 <ScalarProperty Name="tipo_pista" ColumnName="tipo_pista" />
                 <ScalarProperty Name="actividad" ColumnName="actividad" />

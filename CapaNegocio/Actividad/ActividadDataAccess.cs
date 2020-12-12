@@ -110,7 +110,7 @@ namespace CapaNegocio.Actividad
                                         select new ActividadModel
                                         {
                                             Id_actividad = i.id_actividad,
-                                            Actividad = i.actividad,
+                                            Actividad = i.actividad.Trim(),
                                             Tipo_pista = i.tipo_pista.Trim(),
 
                                         }).ToList<ActividadModel>();

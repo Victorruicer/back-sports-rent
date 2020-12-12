@@ -6,21 +6,29 @@ using System.Text;
 using System.Threading.Tasks;
 using CapaDatos.Reserva;
 using CapaNegocio.Pista.DTO;
+using CapaNegocio.Reserva.DTO;
 
 namespace CapaNegocio.Pista
 {
     public class PistaDataAccess
     {
-        //RECUPERAR PISTAS DISPONIBLES PARA RESERVAR
+        //RECUPERAR PISTAS DISPONIBLES PARA RESERVA
+        //recibimos deporte y fecha en datos
+        //devolvemos array de pistas con las horas libres y reservadas para fecha y deporte recibidos
         public IEnumerable<PistasReservaResponse> pistasParaReserva(PistasReservaRequest datos)
         {
-            List<PistasReservaResponse> listaPistas = null;
+            List<PistasReservaResponse> pistasConReserva = new List<PistasReservaResponse>();
+            List<PistasReservaResponse> listaPistas = null;//lista de pistas disponibles para el deporte
+            List<PistasReservaResponse> response = new List<PistasReservaResponse>();
             try
             {
+                //recuperamos listado pistas
                 using (var context = new BDReservasEntities())
                 {
                     listaPistas = (from i in context.V_INSTALACIONES_HORARIOS
                                    where i.actividad == datos.Actividad
+                                   where i.pista_operativa == true
+                                   where i.instalación_operativa == true
                                    select new PistasReservaResponse
                                    {
                                        Pista = i.pista.Trim(),
@@ -33,22 +41,87 @@ namespace CapaNegocio.Pista
                     //si no se encuentran pistas se devuelve msje informativo
                     if (listaPistas.Count < 1)
                     {
-                        listaPistas.Add(new PistasReservaResponse() { Mensaje = "No existen pistas disponibles." });
+                        pistasConReserva.Add(new PistasReservaResponse() { Mensaje = "No existen pistas disponibles " });
+                    }
+                    else
+                    {
+                        //recuperamos horas reservadas/libres para cada pista el dia indicado
+                        foreach(var p in listaPistas)
+                        {
+                            List<PistasReservaResponse> tmp  = (from i in context.V_RESERVAS_PISTAS
+                                                                where i.pista == p.Pista
+                                                                where i.fecha == datos.Fecha
+                                                                select new PistasReservaResponse
+                                                                {
+                                                                    Pista = i.pista.Trim(),
+                                                                    H_ini = i.h_ini.Trim(),
+                                                                    H_fin = i.h_fin.Trim(),
+                                                                    Horas = (decimal)i.horas,
+                                                                    Horario = p.Horario.Trim(),
+                                                                    Instalacion = p.Instalacion.Trim(),
+                                                                    Precio_hora = p.Precio_hora
+
+                                                                }).ToList();
+                            pistasConReserva.AddRange(tmp);
+                        }
+                        string[] ph = new string[13];
+                        string nomPista = "";
+                        PistasReservaResponse pisres = null;
+                        //recorremos las pistas con reserva encontradas
+                        for (var x = 0; x <= pistasConReserva.Count(); x++)
+                        {
+                            if (x != pistasConReserva.Count())
+                            {
+                                if (pistasConReserva[x].Pista != nomPista)//es pista distinta
+                                {
+                                    if (pisres != null)
+                                    {
+                                        pisres.H_ini = null;
+                                        pisres.H_fin = null;
+                                        pisres.Horas = 0;
+                                        response.Add(pisres);//guardamos pista con sus reservas
+                                    }
+                                    ph = new string[13];
+                                    pisres = null;
+                                    nomPista = pistasConReserva[x].Pista;
+                                    pisres = pistasConReserva[x];
+                                    /*
+                                    pisres.H_ini = null;
+                                    pisres.H_fin = null;
+                                    pisres.Horas = 0;*/
+                                    ph = this.checkHorasReserva(pistasConReserva[x], ph);
+                                    pisres.LibresReservadas = ph;
+                                }
+                                else
+                                {
+                                    ph = this.checkHorasReserva(pistasConReserva[x], ph);
+                                    pisres.LibresReservadas = ph;
+                                }
+                            }
+                            else
+                            {
+                                pisres.H_ini = null;
+                                pisres.H_fin = null;
+                                pisres.Horas = 0;
+                                response.Add(pisres);//guardamos pista con sus reservas
+                            }
+
+                        }
                     }
 
-                    return listaPistas;
+                    return response;
 
                 }
 
             }
             catch (Exception ex)
             {
-                listaPistas.Add(new PistasReservaResponse()
+                response.Add(new PistasReservaResponse()
                 {
                     Mensaje = "No se pudo realizar la consulta. -- " + ex.Message
                 });
 
-                return listaPistas;
+                return pistasConReserva;
 
             }
         }
@@ -229,5 +302,27 @@ namespace CapaNegocio.Pista
 
         }
 
+        private string[] checkHorasReserva(PistasReservaResponse pistaReservada, string[] ph)
+        {
+            //miramos que horas tienen reservadas
+            for (var hora = 8; hora < 20; hora++)
+            {
+                //si la hora y la reserva coinciden se guarda
+                int horaini = short.Parse(pistaReservada.H_ini.Substring(0, 2));
+                if (hora == horaini)
+                {
+                    ph[hora - 8] = "reservada";
+                    ph[hora - 7] = "reservada";
+                    ph[hora - 6] = (pistaReservada.Horas > 1) ? "reservada" : "libre";
+
+                }
+                else
+                {
+                    ph[hora - 8] = (ph[hora -8] == "reservada") ? "reservada" : "libre";
+                }
+
+            }
+            return ph;
+        }
     }
 }

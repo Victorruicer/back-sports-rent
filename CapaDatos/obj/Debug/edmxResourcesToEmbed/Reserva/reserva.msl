@@ -114,6 +114,7 @@
     <EntitySetMapping Name="V_RESERVAS_PISTAS">
       <EntityTypeMapping TypeName="BDReservasModel.V_RESERVAS_PISTAS">
         <MappingFragment StoreEntitySet="V_RESERVAS_PISTAS">
+          <ScalarProperty Name="horas" ColumnName="horas" />
           <ScalarProperty Name="instalacion" ColumnName="instalacion" />
           <ScalarProperty Name="estado" ColumnName="estado" />
           <ScalarProperty Name="tipo_pista" ColumnName="tipo_pista" />
@@ -143,6 +144,8 @@
     <EntitySetMapping Name="V_INSTALACIONES_HORARIOS">
       <EntityTypeMapping TypeName="BDReservasModel.V_INSTALACIONES_HORARIOS">
         <MappingFragment StoreEntitySet="V_INSTALACIONES_HORARIOS">
+          <ScalarProperty Name="instalación_operativa" ColumnName="instalación_operativa" />
+          <ScalarProperty Name="pista_operativa" ColumnName="pista_operativa" />
           <ScalarProperty Name="precio_hora" ColumnName="precio_hora" />
           <ScalarProperty Name="tipo_pista" ColumnName="tipo_pista" />
           <ScalarProperty Name="actividad" ColumnName="actividad" />

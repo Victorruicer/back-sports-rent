@@ -13,7 +13,8 @@ namespace CapaNegocio.Instalacion.DTO
         public string Imagen { get; set; }
         public byte[] Imgtmp { get; set; }
         public int Id_instalacion { get; set; }
-        public string Mensaje { get; set; }
         public string Instalacion { get; set; }
+        public Boolean Operativa { get; set; }
+        public string Mensaje { get; set; }
     }
 }

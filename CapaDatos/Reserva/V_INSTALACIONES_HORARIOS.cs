@@ -22,5 +22,7 @@ namespace CapaDatos.Reserva
         public string actividad { get; set; }
         public string tipo_pista { get; set; }
         public decimal precio_hora { get; set; }
+        public Nullable<bool> pista_operativa { get; set; }
+        public bool instalación_operativa { get; set; }
     }
 }

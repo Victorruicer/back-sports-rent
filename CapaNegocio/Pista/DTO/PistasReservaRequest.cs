@@ -9,6 +9,7 @@ namespace CapaNegocio.Pista.DTO
     public class PistasReservaRequest
     {
         public string Actividad { get; set; }
+        public string Fecha { get; set; }
     
     }
 }

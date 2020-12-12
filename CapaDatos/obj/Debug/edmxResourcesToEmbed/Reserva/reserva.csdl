@@ -444,9 +444,10 @@
     <Property Name="precio" Type="Decimal" Precision="4" Scale="2" />
     <Property Name="precio_hora" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
     <Property Name="actividad" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
-    <Property Name="tipo_pista" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="tipo_pista" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="estado" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
     <Property Name="instalacion" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="horas" Type="Decimal" Precision="3" Scale="1" />
   </EntityType>
   <EntityType Name="actividades">
     <Key>
@@ -454,7 +455,7 @@
     </Key>
     <Property Name="id_actividad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="actividad" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
-    <Property Name="tipo_pista" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="tipo_pista" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <NavigationProperty Name="pistas" Relationship="BDReservasModel.FK_pistas_actividades" FromRole="actividades" ToRole="pistas" />
   </EntityType>
   <Association Name="FK_pistas_actividades">
@@ -477,6 +478,7 @@
       <PropertyRef Name="actividad" />
       <PropertyRef Name="tipo_pista" />
       <PropertyRef Name="precio_hora" />
+      <PropertyRef Name="instalación_operativa" />
     </Key>
     <Property Name="instalacion" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
     <Property Name="direccion" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
@@ -484,7 +486,9 @@
     <Property Name="horario" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
     <Property Name="pista" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
     <Property Name="actividad" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
-    <Property Name="tipo_pista" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="tipo_pista" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="precio_hora" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="pista_operativa" Type="Boolean" />
+    <Property Name="instalación_operativa" Type="Boolean" Nullable="false" />
   </EntityType>
 </Schema>
