@@ -97,7 +97,7 @@ namespace CapaNegocio.Horario
         }
 
         //METODO LISTAR HORARIOS
-        public IEnumerable<HorarioModel> GetHorarioes()
+        public IEnumerable<HorarioModel> GetHorarios()
         {
             List<HorarioModel> listaHorarios = null;
 
