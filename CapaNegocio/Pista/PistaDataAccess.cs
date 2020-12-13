@@ -54,6 +54,7 @@ namespace CapaNegocio.Pista
                                                                 select new PistasReservaResponse
                                                                 {
                                                                     Pista = i.pista.Trim(),
+                                                                    Id_pista = i.id_pista,
                                                                     H_ini = i.h_ini.Trim(),
                                                                     H_fin = i.h_fin.Trim(),
                                                                     Horas = (decimal)i.horas,
@@ -85,10 +86,7 @@ namespace CapaNegocio.Pista
                                     pisres = null;
                                     nomPista = pistasConReserva[x].Pista;
                                     pisres = pistasConReserva[x];
-                                    /*
-                                    pisres.H_ini = null;
-                                    pisres.H_fin = null;
-                                    pisres.Horas = 0;*/
+
                                     ph = this.checkHorasReserva(pistasConReserva[x], ph);
                                     pisres.LibresReservadas = ph;
                                 }
@@ -124,6 +122,7 @@ namespace CapaNegocio.Pista
                 return pistasConReserva;
 
             }
+
         }
 
         //METODO CREAR PISTA
@@ -304,17 +303,17 @@ namespace CapaNegocio.Pista
 
         private string[] checkHorasReserva(PistasReservaResponse pistaReservada, string[] ph)
         {
+            //si la hora y la reserva coinciden se guarda
+            int horaini = short.Parse(pistaReservada.H_ini.Substring(0, 2));
             //miramos que horas tienen reservadas
             for (var hora = 8; hora < 20; hora++)
             {
-                //si la hora y la reserva coinciden se guarda
-                int horaini = short.Parse(pistaReservada.H_ini.Substring(0, 2));
+
                 if (hora == horaini)
                 {
                     ph[hora - 8] = "reservada";
-                    ph[hora - 7] = "reservada";
-                    ph[hora - 6] = (pistaReservada.Horas > 1) ? "reservada" : "libre";
-
+                    ph[hora - 7] = (pistaReservada.Horas > 1) ? "reservada" : "libre";
+                    
                 }
                 else
                 {

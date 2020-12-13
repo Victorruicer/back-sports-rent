@@ -9,6 +9,7 @@ namespace CapaNegocio.Pista.DTO
     public class PistasReservaResponse
     {
         public string Pista { get; set; }
+        public int Id_pista { get; set; }
         public string Horario { get; set; }
         public string Instalacion { get; set; }
         public decimal Precio_hora { get; set; }
