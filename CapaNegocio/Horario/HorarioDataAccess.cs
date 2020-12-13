@@ -5,10 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CapaDatos.Reserva;
+using System.Web.Http.Cors;
 using CapaNegocio.Horario.DTO;
+using System.Web.Http;
 
 namespace CapaNegocio.Horario
 {
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
+    [RoutePrefix("api/horario")]
     public class HorarioDataAccess
     {
 

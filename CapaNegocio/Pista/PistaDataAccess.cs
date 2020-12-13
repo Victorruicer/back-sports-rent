@@ -60,7 +60,8 @@ namespace CapaNegocio.Pista
                                                                     Horas = (decimal)i.horas,
                                                                     Horario = p.Horario.Trim(),
                                                                     Instalacion = p.Instalacion.Trim(),
-                                                                    Precio_hora = p.Precio_hora
+                                                                    Precio_hora = p.Precio_hora,
+                                                                    Fecha = datos.Fecha,
 
                                                                 }).ToList();
                             pistasConReserva.AddRange(tmp);
