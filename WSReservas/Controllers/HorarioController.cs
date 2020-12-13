@@ -4,11 +4,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using CapaNegocio.Horario;
 using CapaNegocio.Horario.DTO;
 
 namespace WSReservas.Controllers
 {
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
+    [RoutePrefix("api/horario")]
     public class HorarioController : ApiController
     {
         //CREATE
