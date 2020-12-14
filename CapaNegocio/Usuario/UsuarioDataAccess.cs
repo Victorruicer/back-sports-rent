@@ -344,6 +344,37 @@ namespace CapaNegocio.Usuario
         
         //METODO CAMBIO PASSWORD
 
+/*
+        //MÉTODO DE LISTADO DE TODOS LOS USUARIOS
+        public IEnumerable<User> GetUsers()
+        {
+            try
+            {
+                using (var context = new BDReservasEntities())
+                {
+                    List<User> listUsuarios = (from i in context.usuarios
+                                               select new User
+                                               {
+                                                   Nombre = i.nombre.Trim(),
+                                                   Apellido1 = i.apellido1.Trim(),
+                                                   Apellido2 = i.apellido2.Trim(),
+                                                   Id_Usuario = i.id_usuario,
+                                                   Id_Perfil = (int)i.id_perfil,
+                                                   Email = i.email.Trim(),
+                                                   Dni = i.dni.Trim()
+
+
+                                               }).ToList<User>();
+                    return listUsuarios;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+*/
 
         //MÉTODO DE LISTADO DE TODOS LOS USUARIOS
         public IEnumerable<User> GetUsers()

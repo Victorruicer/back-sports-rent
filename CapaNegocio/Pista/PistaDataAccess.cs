@@ -226,7 +226,7 @@ namespace CapaNegocio.Pista
         }
 
         //METODO LISTAR PISTAS
-        public IEnumerable<PistaModel> GetPistas()
+ /*       public IEnumerable<PistaModel> GetPistas()
         {
             List<PistaModel> listaPistas = null;
 
@@ -250,6 +250,55 @@ namespace CapaNegocio.Pista
                                                 Id_tarifa = i.id_tarifa
 
                                             }).ToList();
+
+                    if (listaPistas.Count < 1)
+                    {
+                        listaPistas.Add(new PistaModel
+                        {
+                            Mensaje = "No existen instalaciones"
+                        });
+
+                    }
+
+                    return listaPistas;
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                listaPistas.Add(new PistaModel
+                {
+                    Mensaje = "No se pudo realizar la consulta -- " + ex.Message
+                });
+
+                return listaPistas;
+
+            }
+        }*/
+ 
+        //METODO LISTAR PISTAS
+        public IEnumerable<PistaModel> GetPistas()
+        {
+            List<PistaModel> listaPistas = null;
+
+            try
+            {
+                using (var context = new BDReservasEntities())
+                {
+
+                    listaPistas = (from i in context.pistas
+                                   select new PistaModel
+                                   {
+                                       Nombre = i.nombre.Trim(),
+                                       Id_actividad = (int)i.id_actividad,
+                                       Id_instalacion = i.id_instalacion,
+                                       Id_pista = i.id_pista,
+                                       Id_tarifa = (int)i.id_tarifa,
+                                       Operativa = (bool)i.operativa
+
+                                   }).ToList();
 
                     if (listaPistas.Count < 1)
                     {

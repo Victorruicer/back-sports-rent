@@ -80,6 +80,40 @@ namespace CapaNegocio.Reserva
             {
                 using (var context = new BDReservasEntities())
                 {
+                    List<ReservaModel> listReservas = (from i in context.reservas
+                                                       select new ReservaModel
+                                                       {
+                                                           Fecha = i.fecha.Trim(),
+                                                           H_ini = i.h_ini.Trim(),
+                                                           H_fin = i.h_fin.Trim(),
+                                                           Id_Reserva = i.id_reserva,
+                                                           Id_Pista = i.id_pista,
+                                                           Id_Usuario = i.id_usuario,
+                                                           Id_Estado = i.id_estado,
+                                                           Precio = (decimal)i.precio,
+                                                           Horas = (decimal)i.horas,
+                                                           
+
+                                                       }).ToList<ReservaModel>();
+                    return listReservas;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+
+/*
+        //METODO LISTAR RESERVAS
+        public IEnumerable<ReservaModel> GetReservas()
+        {
+            try
+            {
+                using (var context = new BDReservasEntities())
+                {
                     List<ReservaModel> listReservas = (from V_RESERVAS_PISTAS in context.V_RESERVAS_PISTAS
                                                        select new ReservaModel
                                                        {
@@ -100,6 +134,7 @@ namespace CapaNegocio.Reserva
             }
 
         }
+*/
 
         //METODO ELIMINAR RESERVA
         public DeleteReservaResponse DeleteReserva(DeleteReservaRequest delReserva)
@@ -194,7 +229,7 @@ namespace CapaNegocio.Reserva
 
         //HISTORICO RESERVAS
         //dependiendo del valor de datos.Email se muestran todos las reservas(admin) o 
-        //solo las del usuario( con el valor que tenga el campo datos.estado)
+        //solo las del usuario
         public IEnumerable<ReservaPistaModel> HistoricoReservas(HistoricoReservasRequest datos)
         {
             using(var context = new BDReservasEntities())
@@ -218,7 +253,8 @@ namespace CapaNegocio.Reserva
                                             Pista = i.pista.Trim(),
                                             Fecha = i.fecha.Trim(),
                                             H_ini = i.h_ini.Trim(),
-                                            H_fin = i.h_fin.Trim()
+                                            H_fin = i.h_fin.Trim(),
+                                            Estado = i.estado.Trim()
 
                                         }).ToList<ReservaPistaModel>();
 

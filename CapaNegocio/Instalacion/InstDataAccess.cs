@@ -117,6 +117,53 @@ namespace CapaNegocio.Instalacion
                 using (var context = new BDReservasEntities())
                 {
 
+                    List<InstModel> listaInstalaciones = (from i in context.instalaciones
+                                                          select new InstModel
+                                                          {
+                                                              Nombre = i.nombre.Trim(),
+                                                              Id_instalacion = i.id_instalacion,
+                                                              Id_horario = i.id_horario,
+                                                              Direccion = i.direccion.Trim(),
+                                                              Imgtmp = i.imagen,
+                                                              Operativa = i.operativa
+                                                          }).ToList<InstModel>();
+
+                    if (listaInstalaciones.Count < 1)
+                    {
+                        listaInstalaciones.Add(new InstModel
+                        {
+                            Mensaje = "No existen instalaciones"
+                        });
+
+                    }
+                    else
+                    {   //parche para convertir cada imagen del array de instalaciones
+                        foreach (InstModel instalacion in listaInstalaciones)
+                        {
+                            instalacion.Imagen = (instalacion.Imgtmp != null) ? new ImageConverter().byteTobase64(instalacion.Imgtmp) : null;
+                            instalacion.Imgtmp = null;
+                        }
+                    }
+
+                    return listaInstalaciones;
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+ /*       public IEnumerable<InstModel> GetInsts()
+        {
+            try
+            {
+                using (var context = new BDReservasEntities())
+                {
+
                     List<InstModel> listaInstalaciones = (from i in context.V_INSTALACIONES_HORARIOS
                                                           select new InstModel
                                                           {
@@ -154,7 +201,7 @@ namespace CapaNegocio.Instalacion
             {
                 throw ex;
             }
-        }
+        }*/
 
         //METODO ACTUALIZAR INSTALACION
         public UpdateInstResponse UpdateInst(UpdateInstRequest upInst)
