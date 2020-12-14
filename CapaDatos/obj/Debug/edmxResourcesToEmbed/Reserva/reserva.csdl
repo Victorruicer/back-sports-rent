@@ -481,6 +481,11 @@
       <PropertyRef Name="tipo_pista" />
       <PropertyRef Name="precio_hora" />
       <PropertyRef Name="instalación_operativa" />
+      <PropertyRef Name="id_pista" />
+      <PropertyRef Name="id_instalacion" />
+      <PropertyRef Name="tarifa" />
+      <PropertyRef Name="id_tarifa" />
+      <PropertyRef Name="id_actividad" />
     </Key>
     <Property Name="instalacion" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
     <Property Name="direccion" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
@@ -492,5 +497,10 @@
     <Property Name="precio_hora" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
     <Property Name="pista_operativa" Type="Boolean" />
     <Property Name="instalación_operativa" Type="Boolean" Nullable="false" />
+    <Property Name="id_pista" Type="Int32" Nullable="false" />
+    <Property Name="id_instalacion" Type="Int32" Nullable="false" />
+    <Property Name="tarifa" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
+    <Property Name="id_tarifa" Type="Int32" Nullable="false" />
+    <Property Name="id_actividad" Type="Int32" Nullable="false" />
   </EntityType>
 </Schema>

@@ -32,9 +32,11 @@ namespace CapaNegocio.Pista
                                    select new PistasReservaResponse
                                    {
                                        Pista = i.pista.Trim(),
+                                       Id_pista = i.id_pista,
                                        Horario = i.horario.Trim(),
                                        Instalacion = i.instalacion.Trim(),
-                                       Precio_hora = i.precio_hora
+                                       Precio_hora = i.precio_hora,
+                                       Fecha = datos.Fecha.Trim()
 
                                    }).ToList();
 
@@ -64,7 +66,19 @@ namespace CapaNegocio.Pista
                                                                     Fecha = datos.Fecha,
 
                                                                 }).ToList();
-                            pistasConReserva.AddRange(tmp);
+
+                            //si no hay reservas para la pista
+                            if(tmp.Count < 1)
+                            {
+                                List<PistasReservaResponse> vacia = new List<PistasReservaResponse>{ p };
+                                pistasConReserva.AddRange(vacia);
+                            }
+                            else
+                            {
+                                pistasConReserva.AddRange(tmp);
+                            }
+
+
                         }
                         string[] ph = new string[13];
                         string nomPista = "";
@@ -226,10 +240,15 @@ namespace CapaNegocio.Pista
                                             {
                                                 Instalacion = i.instalacion.Trim(),
                                                 Horario = i.horario,
-                                                Pista = i.pista.Trim(),
+                                                Nombre = i.pista.Trim(),
                                                 Actividad = i.actividad.Trim(),
                                                 Tipo_pista = i.tipo_pista.Trim(),
                                                 Precio_hora = i.precio_hora,
+                                                Id_actividad = i.id_actividad,
+                                                Id_instalacion = i.id_instalacion,
+                                                Id_pista = i.id_pista,
+                                                Id_tarifa = i.id_tarifa
+
                                             }).ToList();
 
                     if (listaPistas.Count < 1)
@@ -304,8 +323,19 @@ namespace CapaNegocio.Pista
 
         private string[] checkHorasReserva(PistasReservaResponse pistaReservada, string[] ph)
         {
-            //si la hora y la reserva coinciden se guarda
-            int horaini = short.Parse(pistaReservada.H_ini.Substring(0, 2));
+            int horaini;
+            //para pistas sin reservas
+            if (pistaReservada.H_ini == null && pistaReservada.H_fin == null)
+            {
+                //ponemos una hora alta para que el bucle siempre ponga libres las horas
+                horaini = 0;
+            }
+            else
+            {
+                //si la hora y la reserva coinciden se guarda
+                horaini = short.Parse(pistaReservada.H_ini.Substring(0, 2));
+            }
+
             //miramos que horas tienen reservadas
             for (var hora = 8; hora < 20; hora++)
             {
@@ -313,12 +343,12 @@ namespace CapaNegocio.Pista
                 if (hora == horaini)
                 {
                     ph[hora - 8] = "reservada";
-                    ph[hora - 7] = (pistaReservada.Horas > 1) ? "reservada" : "libre";
+                    ph[hora - 7] = (pistaReservada.Horas > 1 || (hora -7) == 12) ? "reservada" : "libre";
                     
                 }
                 else
                 {
-                    ph[hora - 8] = (ph[hora -8] == "reservada") ? "reservada" : "libre";
+                    ph[hora - 8] = (ph[hora -8] != "reservada" || ph[hora - 8] == null) ? "libre" : "reservada";
                 }
 
             }

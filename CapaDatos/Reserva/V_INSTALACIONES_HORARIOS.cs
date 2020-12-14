@@ -24,5 +24,10 @@ namespace CapaDatos.Reserva
         public decimal precio_hora { get; set; }
         public Nullable<bool> pista_operativa { get; set; }
         public bool instalación_operativa { get; set; }
+        public int id_pista { get; set; }
+        public int id_instalacion { get; set; }
+        public string tarifa { get; set; }
+        public int id_tarifa { get; set; }
+        public int id_actividad { get; set; }
     }
 }
