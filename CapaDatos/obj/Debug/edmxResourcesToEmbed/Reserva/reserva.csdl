@@ -486,6 +486,7 @@
       <PropertyRef Name="tarifa" />
       <PropertyRef Name="id_tarifa" />
       <PropertyRef Name="id_actividad" />
+      <PropertyRef Name="tipo_horario" />
     </Key>
     <Property Name="instalacion" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
     <Property Name="direccion" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
@@ -502,5 +503,6 @@
     <Property Name="tarifa" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
     <Property Name="id_tarifa" Type="Int32" Nullable="false" />
     <Property Name="id_actividad" Type="Int32" Nullable="false" />
+    <Property Name="tipo_horario" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
   </EntityType>
 </Schema>

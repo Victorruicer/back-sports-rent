@@ -35,7 +35,7 @@ namespace CapaNegocio.Instalacion
                     }
 
                     context.PA_INSERT_INSTALACION(
-                        nuevaInstalacion.Nombre,
+                        nuevaInstalacion.Instalacion,
                         nuevaInstalacion.Direccion,
                         nuevaInstalacion.Operativa,
                         nuevaInstalacion.Id_Horario,
@@ -157,7 +157,7 @@ namespace CapaNegocio.Instalacion
             }
         }
 
- /*       public IEnumerable<InstModel> GetInsts()
+        public IEnumerable<InstModel> GetInstsVista()
         {
             try
             {
@@ -168,11 +168,13 @@ namespace CapaNegocio.Instalacion
                                                           select new InstModel
                                                           {
                                                               Instalacion = i.instalacion.Trim(),
-                                                              Horario = i.horario,
                                                               Direccion = i.direccion.Trim(),
-                                                              Imgtmp = i.imagen,
-                                                              Operativa = i.instalación_operativa
-                                                          }).ToList<InstModel>();
+                                                              Horario = i.horario.Trim(),
+                                                              Id_instalacion = i.id_instalacion,
+                                                              Operativa = i.instalación_operativa,
+                                                              Tipo_horario = i.tipo_horario.Trim()
+
+                                                          }).Distinct().ToList<InstModel>();
 
                     if (listaInstalaciones.Count < 1)
                     {
@@ -201,7 +203,7 @@ namespace CapaNegocio.Instalacion
             {
                 throw ex;
             }
-        }*/
+        }
 
         //METODO ACTUALIZAR INSTALACION
         public UpdateInstResponse UpdateInst(UpdateInstRequest upInst)
@@ -225,7 +227,7 @@ namespace CapaNegocio.Instalacion
                     }
 
 
-                    context.PA_MODIFICAR_INSTALACION(upInst.Id_instalacion, upInst.Nombre, upInst.Direccion, upInst.Operativa, upInst.Id_horario, imagen, RETCODE, MENSAJE);
+                    context.PA_MODIFICAR_INSTALACION(upInst.Id_instalacion, upInst.Instalacion, upInst.Direccion, upInst.Operativa, upInst.Id_horario, imagen, RETCODE, MENSAJE);
 
                     if ((int)RETCODE.Value < 0)
                     {
@@ -237,7 +239,7 @@ namespace CapaNegocio.Instalacion
                         throw new Exception(MENSAJE.Value.ToString());
                     }
 
-                    var consulta = context.instalaciones.Where(user => user.nombre == upInst.Nombre).FirstOrDefault();
+                    var consulta = context.instalaciones.Where(user => user.nombre == upInst.Instalacion).FirstOrDefault();
 
                     return new UpdateInstResponse()
                     {

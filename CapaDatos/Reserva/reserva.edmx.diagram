@@ -24,7 +24,7 @@
         <EntityTypeShape EntityType="BDReservasModel.V_RESERVAS_PISTAS" Width="1.5" PointX="7.375" PointY="9.75" />
         <EntityTypeShape EntityType="BDReservasModel.actividades" Width="1.5" PointX="9.375" PointY="9.875" />
         <AssociationConnector Association="BDReservasModel.FK_pistas_actividades" />
-        <EntityTypeShape EntityType="BDReservasModel.V_INSTALACIONES_HORARIOS" Width="2.125" PointX="9.75" PointY="2.75" />
+        <EntityTypeShape EntityType="BDReservasModel.V_INSTALACIONES_HORARIOS" Width="2.125" PointX="9.625" PointY="1.25" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

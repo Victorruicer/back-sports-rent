@@ -55,5 +55,15 @@ namespace WSReservas.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, listInsts);
         }
 
+        //LIST DESDE VISTA
+        [HttpGet]
+        [Route("listInstVista")]
+        public HttpResponseMessage listInstsVista()
+        {
+            var instDA = new InstDataAccess();
+            var listInsts = instDA.GetInstsVista();
+            return Request.CreateResponse(HttpStatusCode.OK, listInsts);
+        }
+
     }
 }

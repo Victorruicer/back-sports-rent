@@ -106,10 +106,11 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_INSTALACIONES_HORARIOS' no 
             <PropertyRef Name="precio_hora" />
             <PropertyRef Name="instalación_operativa" />
             <PropertyRef Name="id_pista" />
-            <PropertyRef Name="id_instalacion" />
-            <PropertyRef Name="tarifa" />
+            <PropertyRef Name="tipo_horario" />
             <PropertyRef Name="id_tarifa" />
             <PropertyRef Name="id_actividad" />
+            <PropertyRef Name="id_instalacion" />
+            <PropertyRef Name="tarifa" />
             <PropertyRef Name="tipo_pista" />
           </Key>
           <Property Name="instalacion" Type="nchar" MaxLength="50" Nullable="false" />
@@ -123,10 +124,11 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_INSTALACIONES_HORARIOS' no 
           <Property Name="pista_operativa" Type="bit" />
           <Property Name="instalación_operativa" Type="bit" Nullable="false" />
           <Property Name="id_pista" Type="int" Nullable="false" />
-          <Property Name="id_instalacion" Type="int" Nullable="false" />
-          <Property Name="tarifa" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="tipo_horario" Type="nchar" MaxLength="25" Nullable="false" />
           <Property Name="id_tarifa" Type="int" Nullable="false" />
           <Property Name="id_actividad" Type="int" Nullable="false" />
+          <Property Name="id_instalacion" Type="int" Nullable="false" />
+          <Property Name="tarifa" Type="nchar" MaxLength="25" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'BDReservas.dbo.V_RESERVAS_PISTAS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -475,10 +477,11 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
     [V_INSTALACIONES_HORARIOS].[pista_operativa] AS [pista_operativa], 
     [V_INSTALACIONES_HORARIOS].[instalación_operativa] AS [instalación_operativa], 
     [V_INSTALACIONES_HORARIOS].[id_pista] AS [id_pista], 
-    [V_INSTALACIONES_HORARIOS].[id_instalacion] AS [id_instalacion], 
-    [V_INSTALACIONES_HORARIOS].[tarifa] AS [tarifa], 
+    [V_INSTALACIONES_HORARIOS].[tipo_horario] AS [tipo_horario], 
     [V_INSTALACIONES_HORARIOS].[id_tarifa] AS [id_tarifa], 
-    [V_INSTALACIONES_HORARIOS].[id_actividad] AS [id_actividad]
+    [V_INSTALACIONES_HORARIOS].[id_actividad] AS [id_actividad], 
+    [V_INSTALACIONES_HORARIOS].[id_instalacion] AS [id_instalacion], 
+    [V_INSTALACIONES_HORARIOS].[tarifa] AS [tarifa]
     FROM [dbo].[V_INSTALACIONES_HORARIOS] AS [V_INSTALACIONES_HORARIOS]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_RESERVAS_PISTAS" EntityType="Self.V_RESERVAS_PISTAS" store:Type="Views" store:Schema="dbo">
@@ -1034,6 +1037,7 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
             <PropertyRef Name="tarifa" />
             <PropertyRef Name="id_tarifa" />
             <PropertyRef Name="id_actividad" />
+            <PropertyRef Name="tipo_horario" />
           </Key>
           <Property Name="instalacion" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="direccion" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
@@ -1050,6 +1054,7 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
           <Property Name="tarifa" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
           <Property Name="id_tarifa" Type="Int32" Nullable="false" />
           <Property Name="id_actividad" Type="Int32" Nullable="false" />
+          <Property Name="tipo_horario" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1201,6 +1206,7 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
           <EntitySetMapping Name="V_INSTALACIONES_HORARIOS">
             <EntityTypeMapping TypeName="BDReservasModel.V_INSTALACIONES_HORARIOS">
               <MappingFragment StoreEntitySet="V_INSTALACIONES_HORARIOS">
+                <ScalarProperty Name="tipo_horario" ColumnName="tipo_horario" />
                 <ScalarProperty Name="id_actividad" ColumnName="id_actividad" />
                 <ScalarProperty Name="id_tarifa" ColumnName="id_tarifa" />
                 <ScalarProperty Name="tarifa" ColumnName="tarifa" />

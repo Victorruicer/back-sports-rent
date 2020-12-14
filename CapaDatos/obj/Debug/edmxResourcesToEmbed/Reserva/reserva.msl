@@ -145,6 +145,7 @@
     <EntitySetMapping Name="V_INSTALACIONES_HORARIOS">
       <EntityTypeMapping TypeName="BDReservasModel.V_INSTALACIONES_HORARIOS">
         <MappingFragment StoreEntitySet="V_INSTALACIONES_HORARIOS">
+          <ScalarProperty Name="tipo_horario" ColumnName="tipo_horario" />
           <ScalarProperty Name="id_actividad" ColumnName="id_actividad" />
           <ScalarProperty Name="id_tarifa" ColumnName="id_tarifa" />
           <ScalarProperty Name="tarifa" ColumnName="tarifa" />

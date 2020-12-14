@@ -29,5 +29,6 @@ namespace CapaDatos.Reserva
         public string tarifa { get; set; }
         public int id_tarifa { get; set; }
         public int id_actividad { get; set; }
+        public string tipo_horario { get; set; }
     }
 }
