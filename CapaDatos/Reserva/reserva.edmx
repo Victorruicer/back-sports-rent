@@ -142,6 +142,7 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_RESERVAS_PISTAS' no tiene d
             <PropertyRef Name="estado" />
             <PropertyRef Name="instalacion" />
             <PropertyRef Name="id_pista" />
+            <PropertyRef Name="tarifa" />
             <PropertyRef Name="tipo_pista" />
           </Key>
           <Property Name="fecha" Type="nchar" MaxLength="10" />
@@ -158,6 +159,8 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_RESERVAS_PISTAS' no tiene d
           <Property Name="instalacion" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="horas" Type="decimal" Precision="3" Scale="1" />
           <Property Name="id_pista" Type="int" Nullable="false" />
+          <Property Name="tarifa" Type="nchar" MaxLength="25" Nullable="false" />
+          <Property Name="operativa" Type="bit" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -499,7 +502,9 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
     [V_RESERVAS_PISTAS].[estado] AS [estado], 
     [V_RESERVAS_PISTAS].[instalacion] AS [instalacion], 
     [V_RESERVAS_PISTAS].[horas] AS [horas], 
-    [V_RESERVAS_PISTAS].[id_pista] AS [id_pista]
+    [V_RESERVAS_PISTAS].[id_pista] AS [id_pista], 
+    [V_RESERVAS_PISTAS].[tarifa] AS [tarifa], 
+    [V_RESERVAS_PISTAS].[operativa] AS [operativa]
     FROM [dbo].[V_RESERVAS_PISTAS] AS [V_RESERVAS_PISTAS]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="V_USUARIOS_PERFILES" EntityType="Self.V_USUARIOS_PERFILES" store:Type="Views" store:Schema="dbo">
@@ -848,11 +853,6 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
             <End Role="actividades" EntitySet="actividades" />
             <End Role="pistas" EntitySet="pistas" />
           </AssociationSet>
-          <FunctionImport Name="PA_DELETE_INSTALACION">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
-            <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
-            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
-          </FunctionImport>
           <EntitySet Name="V_INSTALACIONES_HORARIOS" EntityType="BDReservasModel.V_INSTALACIONES_HORARIOS" />
           <FunctionImport Name="PA_DELETE_PISTA">
             <Parameter Name="ID" Mode="In" Type="Int32" />
@@ -974,6 +974,11 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
             <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
             <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="PA_DELETE_INSTALACION">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+            <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="V_RESERVAS_PISTAS">
           <Key>
@@ -986,6 +991,7 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
             <PropertyRef Name="estado" />
             <PropertyRef Name="instalacion" />
             <PropertyRef Name="id_pista" />
+            <PropertyRef Name="tarifa" />
           </Key>
           <Property Name="fecha" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="h_ini" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
@@ -1001,6 +1007,8 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
           <Property Name="instalacion" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="horas" Type="Decimal" Precision="3" Scale="1" />
           <Property Name="id_pista" Type="Int32" Nullable="false" />
+          <Property Name="tarifa" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="operativa" Type="Boolean" />
         </EntityType>
         <EntityType Name="actividades">
           <Key>
@@ -1175,6 +1183,8 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
           <EntitySetMapping Name="V_RESERVAS_PISTAS">
             <EntityTypeMapping TypeName="BDReservasModel.V_RESERVAS_PISTAS">
               <MappingFragment StoreEntitySet="V_RESERVAS_PISTAS">
+                <ScalarProperty Name="operativa" ColumnName="operativa" />
+                <ScalarProperty Name="tarifa" ColumnName="tarifa" />
                 <ScalarProperty Name="id_pista" ColumnName="id_pista" />
                 <ScalarProperty Name="horas" ColumnName="horas" />
                 <ScalarProperty Name="instalacion" ColumnName="instalacion" />
@@ -1202,7 +1212,6 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="PA_DELETE_INSTALACION" FunctionName="BDReservasModel.Store.PA_DELETE_INSTALACION" />
           <EntitySetMapping Name="V_INSTALACIONES_HORARIOS">
             <EntityTypeMapping TypeName="BDReservasModel.V_INSTALACIONES_HORARIOS">
               <MappingFragment StoreEntitySet="V_INSTALACIONES_HORARIOS">
@@ -1241,6 +1250,7 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
           <FunctionImportMapping FunctionImportName="PA_MODIFICAR_ACTIVIDAD" FunctionName="BDReservasModel.Store.PA_MODIFICAR_ACTIVIDAD" />
           <FunctionImportMapping FunctionImportName="PA_MODIFICAR_HORARIO" FunctionName="BDReservasModel.Store.PA_MODIFICAR_HORARIO" />
           <FunctionImportMapping FunctionImportName="PA_CAMBIO_PASSWORD" FunctionName="BDReservasModel.Store.PA_CAMBIO_PASSWORD" />
+          <FunctionImportMapping FunctionImportName="PA_DELETE_INSTALACION" FunctionName="BDReservasModel.Store.PA_DELETE_INSTALACION" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -114,6 +114,8 @@
     <EntitySetMapping Name="V_RESERVAS_PISTAS">
       <EntityTypeMapping TypeName="BDReservasModel.V_RESERVAS_PISTAS">
         <MappingFragment StoreEntitySet="V_RESERVAS_PISTAS">
+          <ScalarProperty Name="operativa" ColumnName="operativa" />
+          <ScalarProperty Name="tarifa" ColumnName="tarifa" />
           <ScalarProperty Name="id_pista" ColumnName="id_pista" />
           <ScalarProperty Name="horas" ColumnName="horas" />
           <ScalarProperty Name="instalacion" ColumnName="instalacion" />
@@ -141,7 +143,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="PA_DELETE_INSTALACION" FunctionName="BDReservasModel.Store.PA_DELETE_INSTALACION" />
     <EntitySetMapping Name="V_INSTALACIONES_HORARIOS">
       <EntityTypeMapping TypeName="BDReservasModel.V_INSTALACIONES_HORARIOS">
         <MappingFragment StoreEntitySet="V_INSTALACIONES_HORARIOS">
@@ -180,5 +181,6 @@
     <FunctionImportMapping FunctionImportName="PA_MODIFICAR_ACTIVIDAD" FunctionName="BDReservasModel.Store.PA_MODIFICAR_ACTIVIDAD" />
     <FunctionImportMapping FunctionImportName="PA_MODIFICAR_HORARIO" FunctionName="BDReservasModel.Store.PA_MODIFICAR_HORARIO" />
     <FunctionImportMapping FunctionImportName="PA_CAMBIO_PASSWORD" FunctionName="BDReservasModel.Store.PA_CAMBIO_PASSWORD" />
+    <FunctionImportMapping FunctionImportName="PA_DELETE_INSTALACION" FunctionName="BDReservasModel.Store.PA_DELETE_INSTALACION" />
   </EntityContainerMapping>
 </Mapping>

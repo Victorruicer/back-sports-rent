@@ -226,7 +226,7 @@ namespace CapaNegocio.Pista
         }
 
         //METODO LISTAR PISTAS
- /*       public IEnumerable<PistaModel> GetPistas()
+        public IEnumerable<PistaModel> GetPistas()
         {
             List<PistaModel> listaPistas = null;
 
@@ -236,6 +236,7 @@ namespace CapaNegocio.Pista
                 {
 
                     listaPistas = (from i in context.V_INSTALACIONES_HORARIOS
+                                   where i.id_actividad != 23  
                                             select new PistaModel
                                             {
                                                 Instalacion = i.instalacion.Trim(),
@@ -247,9 +248,11 @@ namespace CapaNegocio.Pista
                                                 Id_actividad = i.id_actividad,
                                                 Id_instalacion = i.id_instalacion,
                                                 Id_pista = i.id_pista,
-                                                Id_tarifa = i.id_tarifa
+                                                Id_tarifa = i.id_tarifa,
+                                                Tarifa = i.tarifa,
+                                                Operativa = (bool)i.pista_operativa
 
-                                            }).ToList();
+                                            }).Distinct().ToList();
 
                     if (listaPistas.Count < 1)
                     {
@@ -276,8 +279,8 @@ namespace CapaNegocio.Pista
                 return listaPistas;
 
             }
-        }*/
- 
+        }
+ /*
         //METODO LISTAR PISTAS
         public IEnumerable<PistaModel> GetPistas()
         {
@@ -325,7 +328,7 @@ namespace CapaNegocio.Pista
                 return listaPistas;
 
             }
-        }
+        }*/
 
         //METODO ACTUALIZAR PISTA
         public UpdatePistaResponse UpdatePista(UpdatePistaRequest upPista)

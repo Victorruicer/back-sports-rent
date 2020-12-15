@@ -171,15 +171,6 @@ namespace CapaDatos.Reserva
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_DELETE_RESERVA", iDParameter, rETCODE, mENSAJE);
         }
     
-        public virtual int PA_DELETE_INSTALACION(Nullable<int> iD, ObjectParameter rETCODE, ObjectParameter mENSAJE)
-        {
-            var iDParameter = iD.HasValue ?
-                new ObjectParameter("ID", iD) :
-                new ObjectParameter("ID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_DELETE_INSTALACION", iDParameter, rETCODE, mENSAJE);
-        }
-    
         public virtual int PA_DELETE_PISTA(Nullable<int> iD, ObjectParameter rETCODE, ObjectParameter mENSAJE)
         {
             var iDParameter = iD.HasValue ?
@@ -478,6 +469,15 @@ namespace CapaDatos.Reserva
                 new ObjectParameter("NEW_PASSWORD", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_CAMBIO_PASSWORD", iDParameter, oLD_PASSWORDParameter, nEW_PASSWORDParameter, rETCODE, mENSAJE);
+        }
+    
+        public virtual int PA_DELETE_INSTALACION(Nullable<int> iD, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_DELETE_INSTALACION", iDParameter, rETCODE, mENSAJE);
         }
     }
 }

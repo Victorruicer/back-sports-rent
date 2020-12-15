@@ -13,6 +13,7 @@ namespace CapaNegocio.Pista.DTO
         public int Id_instalacion { get; set; }
         public int Id_pista { get; set; }
         public int Id_tarifa { get; set; }
+        public string Tarifa { get; set; }
         public int Id_actividad { get; set; }
         public Boolean Operativa { get; set; }
         public string Horario { get; set; }

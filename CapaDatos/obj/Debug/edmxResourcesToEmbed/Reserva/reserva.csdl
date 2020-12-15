@@ -297,11 +297,6 @@
       <End Role="actividades" EntitySet="actividades" />
       <End Role="pistas" EntitySet="pistas" />
     </AssociationSet>
-    <FunctionImport Name="PA_DELETE_INSTALACION">
-      <Parameter Name="ID" Mode="In" Type="Int32" />
-      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
-      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
-    </FunctionImport>
     <EntitySet Name="V_INSTALACIONES_HORARIOS" EntityType="BDReservasModel.V_INSTALACIONES_HORARIOS" />
     <FunctionImport Name="PA_DELETE_PISTA">
       <Parameter Name="ID" Mode="In" Type="Int32" />
@@ -423,6 +418,11 @@
       <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
       <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="PA_DELETE_INSTALACION">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="V_RESERVAS_PISTAS">
     <Key>
@@ -435,6 +435,7 @@
       <PropertyRef Name="estado" />
       <PropertyRef Name="instalacion" />
       <PropertyRef Name="id_pista" />
+      <PropertyRef Name="tarifa" />
     </Key>
     <Property Name="fecha" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="h_ini" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
@@ -450,6 +451,8 @@
     <Property Name="instalacion" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
     <Property Name="horas" Type="Decimal" Precision="3" Scale="1" />
     <Property Name="id_pista" Type="Int32" Nullable="false" />
+    <Property Name="tarifa" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
+    <Property Name="operativa" Type="Boolean" />
   </EntityType>
   <EntityType Name="actividades">
     <Key>

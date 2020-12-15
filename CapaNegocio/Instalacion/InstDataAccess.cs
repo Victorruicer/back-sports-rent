@@ -103,6 +103,7 @@ namespace CapaNegocio.Instalacion
             {
                 return new DeleteInstResponse()
                 {
+                    Retcode = -1,
                     Mensaje = ex.Message
                 };
             }

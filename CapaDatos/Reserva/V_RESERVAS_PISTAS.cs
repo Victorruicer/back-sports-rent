@@ -28,5 +28,7 @@ namespace CapaDatos.Reserva
         public string instalacion { get; set; }
         public Nullable<decimal> horas { get; set; }
         public int id_pista { get; set; }
+        public string tarifa { get; set; }
+        public Nullable<bool> operativa { get; set; }
     }
 }
