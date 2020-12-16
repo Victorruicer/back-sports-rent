@@ -154,7 +154,12 @@ namespace CapaNegocio.Instalacion
             }
             catch (Exception ex)
             {
-                throw ex;
+                List<InstModel> listaInstalaciones = new List<InstModel>();
+                listaInstalaciones.Add(new InstModel { Mensaje = "No existen instalaciones" });
+
+                return listaInstalaciones;
+
+
             }
         }
 
@@ -240,7 +245,7 @@ namespace CapaNegocio.Instalacion
                         throw new Exception(MENSAJE.Value.ToString());
                     }
 
-                    var consulta = context.instalaciones.Where(user => user.nombre == upInst.Instalacion).FirstOrDefault();
+                    var consulta = context.instalaciones.Where(instalacion => instalacion.id_instalacion == upInst.Id_instalacion).FirstOrDefault();
 
                     return new UpdateInstResponse()
                     {

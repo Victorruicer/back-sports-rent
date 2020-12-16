@@ -1,3 +1,5 @@
+using System.Web.Configuration;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,8 @@ namespace WSReservas
             //FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             //RouteConfig.RegisterRoutes(RouteTable.Routes);
             GlobalConfiguration.Configure(WebApiConfig.Register);
+            var secretKey = WebConfigurationManager.AppSettings["StripeSecretKey"];
+            StripeConfiguration.ApiKey = secretKey;
         }
     }
 }

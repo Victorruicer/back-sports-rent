@@ -91,6 +91,7 @@
     <Compile Include="Instalacion\DTO\UpdateInstRequest.cs" />
     <Compile Include="Instalacion\DTO\UpdateInstResponse.cs" />
     <Compile Include="Instalacion\InstDataAccess.cs" />
+    <Compile Include="Pago\DTO\StripeModel.cs" />
     <Compile Include="Pista\DTO\CreatePistaRequest.cs" />
     <Compile Include="Pista\DTO\CreatePistaResponse.cs" />
     <Compile Include="Pista\DTO\DeletePistaRequest.cs" />
