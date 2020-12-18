@@ -272,7 +272,9 @@ namespace CapaNegocio.Reserva
                                              H_fin = i.h_fin,
                                              Id_Reserva = i.id_reserva,
                                              Pista = i.pista,
-                                             Instalacion = i.instalacion
+                                             Instalacion = i.instalacion,
+                                             Email = i.email.Trim(),
+                                             Precio = (decimal)i.precio
 
                                          }).ToList<ReservaPistaModel>();
                         return listaReservas;
