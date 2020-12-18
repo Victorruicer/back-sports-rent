@@ -379,11 +379,12 @@ namespace CapaNegocio.Usuario
         //MÉTODO DE LISTADO DE TODOS LOS USUARIOS
         public IEnumerable<User> GetUsers()
         {
+            List<User> listUsuarios = new List<User>();
             try
             {
                 using (var context = new BDReservasEntities())
                 {
-                    List<User> listUsuarios = (from V_USUARIOS_PERFILES in context.V_USUARIOS_PERFILES
+                                listUsuarios = (from V_USUARIOS_PERFILES in context.V_USUARIOS_PERFILES
                                                select new User
                                                {
                                                    Nombre = V_USUARIOS_PERFILES.nombre.Trim(),
@@ -393,7 +394,8 @@ namespace CapaNegocio.Usuario
                                                    Id_Usuario = V_USUARIOS_PERFILES.id_usuario,
                                                    Id_Perfil = (int)V_USUARIOS_PERFILES.id_perfil,
                                                    Email = V_USUARIOS_PERFILES.email.Trim(),
-                                                   Dni = V_USUARIOS_PERFILES.dni.Trim()
+                                                   Dni = V_USUARIOS_PERFILES.dni.Trim(),
+                                                   Activo = (bool)V_USUARIOS_PERFILES.activo
 
 
                                                }).ToList<User>();
@@ -402,7 +404,12 @@ namespace CapaNegocio.Usuario
             }
             catch (Exception ex)
             {
-                throw ex;
+                listUsuarios.Add(new User()
+                {
+                    Mensaje = "No se pudo realizar la consulta. Error: " + ex
+                });
+
+                return listUsuarios;
             }
 
         }

@@ -22,5 +22,6 @@ namespace CapaDatos.Reserva
         public string perfil { get; set; }
         public string email { get; set; }
         public string dni { get; set; }
+        public Nullable<bool> activo { get; set; }
     }
 }

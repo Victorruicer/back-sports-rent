@@ -36,9 +36,9 @@ namespace CapaDatos.Reserva
         public virtual DbSet<tarifas> tarifas { get; set; }
         public virtual DbSet<usuarios> usuarios { get; set; }
         public virtual DbSet<V_USUARIOS_PERFILES> V_USUARIOS_PERFILES { get; set; }
-        public virtual DbSet<V_RESERVAS_PISTAS> V_RESERVAS_PISTAS { get; set; }
         public virtual DbSet<actividades> actividades { get; set; }
         public virtual DbSet<V_INSTALACIONES_HORARIOS> V_INSTALACIONES_HORARIOS { get; set; }
+        public virtual DbSet<V_RESERVAS_PISTAS> V_RESERVAS_PISTAS { get; set; }
     
         public virtual int PA_DELETE_USUARIO(Nullable<int> iD, ObjectParameter rETCODE, ObjectParameter mENSAJE)
         {
@@ -346,43 +346,6 @@ namespace CapaDatos.Reserva
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_INSERT_PISTA", nombreParameter, id_instalacionParameter, operativaParameter, id_tarifaParameter, id_actividadParameter, rETCODE, mENSAJE);
         }
     
-        public virtual int PA_MODIFICAR_RESERVA(Nullable<int> iD_RESERVA, string fECHA, string h_INI, string h_FIN, Nullable<int> iD_PISTA, Nullable<int> iD_ESTADO, Nullable<decimal> pRECIO, Nullable<decimal> hORAS, ObjectParameter rETCODE, ObjectParameter mENSAJE)
-        {
-            var iD_RESERVAParameter = iD_RESERVA.HasValue ?
-                new ObjectParameter("ID_RESERVA", iD_RESERVA) :
-                new ObjectParameter("ID_RESERVA", typeof(int));
-    
-            var fECHAParameter = fECHA != null ?
-                new ObjectParameter("FECHA", fECHA) :
-                new ObjectParameter("FECHA", typeof(string));
-    
-            var h_INIParameter = h_INI != null ?
-                new ObjectParameter("H_INI", h_INI) :
-                new ObjectParameter("H_INI", typeof(string));
-    
-            var h_FINParameter = h_FIN != null ?
-                new ObjectParameter("H_FIN", h_FIN) :
-                new ObjectParameter("H_FIN", typeof(string));
-    
-            var iD_PISTAParameter = iD_PISTA.HasValue ?
-                new ObjectParameter("ID_PISTA", iD_PISTA) :
-                new ObjectParameter("ID_PISTA", typeof(int));
-    
-            var iD_ESTADOParameter = iD_ESTADO.HasValue ?
-                new ObjectParameter("ID_ESTADO", iD_ESTADO) :
-                new ObjectParameter("ID_ESTADO", typeof(int));
-    
-            var pRECIOParameter = pRECIO.HasValue ?
-                new ObjectParameter("PRECIO", pRECIO) :
-                new ObjectParameter("PRECIO", typeof(decimal));
-    
-            var hORASParameter = hORAS.HasValue ?
-                new ObjectParameter("HORAS", hORAS) :
-                new ObjectParameter("HORAS", typeof(decimal));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_MODIFICAR_RESERVA", iD_RESERVAParameter, fECHAParameter, h_INIParameter, h_FINParameter, iD_PISTAParameter, iD_ESTADOParameter, pRECIOParameter, hORASParameter, rETCODE, mENSAJE);
-        }
-    
         public virtual int PA_INSERT_RESERVA(string fecha, string h_ini, string h_fin, Nullable<int> id_pista, Nullable<int> id_usuario, Nullable<int> id_estado, Nullable<decimal> precio, Nullable<decimal> horas, ObjectParameter iD_RESERVA, ObjectParameter rETCODE, ObjectParameter mENSAJE)
         {
             var fechaParameter = fecha != null ?
@@ -478,6 +441,39 @@ namespace CapaDatos.Reserva
                 new ObjectParameter("ID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_DELETE_INSTALACION", iDParameter, rETCODE, mENSAJE);
+        }
+    
+        public virtual int PA_MODIFICAR_RESERVA(Nullable<int> iD_RESERVA, string fECHA, string h_INI, string h_FIN, Nullable<int> iD_ESTADO, Nullable<decimal> pRECIO, Nullable<decimal> hORAS, ObjectParameter rETCODE, ObjectParameter mENSAJE)
+        {
+            var iD_RESERVAParameter = iD_RESERVA.HasValue ?
+                new ObjectParameter("ID_RESERVA", iD_RESERVA) :
+                new ObjectParameter("ID_RESERVA", typeof(int));
+    
+            var fECHAParameter = fECHA != null ?
+                new ObjectParameter("FECHA", fECHA) :
+                new ObjectParameter("FECHA", typeof(string));
+    
+            var h_INIParameter = h_INI != null ?
+                new ObjectParameter("H_INI", h_INI) :
+                new ObjectParameter("H_INI", typeof(string));
+    
+            var h_FINParameter = h_FIN != null ?
+                new ObjectParameter("H_FIN", h_FIN) :
+                new ObjectParameter("H_FIN", typeof(string));
+    
+            var iD_ESTADOParameter = iD_ESTADO.HasValue ?
+                new ObjectParameter("ID_ESTADO", iD_ESTADO) :
+                new ObjectParameter("ID_ESTADO", typeof(int));
+    
+            var pRECIOParameter = pRECIO.HasValue ?
+                new ObjectParameter("PRECIO", pRECIO) :
+                new ObjectParameter("PRECIO", typeof(decimal));
+    
+            var hORASParameter = hORAS.HasValue ?
+                new ObjectParameter("HORAS", hORAS) :
+                new ObjectParameter("HORAS", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PA_MODIFICAR_RESERVA", iD_RESERVAParameter, fECHAParameter, h_INIParameter, h_FINParameter, iD_ESTADOParameter, pRECIOParameter, hORASParameter, rETCODE, mENSAJE);
         }
     }
 }

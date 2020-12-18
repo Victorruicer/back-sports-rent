@@ -169,11 +169,13 @@ namespace CapaNegocio.Reserva
             {
                 return new DeleteReservaResponse()
                 {
+                    Retcode = -1,
                     Mensaje = ex.Message
                 };
             }
 
         }
+
 
         //METODO UPDATE RESERVA
         public UpdateReservaResponse UpdateReserva(UpdateReservaRequest upReserva)
@@ -191,7 +193,6 @@ namespace CapaNegocio.Reserva
                         upReserva.Fecha,
                         upReserva.H_ini,
                         upReserva.H_fin,
-                        upReserva.Id_pista,
                         upReserva.Id_estado,
                         upReserva.Precio,
                         upReserva.Horas,

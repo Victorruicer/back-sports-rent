@@ -62,7 +62,7 @@
     <Property Name="h_fin" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Name="id_pista" Type="Int32" Nullable="false" />
     <Property Name="id_usuario" Type="Int32" Nullable="false" />
-    <Property Name="created_at" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="created_at" Type="String" MaxLength="50" Unicode="true" FixedLength="true" />
     <Property Name="updated_at" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
     <Property Name="id_estado" Type="Int32" Nullable="false" />
     <Property Name="id_reserva" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
@@ -96,6 +96,7 @@
     <Property Name="imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
     <NavigationProperty Name="perfiles" Relationship="Self.FK_usuarios_perfiles" FromRole="usuarios" ToRole="perfiles" />
     <NavigationProperty Name="reservas" Relationship="Self.FK_reservas_usuarios" FromRole="usuarios" ToRole="reservas" />
+    <Property Name="activo" Type="Boolean" />
   </EntityType>
   <EntityType Name="V_USUARIOS_PERFILES">
     <Key>
@@ -114,6 +115,7 @@
     <Property Name="perfil" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
     <Property Name="email" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="dni" Type="String" MaxLength="9" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="activo" Type="Boolean" />
   </EntityType>
   <Association Name="FK_reservas_estados">
     <End Role="estados" Type="Self.estados" Multiplicity="1" />
@@ -286,7 +288,6 @@
       <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
       <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
     </FunctionImport>
-    <EntitySet Name="V_RESERVAS_PISTAS" EntityType="BDReservasModel.V_RESERVAS_PISTAS" />
     <FunctionImport Name="PA_DELETE_RESERVA">
       <Parameter Name="ID" Mode="In" Type="Int32" />
       <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
@@ -372,18 +373,6 @@
       <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
       <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="PA_MODIFICAR_RESERVA">
-      <Parameter Name="ID_RESERVA" Mode="In" Type="Int32" />
-      <Parameter Name="FECHA" Mode="In" Type="String" />
-      <Parameter Name="H_INI" Mode="In" Type="String" />
-      <Parameter Name="H_FIN" Mode="In" Type="String" />
-      <Parameter Name="ID_PISTA" Mode="In" Type="Int32" />
-      <Parameter Name="ID_ESTADO" Mode="In" Type="Int32" />
-      <Parameter Name="PRECIO" Mode="In" Type="Decimal" />
-      <Parameter Name="HORAS" Mode="In" Type="Decimal" />
-      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
-      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
-    </FunctionImport>
     <FunctionImport Name="PA_INSERT_RESERVA">
       <Parameter Name="fecha" Mode="In" Type="String" />
       <Parameter Name="h_ini" Mode="In" Type="String" />
@@ -423,37 +412,19 @@
       <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
       <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
     </FunctionImport>
+    <EntitySet Name="V_RESERVAS_PISTAS" EntityType="BDReservasModel.V_RESERVAS_PISTAS" />
+    <FunctionImport Name="PA_MODIFICAR_RESERVA">
+      <Parameter Name="ID_RESERVA" Mode="In" Type="Int32" />
+      <Parameter Name="FECHA" Mode="In" Type="String" />
+      <Parameter Name="H_INI" Mode="In" Type="String" />
+      <Parameter Name="H_FIN" Mode="In" Type="String" />
+      <Parameter Name="ID_ESTADO" Mode="In" Type="Int32" />
+      <Parameter Name="PRECIO" Mode="In" Type="Decimal" />
+      <Parameter Name="HORAS" Mode="In" Type="Decimal" />
+      <Parameter Name="RETCODE" Mode="InOut" Type="Int32" />
+      <Parameter Name="MENSAJE" Mode="InOut" Type="String" />
+    </FunctionImport>
   </EntityContainer>
-  <EntityType Name="V_RESERVAS_PISTAS">
-    <Key>
-      <PropertyRef Name="id_reserva" />
-      <PropertyRef Name="pista" />
-      <PropertyRef Name="email" />
-      <PropertyRef Name="precio_hora" />
-      <PropertyRef Name="actividad" />
-      <PropertyRef Name="tipo_pista" />
-      <PropertyRef Name="estado" />
-      <PropertyRef Name="instalacion" />
-      <PropertyRef Name="id_pista" />
-      <PropertyRef Name="tarifa" />
-    </Key>
-    <Property Name="fecha" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="h_ini" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="h_fin" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="id_reserva" Type="Int32" Nullable="false" />
-    <Property Name="pista" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
-    <Property Name="email" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
-    <Property Name="precio" Type="Decimal" Precision="4" Scale="2" />
-    <Property Name="precio_hora" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-    <Property Name="actividad" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
-    <Property Name="tipo_pista" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-    <Property Name="estado" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
-    <Property Name="instalacion" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
-    <Property Name="horas" Type="Decimal" Precision="3" Scale="1" />
-    <Property Name="id_pista" Type="Int32" Nullable="false" />
-    <Property Name="tarifa" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
-    <Property Name="operativa" Type="Boolean" />
-  </EntityType>
   <EntityType Name="actividades">
     <Key>
       <PropertyRef Name="id_actividad" />
@@ -507,5 +478,34 @@
     <Property Name="id_tarifa" Type="Int32" Nullable="false" />
     <Property Name="id_actividad" Type="Int32" Nullable="false" />
     <Property Name="tipo_horario" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="V_RESERVAS_PISTAS">
+    <Key>
+      <PropertyRef Name="id_reserva" />
+      <PropertyRef Name="pista" />
+      <PropertyRef Name="email" />
+      <PropertyRef Name="precio_hora" />
+      <PropertyRef Name="actividad" />
+      <PropertyRef Name="estado" />
+      <PropertyRef Name="instalacion" />
+      <PropertyRef Name="id_pista" />
+      <PropertyRef Name="tarifa" />
+    </Key>
+    <Property Name="fecha" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="h_ini" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="h_fin" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="id_reserva" Type="Int32" Nullable="false" />
+    <Property Name="pista" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
+    <Property Name="email" Type="String" Nullable="false" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="precio" Type="Decimal" Precision="4" Scale="2" />
+    <Property Name="precio_hora" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+    <Property Name="actividad" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="tipo_pista" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="estado" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
+    <Property Name="instalacion" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="horas" Type="Decimal" Precision="3" Scale="1" />
+    <Property Name="id_pista" Type="Int32" Nullable="false" />
+    <Property Name="tarifa" Type="String" Nullable="false" MaxLength="25" FixedLength="true" Unicode="true" />
+    <Property Name="operativa" Type="Boolean" />
   </EntityType>
 </Schema>

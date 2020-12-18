@@ -29,6 +29,7 @@ namespace CapaDatos.Reserva
         public byte[] password { get; set; }
         public Nullable<int> id_perfil { get; set; }
         public byte[] imagen { get; set; }
+        public Nullable<bool> activo { get; set; }
     
         public virtual perfiles perfiles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

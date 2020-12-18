@@ -17,5 +17,7 @@ namespace CapaNegocio.Usuario.DTO
         public string Perfil { get; set; }
         public int Id_Perfil { get; set; }
         public string Imagen { get; set; }
+        public Boolean Activo { get; set; }
+        public string Mensaje { get; set; }
     }
 }

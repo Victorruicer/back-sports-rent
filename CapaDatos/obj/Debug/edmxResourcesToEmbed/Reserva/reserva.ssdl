@@ -89,6 +89,7 @@
     <Property Name="password" Type="varbinary(max)" Nullable="false" />
     <Property Name="id_perfil" Type="int" />
     <Property Name="imagen" Type="varbinary(max)" />
+    <Property Name="activo" Type="bit" />
   </EntityType>
   <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'BDReservas.dbo.V_INSTALACIONES_HORARIOS' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -138,7 +139,6 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_RESERVAS_PISTAS' no tiene d
       <PropertyRef Name="instalacion" />
       <PropertyRef Name="id_pista" />
       <PropertyRef Name="tarifa" />
-      <PropertyRef Name="tipo_pista" />
     </Key>
     <Property Name="fecha" Type="nchar" MaxLength="10" />
     <Property Name="h_ini" Type="nchar" MaxLength="10" />
@@ -149,7 +149,7 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_RESERVAS_PISTAS' no tiene d
     <Property Name="precio" Type="decimal" Precision="4" Scale="2" />
     <Property Name="precio hora" Type="decimal" Precision="10" Scale="2" Nullable="false" />
     <Property Name="actividad" Type="nchar" MaxLength="50" Nullable="false" />
-    <Property Name="tipo_pista" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="tipo_pista" Type="nchar" MaxLength="10" />
     <Property Name="estado" Type="nchar" MaxLength="25" Nullable="false" />
     <Property Name="instalacion" Type="nchar" MaxLength="50" Nullable="false" />
     <Property Name="horas" Type="decimal" Precision="3" Scale="1" />
@@ -176,6 +176,7 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
     <Property Name="perfil" Type="nchar" MaxLength="25" />
     <Property Name="email" Type="nchar" MaxLength="100" Nullable="false" />
     <Property Name="dni" Type="nchar" MaxLength="9" Nullable="false" />
+    <Property Name="activo" Type="bit" />
   </EntityType>
   <Association Name="FK_instalaciones_horarios">
     <End Role="horarios" Type="Self.horarios" Multiplicity="1" />
@@ -428,7 +429,6 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
     <Parameter Name="FECHA" Type="varchar" Mode="In" />
     <Parameter Name="H_INI" Type="varchar" Mode="In" />
     <Parameter Name="H_FIN" Type="varchar" Mode="In" />
-    <Parameter Name="ID_PISTA" Type="int" Mode="In" />
     <Parameter Name="ID_ESTADO" Type="int" Mode="In" />
     <Parameter Name="PRECIO" Type="decimal" Mode="In" />
     <Parameter Name="HORAS" Type="decimal" Mode="In" />
@@ -511,7 +511,8 @@ advertencia 6002: La tabla o vista 'BDReservas.dbo.V_USUARIOS_PERFILES' no tiene
     [V_USUARIOS_PERFILES].[id_perfil] AS [id_perfil], 
     [V_USUARIOS_PERFILES].[perfil] AS [perfil], 
     [V_USUARIOS_PERFILES].[email] AS [email], 
-    [V_USUARIOS_PERFILES].[dni] AS [dni]
+    [V_USUARIOS_PERFILES].[dni] AS [dni], 
+    [V_USUARIOS_PERFILES].[activo] AS [activo]
     FROM [dbo].[V_USUARIOS_PERFILES] AS [V_USUARIOS_PERFILES]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_instalaciones_horarios" Association="Self.FK_instalaciones_horarios">

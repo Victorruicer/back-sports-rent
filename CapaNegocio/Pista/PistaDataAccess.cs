@@ -53,6 +53,7 @@ namespace CapaNegocio.Pista
                             List<PistasReservaResponse> tmp  = (from i in context.V_RESERVAS_PISTAS
                                                                 where i.pista == p.Pista
                                                                 where i.fecha == datos.Fecha
+                                                                where i.estado != "cancelada"
                                                                 select new PistasReservaResponse
                                                                 {
                                                                     Pista = i.pista.Trim(),
